@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>포트폴리오 수정 가이드</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 40px; color: #333; }
+        h1 { color: #0C4DA2; border-bottom: 2px solid #0C4DA2; padding-bottom: 10px; }
+        h2 { margin-top: 40px; color: #083675; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; color: #d63384; font-family: monospace; }
+        pre { background: #222; color: #fff; padding: 15px; border-radius: 8px; overflow-x: auto; }
+        .box { background: #eef2ff; padding: 20px; border-radius: 8px; border-left: 5px solid #0C4DA2; margin: 20px 0; }
+        .img-box { border: 1px solid #ddd; padding: 10px; margin-top: 10px; text-align: center; color: #888; }
+    </style>
+</head>
+<body>
+
+    <h1>포트폴리오 수정 & 관리 가이드</h1>
+    <p>이 문서는 <strong>index.html</strong> 파일 수정 방법과 <strong>GitHub Pages</strong> 배포 시 파일 관리 방법을 설명합니다.</p>
+
+    <h2>1. GitHub 폴더 구조 (필수)</h2>
+    <p>이미지와 PDF 파일을 정상적으로 불러오기 위해 아래와 같이 폴더를 만드세요.</p>
+    
+    <div class="box">
+        <strong>[레포지토리 구조 예시]</strong>
+        <pre>
+my-portfolio/ (최상위 폴더)
+├── index.html        (메인 파일)
+├── guide.html        (현재 보고 계신 파일)
+└── assets/           (폴더 생성!)
+    ├── my_photo.jpg  (내 사진)
+    ├── project1.pdf  (프로젝트 보고서 PDF)
+    ├── project2.png  (프로젝트 스크린샷)
+    └── demo.pdf</pre>
+    </div>
+
+    <h2>2. 프로젝트 내용 수정하기</h2>
+    <p><code>index.html</code> 파일을 메모장이나 VS Code로 엽니다. 파일 맨 아래쪽 <strong>&lt;script&gt;</strong> 태그 내부를 보세요.</p>
+    
+    <h3>데이터 수정 예시</h3>
+    <pre>
+const projectDB = {
+    "proj1": {
+        title: "제목 수정",
+        period: "날짜 수정",
+        overview: "개요 내용을 여기에 적으세요.",
+        goals: [
+            "목표 1",
+            "목표 2"
+        ],
+        // ... (중략)
+        fileType: "pdf",              // pdf 또는 img (없으면 "")
+        filePath: "./assets/demo.pdf" // assets 폴더 내 파일명
+    },
+    // ...
+};</pre>
+    <p>위 코드에서 <code>filePath</code> 부분에 <code>./assets/파일이름.확장자</code> 형태로 적으면 모달창에 자동으로 뜹니다.</p>
+
+    <h2>3. PDF 및 이미지 넣는 법</h2>
+    <p>모달창 하단에 포트폴리오 상세 자료를 띄우고 싶다면:</p>
+    <ol>
+        <li><strong>assets</strong> 폴더 안에 PDF나 JPG/PNG 파일을 넣으세요.</li>
+        <li><code>index.html</code> 스크립트의 해당 프로젝트 부분으로 이동합니다.</li>
+        <li><code>fileType</code>을 <code>"pdf"</code> 혹은 <code>"img"</code>로 변경합니다.</li>
+        <li><code>filePath</code>를 <code>"./assets/파일이름.pdf"</code>로 변경합니다.</li>
+    </ol>
+    <div class="box">
+        주의: 한글 파일명은 오류가 날 수 있으니 <strong>영문 파일명</strong>(예: <code>report_01.pdf</code>)을 권장합니다.
+    </div>
+
+    <h2>4. HTML 텍스트(이름, 이메일 등) 수정</h2>
+    <p><code>index.html</code> 파일에서 <strong>Ctrl+F</strong> (찾기)를 눌러 수정하고 싶은 글자를 검색하세요.</p>
+    <ul>
+        <li>이름 수정: "채민석" 검색 후 변경</li>
+        <li>이메일 수정: "minseok@gmail.com" 검색 후 변경</li>
+        <li>소개글 수정: "About Me" 섹션 내부의 텍스트 변경</li>
+    </ul>
+
+    <h2>5. 배포 확인</h2>
+    <p>수정한 파일을 GitHub에 Push하면 잠시 후 <code>https://본인아이디.github.io/레포지토리명/</code> 에서 변경 사항을 확인할 수 있습니다.</p>
+
+</body>
+</html>

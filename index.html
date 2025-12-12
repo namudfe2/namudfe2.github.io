@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>채민석 | 포트폴리오</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #0C4DA2; /* 메인 컬러 */
+            --primary-dark: #083675;
+            --secondary: #f4f6f9;
+            --text-main: #111;
+            --text-sub: #555;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --border-radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text-main);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+            
+            /* [보안] 전체 드래그 방지 */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- Navigation --- */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .nav-inner {
+            width: 100%; max-width: 1200px; padding: 0 20px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-weight: 900; font-size: 1.5rem; color: var(--primary); letter-spacing: -0.5px; }
+        .nav-menu { display: flex; gap: 30px; }
+        .nav-menu a {
+            font-size: 0.95rem; font-weight: 500; color: var(--text-sub);
+            transition: color 0.3s;
+        }
+        .nav-menu a:hover { color: var(--primary); }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, #062b5e 100%);
+            color: white;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+            position: relative;
+            padding-top: 70px;
+        }
+        .hero-content h1 {
+            font-size: 4rem; font-weight: 900; margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .hero-content p {
+            font-size: 1.5rem; font-weight: 300; opacity: 0.9; margin-bottom: 40px;
+        }
+        .btn-cta {
+            padding: 15px 40px; background: white; color: var(--primary);
+            font-weight: 700; border-radius: 50px; transition: transform 0.3s;
+            display: inline-block;
+        }
+        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+        /* --- Layout Container --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
+        .section-title {
+            font-size: 2.5rem; font-weight: 700; color: var(--text-main);
+            margin-bottom: 60px; text-align: center; position: relative;
+        }
+        .section-title::after {
+            content: ''; display: block; width: 60px; height: 4px;
+            background: var(--primary); margin: 20px auto 0;
+        }
+
+        /* --- About Me --- */
+        .about-card {
+            background: white; border-radius: var(--border-radius);
+            box-shadow: var(--shadow); padding: 50px;
+            display: grid; grid-template-columns: 1fr 2fr; gap: 50px;
+            align-items: center;
+        }
+        .about-img {
+            width: 100%; height: 300px; background: #eee; border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 5rem; color: #ccc;
+        }
+        .about-info h3 { font-size: 2rem; margin-bottom: 20px; color: var(--primary); }
+        .about-desc { font-size: 1.1rem; line-height: 1.8; color: #444; margin-bottom: 30px; }
+        
+        .personal-info-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+        }
+        .info-item {
+            /* [예외] 개인정보 드래그 허용 */
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+            cursor: text;
+        }
+        .info-label { font-size: 0.9rem; color: #888; display: block; margin-bottom: 5px; }
+        .info-value { font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
+
+        /* --- Skills --- */
+        .skills-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .skill-box { background: white; padding: 30px; border-radius: var(--border-radius); box-shadow: var(--shadow); }
+        .skill-box h4 { font-size: 1.3rem; margin-bottom: 20px; color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+        .tech-tag {
+            padding: 8px 16px; background: var(--secondary); color: var(--text-sub);
+            border-radius: 6px; font-weight: 500; font-size: 0.9rem;
+        }
+
+        /* --- Projects (수정된 이미지 영역 스타일) --- */
+        .project-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: white; border-radius: var(--border-radius); overflow: hidden;
+            box-shadow: var(--shadow); cursor: pointer; transition: all 0.3s ease;
+            border: 1px solid transparent; position: relative;
+        }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--primary); }
+        
+        /* [수정] 썸네일 영역 스타일 변경 */
+        .p-thumb {
+            height: 220px; /* 이미지 높이 */
+            background: #e0e0e0; /* 이미지가 없을 때 보일 회색 배경 */
+            position: relative;
+            overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        
+        /* 이미지 스타일 */
+        .p-thumb img {
+            width: 100%; height: 100%;
+            object-fit: cover; /* 비율 유지하며 꽉 채우기 */
+            transition: transform 0.5s ease;
+            display: block;
+        }
+
+        /* 호버 시 이미지 확대 */
+        .project-card:hover .p-thumb img { transform: scale(1.1); }
+        
+        /* 이미지가 없을 때 보여줄 기본 아이콘 (img 태그가 에러나면 보이도록 처리) */
+        .p-thumb .placeholder-icon {
+            font-size: 3rem; color: #bbb;
+            position: absolute; z-index: 0;
+        }
+
+        .p-body { padding: 25px; }
+        .p-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; color: #222; }
+        .p-desc { font-size: 0.95rem; color: #666; margin-bottom: 20px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
+        .p-tags { margin-top: auto; display: flex; gap: 5px; flex-wrap: wrap; }
+        .p-tag-sm { font-size: 0.75rem; padding: 4px 8px; background: #f0f0f0; border-radius: 4px; color: #555; }
+
+        /* --- Modal --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 2000;
+            display: none; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        
+        .modal-window {
+            width: 90%; max-width: 1000px; height: 90vh;
+            background: white; border-radius: 16px; overflow: hidden;
+            display: flex; flex-direction: column; position: relative;
+            transform: translateY(50px); transition: transform 0.3s;
+        }
+        .modal-overlay.active .modal-window { transform: translateY(0); }
+
+        .modal-header {
+            padding: 25px 40px; background: #fff; border-bottom: 1px solid #eee;
+            display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;
+        }
+        .modal-title-area h2 { font-size: 1.8rem; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
+        .modal-period { font-size: 0.9rem; color: #777; font-weight: 500; }
+        
+        .btn-close { font-size: 2rem; color: #aaa; cursor: pointer; transition: 0.2s; }
+        .btn-close:hover { color: #333; }
+
+        .modal-content {
+            flex: 1; overflow-y: auto; padding: 40px; background: #fdfdfd;
+        }
+
+        .m-section { margin-bottom: 40px; }
+        .m-label {
+            font-size: 1.2rem; font-weight: 700; color: #333; margin-bottom: 15px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .m-label::before { content: ''; width: 5px; height: 20px; background: var(--primary); display: block; }
+        
+        .m-text { font-size: 1rem; line-height: 1.7; color: #444; white-space: pre-line; }
+        .m-list li {
+            position: relative; padding-left: 20px; margin-bottom: 8px; color: #555;
+        }
+        .m-list li::before {
+            content: '•'; position: absolute; left: 0; color: var(--primary); font-weight: bold;
+        }
+
+        .trouble-box {
+            background: #fff5f5; border-left: 4px solid #ff6b6b; padding: 20px; border-radius: 0 8px 8px 0;
+        }
+        .trouble-title { font-weight: 700; color: #e03131; margin-bottom: 5px; display: block; }
+
+        .media-viewer {
+            width: 100%; height: 500px; background: #eee; margin-top: 10px;
+            border: 1px solid #ddd; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+        }
+        .media-viewer iframe, .media-viewer img { width: 100%; height: 100%; object-fit: contain; }
+
+        /* --- Footer --- */
+        footer {
+            background: #222; color: #888; padding: 50px 20px; text-align: center;
+        }
+        .footer-info { margin-bottom: 20px; color: white; font-size: 1.2rem; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .about-card { grid-template-columns: 1fr; padding: 30px; }
+            .nav-menu { display: none; }
+            .modal-header { padding: 20px; flex-direction: column; align-items: flex-start; gap: 10px; }
+            .btn-close { position: absolute; top: 15px; right: 20px; }
+            .modal-content { padding: 20px; }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false">
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="#" class="logo">CHAE MIN SEOK</a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Hardware & Embedded<br>Developer</h1>
+            <p>신뢰할 수 있는 설계를 지향하는 엔지니어 채민석입니다.</p>
+            <a href="#projects" class="btn-cta">View Projects</a>
+        </div>
+    </section>
+
+    <!-- About Me -->
+    <div class="container" id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-card">
+            <!-- [사진 넣는 곳] 추후 이미지 경로를 src에 넣으세요 -->
+            <div class="about-img">
+                <i class="fas fa-user-astronaut"></i>
+                <!-- <img src="./assets/me.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:20px;"> -->
+            </div>
+            <div class="about-info">
+                <h3>멈추지 않는 도전, 채민석</h3>
+                <p class="about-desc">
+                    하드웨어와 소프트웨어의 경계를 넘나들며 최적의 솔루션을 찾아내는 임베디드 개발자입니다. 
+                    FPGA 설계부터 시스템 검증까지 폭넓은 경험을 바탕으로 안정적인 시스템을 구축합니다.
+                </p>
+                <div class="personal-info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Name</span>
+                        <span class="info-value">채민석</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Birth</span>
+                        <span class="info-value">01.03.16</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Email</span>
+                        <span class="info-value">minseok@gmail.com</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Phone</span>
+                        <span class="info-value">010-1234-5678</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Address</span>
+                        <span class="info-value">서울시 강서구</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Education</span>
+                        <span class="info-value">목포대학교 정보통신공학</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="container" id="skills">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-wrapper">
+            <div class="skill-box">
+                <h4>Languages</h4>
+                <div class="skill-tags">
+                    <span class="tech-tag">C / C++</span>
+                    <span class="tech-tag">Verilog HDL</span>
+                    <span class="tech-tag">SystemVerilog</span>
+                    <span class="tech-tag">Python</span>
+                </div>
+            </div>
+            <div class="skill-box">
+                <h4>Hardware & FPGA</h4>
+                <div class="skill-tags">
+                    <span class="tech-tag">Xilinx Vivado</span>
+                    <span class="tech-tag">Vitis</span>
+                    <span class="tech-tag">ModelSim</span>
+                    <span class="tech-tag">STM32 CubeIDE</span>
+                </div>
+            </div>
+            <div class="skill-box">
+                <h4>Domains</h4>
+                <div class="skill-tags">
+                    <span class="tech-tag">Embedded System</span>
+                    <span class="tech-tag">Digital Circuit Design</span>
+                    <span class="tech-tag">SoC Architecture</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="container" id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="project-grid">
+            
+            <!-- Project 1 -->
+            <article class="project-card" onclick="openModal('proj1')">
+                <div class="p-thumb">
+                    <!-- [수정 포인트] 이미지가 없으면 회색 배경, 경로가 있으면 이미지가 보입니다. -->
+                    <!-- onerror: 파일이 없으면 이미지를 숨기고 회색 박스만 보여줍니다. -->
+                    <img src="./assets/proj_riscv.jpg" onerror="this.style.display='none'" alt="RISC-V Project">
+                    <!-- 이미지가 없을 때 뒤에 깔려있는 아이콘 -->
+                    <i class="fas fa-microchip placeholder-icon"></i>
+                </div>
+                <div class="p-body">
+                    <h3 class="p-title">RISC-V Core 설계</h3>
+                    <p class="p-desc">Single-Cycle부터 Multi-Cycle까지, RISC-V 아키텍처를 직접 설계하고 검증한 프로젝트입니다.</p>
+                    <div class="p-tags">
+                        <span class="p-tag-sm">SystemVerilog</span>
+                        <span class="p-tag-sm">FPGA</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Project 2 -->
+            <article class="project-card" onclick="openModal('proj2')">
+                <div class="p-thumb">
+                    <!-- [수정 포인트] 이미지 경로 -->
+                    <img src="./assets/proj_filter.jpg" onerror="this.style.display='none'" alt="Filter Project">
+                    <i class="fas fa-camera placeholder-icon"></i>
+                </div>
+                <div class="p-body">
+                    <h3 class="p-title">FPGA 영상 필터 구현</h3>
+                    <p class="p-desc">실시간 카메라 입력을 받아 하드웨어 가속 필터를 적용하고 VGA로 출력하는 시스템입니다.</p>
+                    <div class="p-tags">
+                        <span class="p-tag-sm">Verilog</span>
+                        <span class="p-tag-sm">Image Processing</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Project 3 -->
+            <article class="project-card" onclick="openModal('proj3')">
+                <div class="p-thumb">
+                    <!-- [수정 포인트] 이미지 경로 -->
+                    <img src="./assets/proj_spi.jpg" onerror="this.style.display='none'" alt="SPI Project">
+                    <i class="fas fa-network-wired placeholder-icon"></i>
+                </div>
+                <div class="p-body">
+                    <h3 class="p-title">AXI-Lite SPI Controller</h3>
+                    <p class="p-desc">AMBA AXI 프로토콜을 준수하는 SPI 통신 IP를 직접 설계하고 Microblaze와 연동했습니다.</p>
+                    <div class="p-tags">
+                        <span class="p-tag-sm">AXI4</span>
+                        <span class="p-tag-sm">SoC</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Project 4 -->
+            <article class="project-card" onclick="openModal('proj4')">
+                <div class="p-thumb">
+                    <!-- [수정 포인트] 이미지 경로 -->
+                    <img src="./assets/proj_parking.jpg" onerror="this.style.display='none'" alt="Parking Project">
+                    <i class="fas fa-robot placeholder-icon"></i>
+                </div>
+                <div class="p-body">
+                    <h3 class="p-title">Smart Parking System</h3>
+                    <p class="p-desc">컴퓨터 비전을 활용한 실시간 주차 관제 시스템 개발 프로젝트입니다.</p>
+                    <div class="p-tags">
+                        <span class="p-tag-sm">Python</span>
+                        <span class="p-tag-sm">OpenCV</span>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-info">minseok@gmail.com</div>
+        <p>Copyright © 2025 Chae Min Seok. All rights reserved.</p>
+    </footer>
+
+    <!-- MODAL POPUP -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-window">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <h2 id="m-title">Project Title</h2>
+                    <span id="m-period" class="modal-period">2025.01 - 2025.02</span>
+                </div>
+                <div class="btn-close" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="modal-content">
+                
+                <!-- 1. 프로젝트 개요 (Overview) -->
+                <div class="m-section">
+                    <div class="m-label">프로젝트 개요</div>
+                    <p id="m-overview" class="m-text">프로젝트에 대한 전반적인 소개가 들어갑니다.</p>
+                </div>
+
+                <!-- 2. 프로젝트 목표 (Goals) -->
+                <div class="m-section">
+                    <div class="m-label">프로젝트 목표</div>
+                    <ul id="m-goals" class="m-list"></ul>
+                </div>
+
+                <!-- 3. 프로젝트 요약 (Summary) -->
+                <div class="m-section">
+                    <div class="m-label">프로젝트 요약</div>
+                    <p id="m-summary" class="m-text" style="font-weight: 500; color: var(--primary);">
+                        핵심 요약 내용
+                    </p>
+                </div>
+
+                <!-- 4. 역할 (Role) -->
+                <div class="m-section">
+                    <div class="m-label">역할</div>
+                    <ul id="m-role" class="m-list"></ul>
+                </div>
+
+                <!-- 5. 트러블슈팅 (Troubleshooting) -->
+                <div class="m-section">
+                    <div class="m-label">트러블슈팅</div>
+                    <div class="trouble-box">
+                        <span class="trouble-title">Issue & Solution</span>
+                        <p id="m-trouble" class="m-text">문제 상황과 해결 방법 기술</p>
+                    </div>
+                </div>
+
+                <!-- 6. 고찰 (Reflections) -->
+                <div class="m-section">
+                    <div class="m-label">고찰</div>
+                    <p id="m-reflect" class="m-text">배운 점 및 느낀 점</p>
+                </div>
+
+                <!-- 7. 첨부 자료 (PDF / Image) -->
+                <div class="m-section" id="m-media-section" style="display:none;">
+                    <div class="m-label">상세 자료 (PDF/Image)</div>
+                    <div class="media-viewer">
+                        <iframe id="m-frame" src="" frameborder="0"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // 1. 프로젝트 데이터
+        const projectDB = {
+            "proj1": {
+                title: "RISC-V Core 설계",
+                period: "2025.09 - 2025.10 (3명)",
+                overview: "Single-Cycle부터 시작하여 파이프라인이 적용된 Multi-Cycle 프로세서까지 단계적으로 설계한 프로젝트입니다. AMBA 버스 인터페이스를 탑재하여 확장성을 고려했습니다.",
+                goals: [
+                    "RISC-V 32I 명령어 셋 완전 구현",
+                    "5단 파이프라인 구조 설계를 통한 성능 최적화",
+                    "SystemVerilog 검증 환경 구축"
+                ],
+                summary: "Verilog HDL을 이용한 32비트 RISC-V 프로세서 설계 및 검증",
+                role: [
+                    "Control Unit 및 Data Path 설계",
+                    "Hazard Unit 구현 (Data Forwarding, Stalling)",
+                    "ALU 검증 테스트벤치 작성"
+                ],
+                trouble: "Load-Use Hazard 발생 시 데이터 정합성 문제가 발생했습니다. 이를 해결하기 위해 별도의 Hazard Detection Unit을 설계하여 1 사이클 Stall을 삽입하고, Forwarding 로직을 추가하여 파이프라인 효율을 유지했습니다.",
+                reflect: "프로세서의 동작 원리를 밑바닥부터 구현하며 컴퓨터 구조에 대한 깊은 이해를 얻었습니다. 특히 타이밍 이슈를 해결하며 동기 회로 설계의 중요성을 깨달았습니다.",
+                fileType: "", // "pdf" or "img"
+                filePath: ""  // "./assets/파일명.pdf"
+            },
+            "proj2": {
+                title: "FPGA 영상 필터 구현",
+                period: "2025.11 - 2025.12 (4명)",
+                overview: "OV7670 카메라 모듈로부터 영상 데이터를 입력받아 FPGA 내부에서 실시간으로 필터링(Edge Detection 등)을 수행하고 VGA 모니터로 출력하는 시스템입니다.",
+                goals: [
+                    "실시간 영상 처리 파이프라인 구축",
+                    "라인 버퍼(Line Buffer) 설계를 통한 메모리 최적화",
+                    "VGA 타이밍 컨트롤러 직접 구현"
+                ],
+                summary: "FPGA 하드웨어 가속을 이용한 실시간 영상 처리 시스템",
+                role: [
+                    "라인 버퍼 아키텍처 설계",
+                    "Sobel Edge Filter Verilog 구현",
+                    "전체 시스템 통합 디버깅"
+                ],
+                trouble: "픽셀 데이터가 들어오는 속도와 처리 속도의 차이로 인해 화면이 밀리는 현상이 있었습니다. FIFO를 활용하여 클럭 도메인 교차(CDC) 문제를 해결하고 데이터 흐름을 안정화했습니다.",
+                reflect: "소프트웨어로 처리하던 영상 알고리즘을 하드웨어로 구현하니 속도가 획기적으로 빨라짐을 체감했습니다. 하드웨어 리소스(BRAM) 제한을 고려한 최적화 설계를 경험했습니다.",
+                fileType: "", 
+                filePath: ""
+            },
+            "proj3": {
+                title: "AXI-Lite SPI Controller",
+                period: "2025.11 (개인)",
+                overview: "SoC 환경에서 널리 쓰이는 AMBA AXI4-Lite 인터페이스를 지원하는 SPI Master IP를 설계하고, 이를 Microblaze 프로세서와 연동하여 동작을 검증했습니다.",
+                goals: ["AMBA AXI4-Lite 프로토콜 준수", "SPI Mode 0~3 지원", "범용성 있는 IP 설계"],
+                summary: "AMBA 버스 기반의 커스텀 IP 설계 및 SoC 연동",
+                role: ["AXI Slave Interface FSM 설계", "SPI Master 로직 구현", "Vitis 펌웨어 드라이버 작성"],
+                trouble: "AXI Read/Write 채널의 Ready/Valid 핸드쉐이킹 타이밍이 맞지 않아 데이터 누락이 발생했습니다. 파형 시뮬레이션을 통해 FSM 상태 전이를 수정하여 해결했습니다.",
+                reflect: "표준 인터페이스 규격을 준수하는 것이 IP 재사용성에 얼마나 중요한지 깨달았습니다.",
+                fileType: "",
+                filePath: ""
+            },
+            "proj4": {
+                title: "Smart Parking System",
+                period: "2024.11 (3명)",
+                overview: "CCTV 영상을 분석하여 주차 공간의 빈 자리를 인식하고, 사용자에게 실시간으로 정보를 제공하는 스마트 주차 시스템입니다.",
+                goals: ["OpenCV 기반 주차면 인식 정확도 95% 달성", "실시간 데이터 처리"],
+                summary: "컴퓨터 비전을 활용한 주차 관제 및 안내 시스템",
+                role: ["영상 전처리 및 사물 인식 알고리즘 구현", "주차 현황판 UI 개발"],
+                trouble: "조명 변화에 따라 인식률이 떨어지는 문제가 있었습니다. Adaptive Thresholding 기법을 적용하여 환경 변화에 강인하도록 개선했습니다.",
+                reflect: "실제 환경 변수를 고려한 알고리즘 설계의 필요성을 느꼈습니다.",
+                fileType: "",
+                filePath: ""
+            }
+        };
+
+        // 2. 모달 기능
+        const modalOverlay = document.getElementById('modal-overlay');
+        const mediaSection = document.getElementById('m-media-section');
+
+        function openModal(id) {
+            const data = projectDB[id];
+            if(!data) return;
+
+            document.getElementById('m-title').innerText = data.title;
+            document.getElementById('m-period').innerText = data.period;
+            document.getElementById('m-overview').innerText = data.overview;
+            document.getElementById('m-summary').innerText = data.summary;
+            document.getElementById('m-trouble').innerText = data.trouble;
+            document.getElementById('m-reflect').innerText = data.reflect;
+
+            // Goals 리스트
+            const goalsList = document.getElementById('m-goals');
+            goalsList.innerHTML = '';
+            data.goals.forEach(goal => {
+                const li = document.createElement('li');
+                li.innerText = goal;
+                goalsList.appendChild(li);
+            });
+
+            // Role 리스트
+            const roleList = document.getElementById('m-role');
+            roleList.innerHTML = '';
+            data.role.forEach(role => {
+                const li = document.createElement('li');
+                li.innerText = role;
+                roleList.appendChild(li);
+            });
+
+            // PDF/이미지
+            if(data.filePath && data.fileType) {
+                mediaSection.style.display = 'block';
+                const viewer = document.querySelector('.media-viewer');
+                viewer.innerHTML = ''; 
+
+                if(data.fileType === 'pdf') {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = data.filePath;
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100%';
+                    iframe.style.border = 'none';
+                    viewer.appendChild(iframe);
+                } else if(data.fileType === 'img') {
+                    const img = document.createElement('img');
+                    img.src = data.filePath;
+                    viewer.appendChild(img);
+                }
+            } else {
+                mediaSection.style.display = 'none';
+            }
+
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            setTimeout(() => {
+                document.querySelector('.media-viewer').innerHTML = ''; 
+            }, 300);
+        }
+
+        modalOverlay.addEventListener('click', (e) => {
+            if(e.target === modalOverlay) closeModal();
+        });
+
+        // 3. 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    const top = target.getBoundingClientRect().top + window.pageYOffset - 70;
+                    window.scrollTo({ top: top, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // 4. 보안 설정
+        document.addEventListener('keydown', function(e) {
+            if(e.keyCode == 123) { e.preventDefault(); return false; }
+            if(e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) { e.preventDefault(); return false; }
+            if(e.ctrlKey && e.keyCode == 85) { e.preventDefault(); return false; }
+        });
+    </script>
+</body>
+</html>
