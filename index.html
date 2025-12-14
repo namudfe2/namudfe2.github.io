@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>채민석 | 포트폴리오</title>
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -53,6 +52,7 @@
             width: 100%; max-width: 1200px; padding: 0 20px;
             display: flex; justify-content: space-between; align-items: center;
             position: relative;
+            height: 100%; /* 높이 상속 */
         }
         
         /* 햄버거 버튼 (모바일용) */
@@ -116,13 +116,17 @@
             align-items: center;
         }
         .about-img {
-            width: 100%; height: 300px;
+            width: 100%;
+            /* [수정 1] 높이 고정 제거 및 비율 설정 (증명사진용 3:4 비율) */
+            height: auto;
+            aspect-ratio: 3 / 4; 
             border-radius: 20px; overflow: hidden;
             background: #eee;
             display: flex; align-items: center; justify-content: center;
         }
         .about-img img {
-            width: 100%; height: 100%; object-fit: cover;
+            width: 100%; height: 100%; 
+            object-fit: cover; /* 꽉 차게 채움 */
         }
         .about-info h3 { font-size: 2rem; margin-bottom: 20px; color: var(--primary); }
         .about-desc { font-size: 1.1rem; line-height: 1.8; color: #444; margin-bottom: 30px; }
@@ -256,8 +260,14 @@
             .hero-content h1 { font-size: 2.5rem; }
             .about-card { grid-template-columns: 1fr; padding: 30px; }
             
-            /* 햄버거 메뉴 스타일링 */
-            .menu-toggle { display: block; position: absolute; left: 20px; top: 22px; }
+            /* [수정 2] 햄버거 버튼 수직 중앙 정렬 완벽 적용 */
+            .menu-toggle { 
+                display: block; 
+                position: absolute; 
+                left: 20px; 
+                top: 50%; /* 부모 높이의 50% 지점 */
+                transform: translateY(-50%); /* 자신의 높이 절반만큼 위로 이동해 중앙 맞춤 */
+            }
             .logo { margin-left: auto; margin-right: auto; } /* 로고 가운데 정렬 */
             
             .nav-menu {
@@ -281,10 +291,8 @@
 </head>
 <body oncontextmenu="return false">
 
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-inner">
-            <!-- 햄버거 버튼 (모바일용) -->
             <div class="menu-toggle" onclick="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </div>
@@ -300,7 +308,6 @@
         </div>
     </nav>
 
-    <!-- Hero -->
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>Hardware Developer</h1>
@@ -309,13 +316,11 @@
         </div>
     </section>
 
-    <!-- About Me -->
     <div class="container" id="about">
         <h2 class="section-title">About Me</h2>
         <div class="about-card">
-            <!-- [사진 수정] 요청하신 증명사진 적용 -->
             <div class="about-img">
-                <img src="./assets/채민석 증명사진.jpg" onerror="this.src=''; this.parentElement.innerHTML='<i class=\'fas fa-user-astronaut\' style=\'font-size:5rem; color:#ccc;\'></i>'" alt="채민석">
+                <img src="./images/채민석 증명사진.jpg" onerror="this.src=''; this.parentElement.innerHTML='<i class=\'fas fa-user-astronaut\' style=\'font-size:5rem; color:#ccc;\'></i>'" alt="채민석">
             </div>
             <div class="about-info">
                 <h3>멈추지 않는 도전, 채민석</h3>
@@ -353,9 +358,8 @@
         </div>
     </div>
 
-    <!-- Skills -->
     <div class="container" id="skills">
-        <h2 class="section-title">Technical Skills</h2>
+        <h2 class="section-title">Skills</h2>
         <div class="skills-wrapper">
             <div class="skill-box">
                 <h4>Languages</h4>
@@ -384,97 +388,15 @@
             </div>
         </div>
     </div>
-
-    <!-- Projects -->
+    
     <div class="container" id="projects">
         <h2 class="section-title">Projects</h2>
         <div class="project-grid">
             
-            <!-- Project 1: FPGA UART Watch Sensor -->
-            <article class="project-card" onclick="openModal('proj1')">
-                <div class="p-thumb">
-                    <img src="./images/fpga_uart_watch_sensor프로젝트이미지.png" onerror="this.style.display='none'" alt="Watch Sensor">
-                    <i class="fas fa-microchip placeholder-icon"></i>
-                </div>
-                <div class="p-body">
-                    <h3 class="p-title">FPGA UART Watch Sensor</h3>
-                    <p class="p-desc">FPGA를 활용한 UART 통신 기반 워치 센서 데이터 처리 및 모니터링 시스템입니다.</p>
-                    <div class="p-tags">
-                        <span class="p-tag-sm">FPGA</span>
-                        <span class="p-tag-sm">UART</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Project 2: Counter 검증 -->
-            <article class="project-card" onclick="openModal('proj2')">
-                <div class="p-thumb">
-                    <img src="./images/만진counter검증프로젝트이미지.png" onerror="this.style.display='none'" alt="Counter Verif">
-                    <i class="fas fa-check-double placeholder-icon"></i>
-                </div>
-                <div class="p-body">
-                    <h3 class="p-title">Counter IP 설계 및 검증</h3>
-                    <p class="p-desc">디지털 카운터 모듈을 설계하고 시뮬레이션을 통해 동작을 검증한 프로젝트입니다.</p>
-                    <div class="p-tags">
-                        <span class="p-tag-sm">Verilog</span>
-                        <span class="p-tag-sm">Verification</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Project 3: RV32I Single CPU -->
-            <article class="project-card" onclick="openModal('proj3')">
-                <div class="p-thumb">
-                    <img src="./images/rv32i_singleCPU프로젝트이미지.png" onerror="this.style.display='none'" alt="RISC-V CPU">
-                    <i class="fas fa-server placeholder-icon"></i>
-                </div>
-                <div class="p-body">
-                    <h3 class="p-title">RISC-V Single Cycle CPU</h3>
-                    <p class="p-desc">RISC-V 32I 명령어 셋을 지원하는 Single Cycle 프로세서를 설계하고 구현했습니다.</p>
-                    <div class="p-tags">
-                        <span class="p-tag-sm">SystemVerilog</span>
-                        <span class="p-tag-sm">CPU Arch</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Project 4: AMBA APB Peripheral -->
-            <article class="project-card" onclick="openModal('proj4')">
-                <div class="p-thumb">
-                    <img src="./images/AMBA_APB_Peripheral프로젝트이미지.png" onerror="this.style.display='none'" alt="AMBA APB">
-                    <i class="fas fa-network-wired placeholder-icon"></i>
-                </div>
-                <div class="p-body">
-                    <h3 class="p-title">AMBA APB Peripheral</h3>
-                    <p class="p-desc">SoC 내 저속 주변장치 제어를 위한 AMBA APB 프로토콜 기반의 IP 설계 프로젝트입니다.</p>
-                    <div class="p-tags">
-                        <span class="p-tag-sm">AMBA APB</span>
-                        <span class="p-tag-sm">SoC</span>
-                    </div>
-                </div>
-            </article>
-
-             <!-- Project 5: SPI & I2C -->
-             <article class="project-card" onclick="openModal('proj5')">
-                <div class="p-thumb">
-                    <img src="./images/spi&i2c프로젝트이미지.png" onerror="this.style.display='none'" alt="SPI I2C">
-                    <i class="fas fa-exchange-alt placeholder-icon"></i>
-                </div>
-                <div class="p-body">
-                    <h3 class="p-title">SPI & I2C Interface</h3>
-                    <p class="p-desc">다양한 센서와의 통신을 위한 직렬 통신 프로토콜(SPI, I2C) 마스터/슬레이브 컨트롤러 설계입니다.</p>
-                    <div class="p-tags">
-                        <span class="p-tag-sm">Protocol</span>
-                        <span class="p-tag-sm">Interface</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Project 6: VGA -->
             <article class="project-card" onclick="openModal('proj6')">
                 <div class="p-thumb">
                     <img src="./images/vga프로젝트이미지.png" onerror="this.style.display='none'" alt="VGA Project">
-                    <i class="fas fa-tv placeholder-icon"></i>
+                    
                 </div>
                 <div class="p-body">
                     <h3 class="p-title">VGA Display Controller</h3>
@@ -485,17 +407,93 @@
                     </div>
                 </div>
             </article>
+            
+            <article class="project-card" onclick="openModal('proj5')">
+                <div class="p-thumb">
+                    <img src="./images/spi&i2c프로젝트이미지.png" onerror="this.style.display='none'" alt="SPI I2C">
+                    
+                </div>
+                <div class="p-body">
+                    <h3 class="p-title">SPI & I2C Interface</h3>
+                    <p class="p-desc">다양한 센서와의 통신을 위한 직렬 통신 프로토콜(SPI, I2C) 마스터/슬레이브 컨트롤러 설계입니다.</p>
+                    <div class="p-tags">
+                        <span class="p-tag-sm">Protocol</span>
+                        <span class="p-tag-sm">Interface</span>
+                    </div>
+                </div>
+            </article>
+            
+            
+            <article class="project-card" onclick="openModal('proj4')">
+                <div class="p-thumb">
+                    <img src="./images/AMBA_APB_Peripheral프로젝트이미지.png" onerror="this.style.display='none'" alt="AMBA APB">
+                    
+                </div>
+                <div class="p-body">
+                    <h3 class="p-title">AMBA APB Peripheral</h3>
+                    <p class="p-desc">SoC 내 저속 주변장치 제어를 위한 AMBA APB 프로토콜 기반의 IP 설계 프로젝트입니다.</p>
+                    <div class="p-tags">
+                        <span class="p-tag-sm">AMBA APB</span>
+                        <span class="p-tag-sm">SoC</span>
+                    </div>
+                </div>
+            </article>
+            
+            
+            <article class="project-card" onclick="openModal('proj3')">
+               <div class="p-thumb">
+                   <img src="./images/rv32i_singleCPU프로젝트이미지.png" onerror="this.style.display='none'" alt="RISC-V CPU">
+                   
+                </div>
+                <div class="p-body">
+                    <h3 class="p-title">RISC-V Single Cycle CPU</h3>
+                    <p class="p-desc">RISC-V 32I 명령어 셋을 지원하는 Single Cycle 프로세서를 설계하고 구현했습니다.</p>
+                    <div class="p-tags">
+                        <span class="p-tag-sm">SystemVerilog</span>
+                        <span class="p-tag-sm">CPU Arch</span>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="project-card" onclick="openModal('proj2')">
+                <div class="p-thumb">
+                    <img src="./images/만진counter검증프로젝트이미지.png" onerror="this.style.display='none'" alt="Counter Verif">
+                    
+                </div>
+                <div class="p-body">
+                    <h3 class="p-title">Counter IP 설계 및 검증</h3>
+                    <p class="p-desc">디지털 카운터 모듈을 설계하고 시뮬레이션을 통해 동작을 검증한 프로젝트입니다.</p>
+                    <div class="p-tags">
+                        <span class="p-tag-sm">Verilog</span>
+                        <span class="p-tag-sm">Verification</span>
+                    </div>
+                </div>
+            </article>
+           
+            <article class="project-card" onclick="openModal('proj1')">
+                <div class="p-thumb">
+                    <img src="./images/fpga_uart_watch_sensor프로젝트이미지.png" onerror="this.style.display='none'" alt="Watch Sensor">
+                    
+                </div>
+                <div class="p-body">
+                    <h3 class="p-title">FPGA UART + Watch + Sensor</h3>
+                    <p class="p-desc">FPGA를 활용한 UART 통신 기반 워치 센서 데이터 처리 및 모니터링 시스템입니다.</p>
+                    <div class="p-tags">
+                        <span class="p-tag-sm">FPGA</span>
+                        <span class="p-tag-sm">UART</span>
+                    </div>
+                </div>
+            </article>
 
+            
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
-        <div class="footer-info">minseok@gmail.com</div>
+        <div class="footer-info">cms2789@gmail.com</div>
         <p>Copyright © 2025 Chae Min Seok. All rights reserved.</p>
     </footer>
 
-    <!-- MODAL POPUP -->
     <div id="modal-overlay" class="modal-overlay">
         <div class="modal-window">
             <div class="modal-header">
@@ -507,31 +505,26 @@
             </div>
             <div class="modal-content">
                 
-                <!-- 1. 프로젝트 개요 (Overview) -->
                 <div class="m-section">
                     <div class="m-label">프로젝트 개요</div>
                     <p id="m-overview" class="m-text"></p>
                 </div>
 
-                <!-- 2. 프로젝트 목표 (Goals) -->
                 <div class="m-section">
                     <div class="m-label">프로젝트 목표</div>
                     <ul id="m-goals" class="m-list"></ul>
                 </div>
 
-                <!-- 3. 프로젝트 요약 (Summary) -->
                 <div class="m-section">
                     <div class="m-label">프로젝트 요약</div>
                     <p id="m-summary" class="m-text" style="font-weight: 500; color: var(--primary);"></p>
                 </div>
 
-                <!-- 4. 역할 (Role) -->
                 <div class="m-section">
                     <div class="m-label">역할</div>
                     <ul id="m-role" class="m-list"></ul>
                 </div>
 
-                <!-- 5. 트러블슈팅 (Troubleshooting) -->
                 <div class="m-section">
                     <div class="m-label">트러블슈팅</div>
                     <div class="trouble-box">
@@ -540,25 +533,21 @@
                     </div>
                 </div>
 
-                <!-- 6. 고찰 (Reflections) -->
                 <div class="m-section">
                     <div class="m-label">고찰</div>
                     <p id="m-reflect" class="m-text"></p>
                 </div>
 
-                <!-- 7. 첨부 자료 (PDF / Image) -->
                 <div class="m-section" id="m-media-section" style="display:none;">
                     <div class="m-label">상세 자료 (PDF/Image)</div>
                     <div class="media-viewer">
-                        <!-- 동적으로 생성 -->
-                    </div>
+                        </div>
                 </div>
 
             </div>
         </div>
     </div>
 
-    <!-- Scripts -->
     <script>
         // 모바일 메뉴 토글 스크립트
         function toggleMenu() {
