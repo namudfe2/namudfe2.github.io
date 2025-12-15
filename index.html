@@ -35,7 +35,7 @@
             -ms-user-select: none;
             user-select: none;
 
-            /* [수정 1] 전역 텍스트 줄바꿈 설정 (단어 단위 유지) */
+            /* [핵심] 전역 텍스트 줄바꿈 설정 (단어 단위 유지, 가독성 향상) */
             word-break: keep-all; 
         }
 
@@ -90,7 +90,6 @@
             font-size: 4.5rem;
             font-weight: 900; margin-bottom: 20px;
             line-height: 1.2;
-            /* 영문 타이틀은 단어 단위 줄바꿈 유지 */
             word-break: keep-all;
         }
         .hero-content p {
@@ -139,7 +138,6 @@
         .about-info h3 { font-size: 2.2rem; margin-bottom: 20px; color: var(--primary); }
         .about-desc { 
             font-size: 1.2rem; line-height: 1.8; color: #444; margin-bottom: 30px; 
-            /* 설명글 가독성 향상 */
             word-break: keep-all;
         }
         
@@ -147,7 +145,6 @@
             display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
         }
         .info-item {
-            /* [예외] 개인정보 드래그 허용 */
             -webkit-user-select: text;
             -moz-user-select: text;
             -ms-user-select: text;
@@ -157,7 +154,6 @@
         .info-label { font-size: 1rem; color: #888; display: block; margin-bottom: 5px; }
         .info-value { 
             font-size: 1.2rem; font-weight: 700; color: var(--text-main); 
-            /* [수정 2] About 정보값 줄바꿈 방지 */
             word-break: keep-all; 
         }
         
@@ -169,7 +165,6 @@
             padding: 20px 0;
         }
 
-        /* 1. 수직선 */
         .timeline::after {
             content: '';
             position: absolute;
@@ -188,7 +183,6 @@
             padding-left: 90px;      
         }
         
-        /* 2. 점(Dot) */
         .timeline-dot {
             position: absolute;
             width: 24px;              
@@ -202,7 +196,6 @@
             top: 15px;                
         }
 
-        /* 3. 화살표 */
         .timeline-item::after {
             content: '';
             position: absolute;
@@ -216,7 +209,6 @@
             z-index: 1;
         }
         
-        /* 내용 상자 */
         .timeline-content {
             padding: 25px 35px;
             background-color: var(--white);
@@ -225,7 +217,6 @@
             box-shadow: var(--shadow);
         }
 
-        /* 날짜 부분 */
         .timeline-content .period {
             font-size: 1rem;
             font-weight: 700;
@@ -244,7 +235,6 @@
             margin-top: 5px; 
             font-weight: 800; 
             line-height: 1.4;
-            /* [수정 3] 제목도 단어 단위로 줄바꿈 */
             word-break: keep-all;
         }
         
@@ -252,7 +242,6 @@
             font-size: 1.05rem;
             color: #444;
             line-height: 1.6;
-            /* [수정 4] 커리어 설명 내용 단어 단위 줄바꿈 */
             word-break: keep-all;
         }
         /* --- Career Timeline 끝 --- */
@@ -378,7 +367,7 @@
             .hero-content h1 { font-size: 3rem; }
             .about-card { grid-template-columns: 1fr; padding: 30px; }
             
-            /* [수정 5] 모바일에서 개인정보 그리드를 1단으로 변경하여 공간 확보 */
+            /* 모바일에서 개인정보 그리드를 1단으로 변경 */
             .personal-info-grid {
                 grid-template-columns: 1fr; 
             }
@@ -529,7 +518,7 @@
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <span class="period">2016.03. - 2019.02.</span>
-                    <h4>단국대학교사범대학부속고등학교   졸업</h4>
+                    <h4>단국대학교사범대학<wbr>부속고등학교   졸업</h4>
                 </div>
             </div>
 
