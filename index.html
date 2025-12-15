@@ -34,6 +34,9 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+
+            /* [수정 1] 전역 텍스트 줄바꿈 설정 (단어 단위 유지) */
+            word-break: keep-all; 
         }
 
         a { text-decoration: none; color: inherit; }
@@ -87,10 +90,13 @@
             font-size: 4.5rem;
             font-weight: 900; margin-bottom: 20px;
             line-height: 1.2;
+            /* 영문 타이틀은 단어 단위 줄바꿈 유지 */
+            word-break: keep-all;
         }
         .hero-content p {
             font-size: 1.6rem;
             font-weight: 300; opacity: 0.9; margin-bottom: 40px;
+            word-break: keep-all;
         }
         .btn-cta {
             padding: 15px 40px; background: white; color: var(--primary);
@@ -131,7 +137,11 @@
             object-fit: cover;
         }
         .about-info h3 { font-size: 2.2rem; margin-bottom: 20px; color: var(--primary); }
-        .about-desc { font-size: 1.2rem; line-height: 1.8; color: #444; margin-bottom: 30px; }
+        .about-desc { 
+            font-size: 1.2rem; line-height: 1.8; color: #444; margin-bottom: 30px; 
+            /* 설명글 가독성 향상 */
+            word-break: keep-all;
+        }
         
         .personal-info-grid {
             display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
@@ -145,7 +155,11 @@
             cursor: text;
         }
         .info-label { font-size: 1rem; color: #888; display: block; margin-bottom: 5px; }
-        .info-value { font-size: 1.2rem; font-weight: 700; color: var(--text-main); }
+        .info-value { 
+            font-size: 1.2rem; font-weight: 700; color: var(--text-main); 
+            /* [수정 2] About 정보값 줄바꿈 방지 */
+            word-break: keep-all; 
+        }
         
         /* --- Career Timeline --- */
         .timeline {
@@ -223,20 +237,23 @@
             display: inline-block;
         }
         
-        /* [수정됨] Timeline 제목 크기 확대 */
         .timeline-content h4 {
-            font-size: 1.6rem; /* 기존 1.3rem -> 1.6rem (약 25-26px) */
+            font-size: 1.6rem;
             color: var(--primary);
             margin-bottom: 10px;
             margin-top: 5px; 
-            font-weight: 800; /* 조금 더 굵게 */
+            font-weight: 800; 
             line-height: 1.4;
+            /* [수정 3] 제목도 단어 단위로 줄바꿈 */
+            word-break: keep-all;
         }
         
         .timeline-content p {
             font-size: 1.05rem;
             color: #444;
             line-height: 1.6;
+            /* [수정 4] 커리어 설명 내용 단어 단위 줄바꿈 */
+            word-break: keep-all;
         }
         /* --- Career Timeline 끝 --- */
 
@@ -285,7 +302,11 @@
 
         .p-body { padding: 30px; }
         .p-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; color: #222; }
-        .p-desc { font-size: 1rem; color: #666; margin-bottom: 20px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
+        .p-desc { 
+            font-size: 1rem; color: #666; margin-bottom: 20px; line-height: 1.5; 
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+            word-break: keep-all;
+        }
         .p-tags { margin-top: auto; display: flex; gap: 5px; flex-wrap: wrap; }
         .p-tag-sm { font-size: 0.8rem; padding: 5px 10px; background: #f0f0f0; border-radius: 4px; color: #555; }
 
@@ -327,9 +348,9 @@
         }
         .m-label::before { content: ''; width: 5px; height: 20px; background: var(--primary); display: block; }
         
-        .m-text { font-size: 1.05rem; line-height: 1.7; color: #444; white-space: pre-line; }
+        .m-text { font-size: 1.05rem; line-height: 1.7; color: #444; white-space: pre-line; word-break: keep-all; }
         .m-list li {
-            position: relative; padding-left: 20px; margin-bottom: 8px; color: #555; font-size: 1.05rem;
+            position: relative; padding-left: 20px; margin-bottom: 8px; color: #555; font-size: 1.05rem; word-break: keep-all;
         }
         .m-list li::before {
             content: '•'; position: absolute; left: 0; color: var(--primary); font-weight: bold;
@@ -356,6 +377,11 @@
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 3rem; }
             .about-card { grid-template-columns: 1fr; padding: 30px; }
+            
+            /* [수정 5] 모바일에서 개인정보 그리드를 1단으로 변경하여 공간 확보 */
+            .personal-info-grid {
+                grid-template-columns: 1fr; 
+            }
             
             .menu-toggle { 
                 display: block; 
@@ -395,7 +421,6 @@
                 left: 20px; 
                 margin-left: -12px; 
             }
-            /* 모바일에서는 폰트가 너무 크지 않게 적절히 조정 */
             .timeline-content h4 {
                 font-size: 1.4rem; 
             }
