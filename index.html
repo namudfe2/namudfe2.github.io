@@ -85,16 +85,10 @@
 
         /* --- Hero Section (이미지 배경 적용) --- */
         .hero {
-            /* [수정됨] 배경 이미지 + 어두운 오버레이 적용 */
-            /* rgba(6, 46, 102, 0.85)는 primary-dark의 반투명 버전, rgba(12, 77, 162, 0.75)는 primary의 반투명 버전입니다. */
-            /* 뒤의 url('./images/semiconimg.png')가 실제 이미지 경로입니다. */
             background: linear-gradient(135deg, rgba(6, 46, 102, 0.85) 0%, rgba(12, 77, 162, 0.75) 100%), url('./images/semiconimg.png');
-            
-            /* 배경 이미지 설정 */
-            background-size: cover;      /* 영역을 꽉 채우도록 */
-            background-position: center; /* 중앙 정렬 */
+            background-size: cover;
+            background-position: center;
             background-repeat: no-repeat;
-
             color: white;
             padding: 180px 0 220px;
             position: relative;
@@ -114,7 +108,7 @@
         .hero-title {
             font-size: 4.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 30px;
             font-family: 'Poppins', sans-serif;
-            color: #ffffff; /* 흰색으로 강제 지정하여 잘 보이게 수정 */
+            color: #ffffff;
         }
         .hero-desc {
             font-size: 1.5rem; font-weight: 300; opacity: 0.9; margin-bottom: 50px; max-width: 700px;
@@ -317,7 +311,20 @@
             background: #fff5f5; border-left: 4px solid #ff6b6b; padding: 30px; border-radius: 0 var(--radius-md) var(--radius-md) 0;
         }
         .trouble-title { color: #c92a2a; font-weight: 800; margin-bottom: 10px; display: block; }
-        .media-viewer { background: var(--bg-light-gray); border: none; border-radius: var(--radius-md); }
+        
+        .media-viewer { 
+            width: 100%; 
+            height: 500px; 
+            background: var(--bg-light-gray); 
+            border: 1px solid #ddd; 
+            border-radius: var(--radius-md); 
+            overflow: hidden;
+        }
+        .media-viewer iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
 
 
         /* --- Responsive --- */
@@ -354,6 +361,7 @@
             .modal-window { width: 100%; height: 100%; border-radius: 0; }
             .modal-header { padding: 25px; }
             .modal-content { padding: 30px 25px; }
+            .media-viewer { height: 400px; } 
         }
     </style>
 </head>
@@ -396,66 +404,42 @@
             <div class="section-header">
                 <h2 class="section-title">About Me</h2>
             </div>
-            
             <div class="about-container">
                 <div class="about-image-area">
                     <div class="about-img">
                         <img src="./images/채민석 증명사진.jpg" onerror="this.src=''; this.parentElement.innerHTML='<div style=\'height:100%; display:flex; align-items:center; justify-content:center; background:#edf2f7; color:#a0aec0; font-size:3rem;\'><i class=\'fas fa-user\'></i></div>'" alt="채민석">
                     </div>
                 </div>
-                
                 <div class="about-content-area">
                     <h3 class="about-highlight">"작동한다"는 것 이상의<br>견고한 신뢰를 설계합니다.</h3>
                     <p class="about-text">
                         수많은 변수 속에서도 예측 가능한 결과를 만들어내는 것을 목표로 합니다. 
                         단순한 기능 구현을 넘어, 철저한 검증 시나리오를 통해 오차 없는 시스템을 완성하는 데 집중하는 Digital Logic Designer입니다.
                     </p>
-                    
                     <div class="info-list">
                         <div class="info-item">
                             <div class="info-icon"><i class="fas fa-user-circle"></i></div>
-                            <div class="info-data">
-                                <span class="info-label">Name</span>
-                                <span class="info-value">채민석</span>
-                            </div>
+                            <div class="info-data"><span class="info-label">Name</span><span class="info-value">채민석</span></div>
                         </div>
                         <div class="info-item">
                             <div class="info-icon"><i class="fas fa-envelope"></i></div>
-                            <div class="info-data">
-                                <span class="info-label">Email</span>
-                                <span class="info-value">cms2789@gmail.com</span>
-                            </div>
+                            <div class="info-data"><span class="info-label">Email</span><span class="info-value">cms2789@gmail.com</span></div>
                         </div>
                         <div class="info-item">
                             <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
-                            <div class="info-data">
-                                <span class="info-label">Birth date</span>
-                                <span class="info-value">00. 09. 18</span>
-                            </div>
+                            <div class="info-data"><span class="info-label">Birth date</span><span class="info-value">00. 09. 18</span></div>
                         </div>
-                        
                         <div class="info-item">
-                            <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
-                            <div class="info-data">
-                                <span class="info-label">Number</span>
-                                <span class="info-value">010-4708-6527</span>
-                            </div>
+                            <div class="info-icon"><i class="fas fa-language"></i></div>
+                            <div class="info-data"><span class="info-label">Language</span><span class="info-value">Toeic Speaking IH</span></div>
                         </div>
-
                         <div class="info-item">
                             <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-                            <div class="info-data">
-                                <span class="info-label">Location</span>
-                                <span class="info-value">서울특별시</span>
-                            </div>
+                            <div class="info-data"><span class="info-label">Location</span><span class="info-value">서울특별시</span></div>
                         </div>
-
                         <div class="info-item">
                             <div class="info-icon"><i class="fas fa-graduation-cap"></i></div>
-                            <div class="info-data">
-                                <span class="info-label">Education</span>
-                                <span class="info-value">상명대학교 시스템반도체공학과</span>
-                            </div>
+                            <div class="info-data"><span class="info-label">Education</span><span class="info-value">상명대학교 시스템반도체공학과</span></div>
                         </div>
                     </div>
                 </div>
@@ -465,170 +449,101 @@
 
     <section class="section-wrapper bg-light-gray" id="projects">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Featured Projects</h2>
-            </div>
-
+            <div class="section-header"><h2 class="section-title">Featured Projects</h2></div>
             <div class="project-grid">
-
                 <article class="project-card" onclick="openModal('proj7')">
-                    <div class="p-thumb">
-                        <img src="./images/linebuffer검증.png" onerror="this.style.display='none'" alt="VGA Project">
-                    </div>
+                    <div class="p-thumb"><img src="./images/linebuffer검증.png" onerror="this.style.display='none'" alt="LineBuffer"></div>
                     <div class="p-body">
                         <span class="p-category">UVM Verification</span>
                         <h3 class="p-title">Linebuffer UVM Verification</h3>
                         <p class="p-desc">Line Buffer를 Frame Size와 Data Mode에 따른 UVM 환경 검증</p>
-                        <div class="p-tags">
-                            <span class="p-tag-sm">UVM</span>
-                            <span class="p-tag-sm">Systemverilog</span>
-                        </div>
+                        <div class="p-tags"><span class="p-tag-sm">UVM</span><span class="p-tag-sm">Systemverilog</span></div>
                     </div>
                 </article>
-                
                 <article class="project-card" onclick="openModal('proj6')">
-                    <div class="p-thumb">
-                        <img src="./images/vga프로젝트이미지.png" onerror="this.style.display='none'" alt="VGA Project">
-                    </div>
+                    <div class="p-thumb"><img src="./images/vga프로젝트이미지.png" onerror="this.style.display='none'" alt="VGA Project"></div>
                     <div class="p-body">
                         <span class="p-category">FPGA / Display Control</span>
                         <h3 class="p-title">VGA Display Controller</h3>
                         <p class="p-desc">FPGA를 이용하여 이미지 데이터를 모니터로 출력하는 VGA 타이밍 컨트롤러 및 필터 시스템 구현</p>
-                        <div class="p-tags">
-                            <span class="p-tag-sm">Systemverilog</span>
-                            <span class="p-tag-sm">VGA Interface</span>
-                        </div>
+                        <div class="p-tags"><span class="p-tag-sm">Systemverilog</span><span class="p-tag-sm">VGA Interface</span></div>
                     </div>
                 </article>
-                
                 <article class="project-card" onclick="openModal('proj5')">
-                    <div class="p-thumb">
-                        <img src="./images/spi&i2c프로젝트이미지.png" onerror="this.style.display='none'" alt="SPI I2C">
-                    </div>
+                    <div class="p-thumb"><img src="./images/spi&i2c프로젝트이미지.png" onerror="this.style.display='none'" alt="SPI I2C"></div>
                     <div class="p-body">
                         <span class="p-category">IP Design / Verification</span>
                         <h3 class="p-title">SPI & I2C 통신 설계 프로젝트</h3>
                         <p class="p-desc">다양한 센서와의 통신을 위한 직렬 통신 프로토콜(SPI, I2C) 마스터/슬레이브 컨트롤러 설계 및 검증</p>
-                        <div class="p-tags">
-                            <span class="p-tag-sm">SystemVerilog</span>
-                            <span class="p-tag-sm">UVM</span>
-                        </div>
+                        <div class="p-tags"><span class="p-tag-sm">SystemVerilog</span><span class="p-tag-sm">UVM</span></div>
                     </div>
                 </article>
-                
                 <article class="project-card" onclick="openModal('proj4')">
-                    <div class="p-thumb">
-                        <img src="./images/AMBA_APB_Peripheral프로젝트이미지.png" onerror="this.style.display='none'" alt="AMBA APB">
-                    </div>
+                    <div class="p-thumb"><img src="./images/AMBA_APB_Peripheral프로젝트이미지.png" onerror="this.style.display='none'" alt="AMBA APB"></div>
                     <div class="p-body">
                         <span class="p-category">SoC / Bus Protocol</span>
                         <h3 class="p-title">AMBA APB Peripheral</h3>
                         <p class="p-desc">SoC 내 저속 주변장치 제어를 위한 AMBA APB 프로토콜 기반의 IP 설계 프로젝트</p>
-                        <div class="p-tags">
-                            <span class="p-tag-sm">AMBA APB</span>
-                            <span class="p-tag-sm">SoC Integration</span>
-                        </div>
+                        <div class="p-tags"><span class="p-tag-sm">AMBA APB</span><span class="p-tag-sm">SoC Integration</span></div>
                     </div>
                 </article>
-                
-                 <article class="project-card" onclick="openModal('proj3')">
-                   <div class="p-thumb">
-                        <img src="./images/rv32i_singleCPU프로젝트이미지.png" onerror="this.style.display='none'" alt="RISC-V CPU">
-                    </div>
+                <article class="project-card" onclick="openModal('proj3')">
+                   <div class="p-thumb"><img src="./images/rv32i_singleCPU프로젝트이미지.png" onerror="this.style.display='none'" alt="RISC-V CPU"></div>
                     <div class="p-body">
                         <span class="p-category">Computer Architecture</span>
                         <h3 class="p-title">RISC-V Single Cycle CPU</h3>
                         <p class="p-desc">RISC-V 32I 명령어 셋을 지원하는 Single Cycle 프로세서를 설계하고 구현</p>
-                        <div class="p-tags">
-                            <span class="p-tag-sm">RISC-V</span>
-                            <span class="p-tag-sm">CPU Design</span>
-                        </div>
+                        <div class="p-tags"><span class="p-tag-sm">RISC-V</span><span class="p-tag-sm">CPU Design</span></div>
                     </div>
                 </article>
-                
-                 <article class="project-card" onclick="openModal('proj2')">
-                    <div class="p-thumb">
-                        <img src="./images/만진counter검증프로젝트이미지.png" onerror="this.style.display='none'" alt="Counter Verif">
-                    </div>
+                <article class="project-card" onclick="openModal('proj2')">
+                    <div class="p-thumb"><img src="./images/만진counter검증프로젝트이미지.png" onerror="this.style.display='none'" alt="Counter Verif"></div>
                     <div class="p-body">
                         <span class="p-category">Design & Verification</span>
                         <h3 class="p-title">Counter IP 설계 및 검증</h3>
                         <p class="p-desc">디지털 카운터 모듈을 설계하고 체계적인 시뮬레이션을 통해 동작 검증 프로젝트</p>
-                        <div class="p-tags">
-                            <span class="p-tag-sm">Verilog</span>
-                            <span class="p-tag-sm">Verification Loop</span>
-                        </div>
+                        <div class="p-tags"><span class="p-tag-sm">Verilog</span><span class="p-tag-sm">Verification Loop</span></div>
                     </div>
                 </article>
-                
-                 <article class="project-card" onclick="openModal('proj1')">
-                    <div class="p-thumb">
-                        <img src="./images/fpga_uart_watch_sensor프로젝트이미지.png" onerror="this.style.display='none'" alt="Watch Sensor">
-                    </div>
+                <article class="project-card" onclick="openModal('proj1')">
+                    <div class="p-thumb"><img src="./images/fpga_uart_watch_sensor프로젝트이미지.png" onerror="this.style.display='none'" alt="Watch Sensor"></div>
                     <div class="p-body">
                         <span class="p-category">FPGA System</span>
                         <h3 class="p-title">FPGA UART Multi-Sensor</h3>
                         <p class="p-desc">FPGA를 활용한 UART 통신 기반 clock & 2 sensor 통합 시스템 구현 </p>
-                        <div class="p-tags">
-                            <span class="p-tag-sm">FPGA</span>
-                            <span class="p-tag-sm">UART / Sensors</span>
-                        </div>
+                        <div class="p-tags"><span class="p-tag-sm">FPGA</span><span class="p-tag-sm">UART / Sensors</span></div>
                     </div>
                 </article>
-
             </div>
         </div>
     </section>
 
-    
     <section class="section-wrapper bg-off-white" id="skills">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Technical Skills</h2>
-            </div>
-            
+            <div class="section-header"><h2 class="section-title">Technical Skills</h2></div>
             <div class="skills-wrapper">
                 <div class="skill-box">
                     <div class="skill-icon"><i class="fas fa-code"></i></div>
                     <h4>Languages</h4>
-                    <div class="skill-tags">
-                        <span class="tech-tag">Verilog HDL</span>
-                        <span class="tech-tag">SystemVerilog</span>
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">C / C++</span>
-                        <span class="tech-tag">Matlab</span>
-                    </div>
+                    <div class="skill-tags"><span class="tech-tag">Verilog HDL</span><span class="tech-tag">SystemVerilog</span><span class="tech-tag">Python</span><span class="tech-tag">C / C++</span><span class="tech-tag">Matlab</span></div>
                 </div>
                 <div class="skill-box">
                     <div class="skill-icon"><i class="fas fa-microchip"></i></div>
                     <h4>Tools & FPGA</h4>
-                    <div class="skill-tags">
-                        <span class="tech-tag">Xilinx Vivado</span>
-                        <span class="tech-tag">Vitis</span>
-                        <span class="tech-tag">STM32 CubeIDE</span>
-                        <span class="tech-tag">ModelSim</span>
-                    </div>
+                    <div class="skill-tags"><span class="tech-tag">Xilinx Vivado</span><span class="tech-tag">Vitis</span><span class="tech-tag">STM32 CubeIDE</span><span class="tech-tag">ModelSim</span></div>
                 </div>
                 <div class="skill-box">
                     <div class="skill-icon"><i class="fas fa-sitemap"></i></div>
                     <h4>Domains</h4>
-                    <div class="skill-tags">
-                        <span class="tech-tag">Digital Circuit Design</span>
-                        <span class="tech-tag">SoC Architecture</span>
-                        <span class="tech-tag">IP Verification</span>
-                    </div>
+                    <div class="skill-tags"><span class="tech-tag">Digital Circuit Design</span><span class="tech-tag">SoC Architecture</span><span class="tech-tag">IP Verification</span></div>
                 </div>
             </div>
         </div>
     </section>
     
-    
     <section class="section-wrapper bg-light-gray" id="education">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Careers</h2>
-            </div>
-            
+            <div class="section-header"><h2 class="section-title">Careers</h2></div>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
@@ -638,7 +553,6 @@
                         <p>VerilogHDL/UVM, ARM Cortex-M, SoC(AXI) 설계 및 검증 실무 교육 (950h) 이수 중</p>
                     </div>
                 </div>
-                
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
@@ -646,7 +560,6 @@
                         <h4>상명대학교 시스템반도체공학과 졸업</h4>
                     </div>
                 </div>
-                
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
@@ -657,7 +570,6 @@
             </div>
         </div>
     </section>
-
 
     <footer>
         <div class="container">
@@ -711,7 +623,7 @@
                 </div>
 
                 <div class="m-section" id="m-media-section" style="display:none;">
-                    <div class="m-label">상세 자료 (PDF/Image)</div>
+                    <div class="m-label">상세 자료 (PDF Report)</div>
                     <div class="media-viewer">
                         </div>
                 </div>
@@ -729,7 +641,6 @@
             document.querySelector('.nav-menu').classList.remove('active');
         }
 
-        // 데이터 (기존과 동일)
         const projectDB = {
             "proj1": {
                 title: "FPGA UART Watch Sensor",
@@ -754,7 +665,8 @@
                     "ASCII Sender 로직 구현 및 UART 디스플레이 연동",
                     "SR04(초음파 센서) FSM 설계 및 구현"
                 ],
-                reflect: "다중 센서 및 디스플레이 모듈 통합 제어를 통한 Top-level 시스템 설계 역량 강화 및 UART 통신 프로토콜의 하드웨어적 제어 구조 이해"
+                reflect: "다중 센서 및 디스플레이 모듈 통합 제어를 통한 Top-level 시스템 설계 역량 강화 및 UART 통신 프로토콜의 하드웨어적 제어 구조 이해",
+                pdf: "1.clock & 2sensor 프로젝트.pdf" // 파일명 입력
             },
             "proj2": {
                 title: "UART 통신 기반 Mod-Counter 시뮬레이션 및 검증",
@@ -772,11 +684,12 @@
                     "UVM 스타일 Testbench 개발 및 10000진 카운터 검증",
                     "UVM 스타일 Testbench 개발 및 UART RX/TX/FIFO/TOP 검증"
                 ],
-                reflect: "UVM-Lite 검증 환경 구축을 통해 체계적인 시뮬레이션 검증 방법론을 습득하고 Random Test 시나리오 작성을 통한 RTL 설계 신뢰성 확보 경험 축적"
+                reflect: "UVM-Lite 검증 환경 구축을 통해 체계적인 시뮬레이션 검증 방법론을 습득하고 Random Test 시나리오 작성을 통한 RTL 설계 신뢰성 확보 경험 축적",
+                pdf: "2.uart+만진프로젝트.pdf" // 파일명 입력
             },
             "proj3": {
                 title: "RISC-V Single Cycle CPU",
-                period: "2025.10.02. - 2025.10.22.", // 날짜 순서 수정됨
+                period: "2025.10.02. - 2025.10.22.", 
                 overview: "RISC-V RV32I 기반 Single Cycle CPU 구조 설계 및 명령어 Type(R, I, S, B, U, J)별 시뮬레이션 기능 검증",
                 goals: [
                     "RISC-V RV32I 기반 Single-Cycle CPU Core 설계",
@@ -793,7 +706,8 @@
                     "RISC-V RV32I Single-Cycle CPU Datapath 및 Control Unit 설계",
                     "명령어 타입별 레지스터 갱신/메모리 접근/분기 동작 시뮬레이션 수행 및 결과 분석"
                 ],
-                reflect: "RV32I 구현을 통한 하드웨어 동작 및 구조의 종합적 이해, 고급 언어의 하드웨어 실행 과정 및 메모리 접근/제어 방식 습득, 향후 Multi Cycle 방식 확장을 위한 아키텍처 설계 기초 마련"
+                reflect: "RV32I 구현을 통한 하드웨어 동작 및 구조의 종합적 이해, 고급 언어의 하드웨어 실행 과정 및 메모리 접근/제어 방식 습득, 향후 Multi Cycle 방식 확장을 위한 아키텍처 설계 기초 마련",
+                pdf: "3.RISC-V_RV32I기반 SingleCycle CPU설계.pdf" // 파일명 입력
             },
             "proj4": {
                 title: "AMBA APB Peripheral",
@@ -813,66 +727,62 @@
                     "UVM-Lite 구조 SystemVerilog Testbench 개발 및 UART 기능 검증",
                     "C Application 코드 작성 및 CPU 실행을 통한 시스템 동작 검증"
                 ],
-                reflect: "AMBA APB 프로토콜을 적용한 IP 설계 및 Multi-Cycle CPU 구조 이해를 통해 SoC 시스템 버스 인터페이스 설계 능력 배양 및 HW/SW Co-verification 수행 경험 확보"
+                reflect: "AMBA APB 프로토콜을 적용한 IP 설계 및 Multi-Cycle CPU 구조 이해를 통해 SoC 시스템 버스 인터페이스 설계 능력 배양 및 HW/SW Co-verification 수행 경험 확보",
+                pdf: "4.AMBA_APB Peripheral 설계 검증..pdf" // 파일명 입력
             },
-            "pro5": {
-                title: "RISC-V Single Cycle CPU",
+            "proj5": {
+                title: "SPI & I2C 통신 설계 프로젝트",
                 period: "2025.10.02. - 2025.10.22.",
-                overview: "RISC-V RV32I 기반 Single Cycle CPU 구조 설계 및 명령어 Type(R, I, S, B, U, J)별 시뮬레이션 기능 검증",
+                overview: "다양한 센서와의 통신을 위한 직렬 통신 프로토콜(SPI, I2C) 마스터/슬레이브 컨트롤러 설계 및 검증",
                 goals: [
-                    "RISC-V RV32I 기반 Single-Cycle CPU Core 설계",
-                    "전반적인 CPU 데이터 흐름과 구조적 특징 파악"
+                    "SystemVerilog 기반 SPI Master/Slave 설계",
+                    "SystemVerilog 기반 I2C Master/Slave 설계",
+                    "UVM 환경에서의 VIP(Verification IP) 검증"
                 ],
-                summary: [
-                    "SystemVerilog 이용 RISC-V RV32I Single-Cycle CPU 설계",
-                    "Control Unit 제어 신호 생성 및 MUX 기반 Datapath 최적화", 
-                    "C 코드의 Assembly 변환 및 CPU 실행 결과 확인", 
-                    "Register/Memory 동작 확인", 
-                    "명령어 타입별 동작 검증을 위한 SystemVerilog Testbench 구성"
-                ],
+                summary: "SPI Mode 0~3 지원 컨트롤러 설계, I2C Standard/Fast Mode 지원 컨트롤러 설계, UVM Testbench 구축 및 Random Sequence 기반 검증 수행",
                 role: [
-                    "RISC-V RV32I Single-Cycle CPU Datapath 및 Control Unit 설계",
-                    "명령어 타입별 레지스터 갱신/메모리 접근/분기 동작 시뮬레이션 수행 및 결과 분석"
+                    "SPI/I2C FSM 및 Datapath 설계",
+                    "UVM Agent, Sequence, Scoreboard 구현",
+                    "Coverage 수집 및 분석"
                 ],
-                reflect: "RV32I 구현을 통한 하드웨어 동작 및 구조의 종합적 이해, 고급 언어의 하드웨어 실행 과정 및 메모리 접근/제어 방식 습득, 향후 Multi Cycle 방식 확장을 위한 아키텍처 설계 기초 마련"
+                reflect: "표준 통신 프로토콜의 스펙을 준수하며 설계하는 능력과 UVM을 활용한 검증 자동화 환경 구축 경험을 쌓음",
+                pdf: "5. SPI&I2C 통신 모듈 설계.pdf" // 파일명 입력
             },
             "proj6": {
-                title: "VGA기반 뱀 사다리 게임 프로젝트",
+                title: "VGA Display Controller",
                 period: "2025.11.24. - 2025.12.04.",
-                overview: "RISC-V RV32I 기반 Multi Cycle CPU 구조 내 AMBA APB 기반 Peripheral 연결 및 커스텀 IP 검증/동작 구현",
+                overview: "FPGA를 이용하여 이미지 데이터를 모니터로 출력하는 VGA 타이밍 컨트롤러 및 필터 시스템 구현",
                 goals: [
-                    "Multi-Cycle CPU Core 설계를 통한 Single-Cycle 지연 한계 보완",
-                    "AMBA APB Protocol 기반 시스템 통합 및 표준 데이터 전송 구조 구현",
-                    "TX/RX FIFO 포함 UART Peripheral 직접 설계 및 검증",
-                    "C Application 실행을 통한 HW/SW 통합 동작 검증"
+                    "VGA 640x480 @60Hz Timing Generator 설계",
+                    "Image ROM 데이터 출력 및 RGB 제어",
+                    "다양한 필터(Gray, Invert 등) 기능 구현"
                 ],
-                summary: "RV32I Multi-Cycle CPU Core(5단계 FSM) 구현, APB Master-Slave 인터페이스 기반 CPU-Peripheral 통합, TX/RX FIFO 및 레지스터 구조 UART Peripheral 구현, UVM-Lite 환경 Random Transaction 기반 UART 송수신 검증, C Application 실행을 통한 전체 시스템 동작 FPGA 시연",
+                summary: "SystemVerilog 기반 VGA Sync 신호 생성기 설계, ROM 이미지 데이터 매핑 로직 구현, 스위치 제어를 통한 실시간 이미지 필터링 기능 구현, FPGA 보드 실습을 통한 동작 검증",
                 role: [
-                    "RISC-V RV32I Multi-Cycle CPU Core RTL 설계",
-                    "APB Master 신호 처리 및 Peripheral(GPIO/UART/FND) 연동 제어 로직 구현",
-                    "APB 기반 UART Slave 인터페이스 및 레지스터(Status/TDR/RDR) 설계",
-                    "UVM-Lite 구조 SystemVerilog Testbench 개발 및 UART 기능 검증",
-                    "C Application 코드 작성 및 CPU 실행을 통한 시스템 동작 검증"
+                    "VGA Timing Generator 설계",
+                    "Line Buffer를 이용한 Image Processing 로직 구현",
+                    "FPGA Pin Mapping 및 Board Test"
                 ],
-                reflect: "AMBA APB 프로토콜을 적용한 IP 설계 및 Multi-Cycle CPU 구조 이해를 통해 SoC 시스템 버스 인터페이스 설계 능력 배양 및 HW/SW Co-verification 수행 경험 확보"
+                reflect: "고속 데이터 처리가 필요한 디스플레이 인터페이스의 타이밍 제어 원리를 이해하고 하드웨어 리소스 최적화 경험",
+                pdf: "6.vga프로젝트.pdf" // 파일명 입력
             },
             "proj7": {
-                title: "UVM 기반 Linebuffer Module 검증",
+                title: "Linebuffer UVM Verification",
                 period: "2025.12.15. - 2025.12.21.",
                 overview: "Line Buffer를 Frame Size(PIXEL, LINE, FRAME)와 Data Mode(RANDOM, FIX, INCREASE)에 따른 UVM 환경 검증",
                 goals: [
-                    "Multi-Cycle CPU Core 설계를 통한 Single-Cycle 지연 한계 보완",
-                    "AMBA APB Protocol 기반 시스템 통합 및 표준 데이터 전송 구조 구현",
-                    "TX/RX FIFO 포함 UART Peripheral 직접 설계 및 검증",
-                    "C Application 실행을 통한 HW/SW 통합 동작 검증"
+                    "Line Buffer RTL 동작 이해 및 검증 Plan 수립",
+                    "다양한 시나리오에 대응하는 UVM Testbench 구축",
+                    "기능 커버리지 100% 달성 목표"
                 ],
-                summary: "RV32I Multi-Cycle CPU Core(5단계 FSM) 구현, APB Master-Slave 인터페이스 기반 CPU-Peripheral 통합, TX/RX FIFO 및 레지스터 구조 UART Peripheral 구현, UVM-Lite 환경 Random Transaction 기반 UART 송수신 검증, C Application 실행을 통한 전체 시스템 동작 FPGA 시연",
+                summary: "Line Buffer DUT 분석, UVM Environment(Agent, Driver, Monitor, Sequencer) 구축, Frame Size 및 Data Pattern 별 Sequence Item 생성, Scoreboard에서의 데이터 무결성 검증 수행",
                 role: [
                     "Scoreboard 부분 검증 설계",
                     "agent를 비롯한 component 부분 설계",
                     "Frame Size, Fix Data Mode 검증 시나리오 작성"
                 ],
-                reflect: "AMBA APB 프로토콜을 적용한 IP 설계 및 Multi-Cycle CPU 구조 이해를 통해 SoC 시스템 버스 인터페이스 설계 능력 배양 및 HW/SW Co-verification 수행 경험 확보"
+                reflect: "복잡한 메모리 버퍼 구조에 대한 검증 전략 수립 능력과 UVM 컴포넌트 재사용성 및 확장성에 대한 깊은 이해",
+                pdf: "7.LineBuffer UVM 검증.pdf" // 예: "linebuffer_report.pdf"
             }
         };
 
@@ -895,6 +805,7 @@
             document.getElementById('m-trouble').innerText = data.trouble ? data.trouble : "내용 없음";
             document.getElementById('m-reflect').innerText = data.reflect;
 
+            // Goals List
             const goalsList = document.getElementById('m-goals');
             goalsList.innerHTML = '';
             if(data.goals) {
@@ -905,6 +816,7 @@
                 });
             }
 
+            // Role List
             const roleList = document.getElementById('m-role');
             roleList.innerHTML = '';
             if(data.role) {
@@ -915,6 +827,19 @@
                 });
             }
 
+            // [수정] PDF 파일 뷰어 로직 (툴바 숨김 적용)
+            const mediaSection = document.getElementById('m-media-section');
+            const mediaViewer = document.querySelector('.media-viewer');
+
+            if (data.pdf && data.pdf !== "") {
+                mediaSection.style.display = 'block';
+                // #toolbar=0&navpanes=0 을 추가하여 툴바와 네비게이션 창을 숨김
+                mediaViewer.innerHTML = `<iframe src="./file/${data.pdf}#toolbar=0&navpanes=0&view=FitH" width="100%" height="100%" style="border:none;" oncontextmenu="return false;"></iframe>`;
+            } else {
+                mediaSection.style.display = 'none';
+                mediaViewer.innerHTML = ''; 
+            }
+
             modalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -922,6 +847,8 @@
         function closeModal() {
             modalOverlay.classList.remove('active');
             document.body.style.overflow = '';
+            // 모달 닫을 때 iframe 내용 제거
+            document.querySelector('.media-viewer').innerHTML = '';
         }
 
         modalOverlay.addEventListener('click', (e) => {
@@ -932,4 +859,3 @@
     </script>
 </body>
 </html>
-
