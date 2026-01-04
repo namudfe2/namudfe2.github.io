@@ -139,9 +139,9 @@
         /* --- About Me --- */
         .about-container {
             display: flex; 
-            gap: 80px; 
+            gap: 40px; /* [수정됨] PC에서 사진과 정보 사이 간격 축소 (80px -> 40px) */
             align-items: center; 
-            flex-direction: row !important; /* 가로 배치 강제 */
+            flex-direction: row !important; 
         }
         .about-image-area {
             flex: 1; position: relative;
@@ -151,7 +151,8 @@
             background: var(--primary); border-radius: var(--radius-lg); opacity: 0.1; z-index: -1;
         }
         .about-img {
-            width: 300px; margin: 0 auto;  
+            width: 260px; /* PC 사진 크기 */
+            margin: 0 auto;  
             border-radius: var(--radius-lg); overflow: hidden;
             box-shadow: var(--shadow-lg);
             aspect-ratio: 3 / 4; background: #ddd;
@@ -160,16 +161,14 @@
         
         .about-content-area { flex: 1.2; }
         
-        .about-highlight {
-            font-size: 1.8rem; font-weight: 700; color: var(--primary); margin-bottom: 30px;
-            font-family: 'Poppins', sans-serif;
-        }
         .about-text {
             font-size: 1.15rem; line-height: 1.9; color: var(--text-body); margin-bottom: 50px;
         }
         
         .info-list {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px 40px;
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 25px 10px; /* [수정됨] PC 행 간격 축소 (25px -> 12px) */
         }
         .info-item { display: flex; align-items: flex-start; gap: 15px; }
         .info-icon {
@@ -219,7 +218,7 @@
             padding: 35px;
             border-radius: var(--radius-lg); 
             box-shadow: var(--shadow-md);
-            text-align: left; /* 왼쪽 정렬로 변경 */
+            text-align: left; /* 왼쪽 정렬 */
             transition: 0.3s;
             display: flex;
             flex-direction: column;
@@ -446,7 +445,7 @@
             .about-container {
                 display: flex !important;
                 flex-direction: row !important; /* 가로 고정 */
-                gap: 15px;
+                gap: 2px; /* [유지] 모바일에서 사진-텍스트 간격 좁게 */
                 align-items: flex-start;
             }
 
@@ -469,6 +468,7 @@
                 padding-top: 0;
             }
 
+            /* 하이라이트 텍스트 스타일은 유지하되 HTML에서 내용은 비움 */
             .about-highlight {
                 font-size: 1rem;
                 margin-bottom: 10px;
@@ -576,10 +576,6 @@
                     </div>
                 </div>
                 <div class="about-content-area">
-                    <h3 class="about-highlight">"작동한다"는 것 이상의<br>견고한 신뢰를 설계합니다.</h3>
-                    <p class="about-text">
-                        [Harman] 시스템반도체 설계/검증 엔지니어 2기 수강 중 입니다.
-                    </p>
                     <div class="info-list">
                         <div class="info-item">
                             <div class="info-icon"><i class="fas fa-user-circle"></i></div>
@@ -724,7 +720,6 @@
                             <span class="tag-sub">Verdi</span>
                             <span class="tag-sub">Intel Quartus</span>
                             <span class="tag-sub">ModelSim</span>
-                            <span class="tag-sub">TCAD</span>
                         </div>
                     </div>
                 </div>
