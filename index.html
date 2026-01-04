@@ -89,31 +89,38 @@
         .hero-desc { font-size: 1.5rem; font-weight: 300; opacity: 0; margin-bottom: 50px; max-width: 700px; animation: fadeInUp 1s ease-out forwards; animation-delay: 1.0s; }
         .btn-cta { padding: 18px 45px; background: var(--accent); color: var(--primary-dark); font-weight: 700; border-radius: 100px; display: inline-block; box-shadow: 0 10px 25px -5px rgba(56, 182, 255, 0.5); }
 
-        /* --- About Me (수정: PC 버전 간격 최적화) --- */
+        /* --- About Me (수정: 1열-2열 간격 좁힘) --- */
         .section-wrapper { padding: var(--section-spacing) 0; }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 30px; }
         .section-header { margin-bottom: 80px; text-align: center; }
-        .section-title { font-size: 2.8rem; font-weight: 800; position: relative; display: inline-block;}
-        /* 사진과 텍스트 사이 간격 60px -> 40px로 축소 */
-        .about-container { display: flex; gap: 40px; align-items: center; } 
-        .about-image-area { flex: 1; position: relative; }
-        .about-img { width: 280px; margin: 0 auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); aspect-ratio: 3 / 4; background: #ddd; }
+        .section-title { font-size: 2.8rem; font-weight: 600; position: relative; display: inline-block;}
+        .about-container { display: flex; gap: 60px; align-items: center; }
+        .about-image-area { flex: 0.8; position: relative; }
+        .about-img { width: 240px; margin: 0 auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); aspect-ratio: 3 / 4; background: #ddd; }
         .about-img img { width: 100%; height: 100%; object-fit: cover; }
         .about-content-area { flex: 1.5; }
-        /* 인적사항 항목 간 상하 간격 35px -> 18px로 대폭 축소 */
-        .info-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 25px; } 
+        
+        /* [수정] max-content를 사용하여 각 열의 넓이를 고정값이 아닌 텍스트에 맞게 조절 */
+        .info-list { 
+            display: grid; 
+            grid-template-columns: max-content max-content; 
+            column-gap: 160px; /* 여기서 1열과 2열 사이의 간격을 숫자로 직접 조절 가능 (예: 60px -> 40px) */
+            row-gap: 50px; 
+            align-items: start; 
+        }
+        
         .info-item { display: flex; align-items: center; gap: 20px; }
-        .info-icon { color: var(--primary); font-size: 1.6rem; padding: 14px; background: rgba(12, 77, 162, 0.08); border-radius: 14px; }
-        .info-label { font-size: 1.1rem; color: var(--text-light); font-weight: 500; margin-bottom: 4px; display: block; }
-        .info-value { font-size: 1.35rem; font-weight: 700; color: var(--text-heading); }
+        .info-icon { color: var(--primary); font-size: 1.6rem; padding: 12px; background: rgba(12, 77, 162, 0.08); border-radius: 14px; }
+        .info-label { font-size: 1.0rem; color: var(--text-light); font-weight: 500; margin-bottom: 0px; display: block; }
+        .info-value { font-size: 1.1rem; font-weight: 700; color: var(--text-heading); }
 
-        /* --- Projects --- */
+        /* --- Projects (수정: 짤림 방지 contain 적용) --- */
         .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 50px; }
-        .project-card { background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); cursor: pointer; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .project-card { background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); cursor: pointer; transition: 0.4s; }
         .project-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
         .p-period-header { display: block; padding: 15px 25px 10px; font-size: 0.85rem; color: #a0aec0; font-weight: 700; background: #ffffff; text-align: left; letter-spacing: 0.5px; }
         .p-thumb { height: 260px; background: #ffffff; position: relative; overflow: hidden; border-top: 1px solid #f1f5f9; }
-        .p-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .p-thumb img { width: 100%; height: 100%; object-fit: contain; } 
         .p-body { padding: 35px; }
         .p-category { font-size: 0.9rem; color: var(--accent); font-weight: 600; margin-bottom: 8px; display: block; }
         .p-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 15px; line-height: 1.3; }
@@ -122,37 +129,26 @@
         .p-tag-sm { font-size: 0.8rem; padding: 6px 14px; background: var(--bg-light-gray); border-radius: 50px; color: var(--text-body); font-weight: 600; transition: 0.3s; }
         .project-card:hover .p-tag-sm { background: var(--primary); color: white; }
 
-        /* --- Skills (상하 간격 넓은 상태 유지) --- */
+        /* --- Skills (간격 60px 유지) --- */
         .skills-wrapper { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1000px; margin: 0 auto; }
         .skill-box { background: var(--bg-white); padding: 35px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); transition: 0.3s; display: flex; flex-direction: column; }
         .skill-box:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
         .sb-header { display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #edf2f7; padding-bottom: 20px; margin-bottom: 25px; }
         .sb-icon { font-size: 1.8rem; color: var(--primary); width: 50px; height: 50px; background: rgba(12, 77, 162, 0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
         .sb-title { font-size: 1.4rem; font-weight: 800; color: var(--text-heading); }
-        
-        .sb-group { margin-bottom: 40px; } 
+        .sb-group { margin-bottom: 60px; } 
         .sb-group:last-child { margin-bottom: 0; }
-        
         .sb-label { font-size: 0.8rem; color: #a0aec0; font-weight: 700; margin-bottom: 15px; display: block; text-transform: uppercase; letter-spacing: 1px; }
         .sb-tags { display: flex; flex-wrap: wrap; gap: 15px 12px; } 
-        
-        .tag-main { 
-            padding: 8px 18px; background: var(--primary); color: white; border-radius: 8px; 
-            font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 6px -1px rgba(12, 77, 162, 0.2);
-            white-space: nowrap; 
-        }
-        .tag-sub { 
-            padding: 6px 14px; background: #f1f5f9; color: var(--text-body); border-radius: 8px; 
-            font-weight: 500; font-size: 0.9rem; border: 1px solid #e2e8f0;
-            white-space: nowrap; 
-        }
+        .tag-main { padding: 8px 18px; background: var(--primary); color: white; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 6px -1px rgba(12, 77, 162, 0.2); white-space: nowrap; }
+        .tag-sub { padding: 6px 14px; background: #f1f5f9; color: var(--text-body); border-radius: 8px; font-weight: 500; font-size: 0.9rem; border: 1px solid #e2e8f0; white-space: nowrap; }
 
+        /* --- Awards, Careers --- */
         .award-list { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
         .award-item { background: var(--bg-white); padding: 30px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: space-between; transition: 0.3s; border-left: 5px solid var(--primary); }
         .award-badge { padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 0.95rem; white-space: nowrap; margin-left: 20px; display: flex; align-items: center; justify-content: center; min-width: 80px; }
         .badge-gold { background: #FFF9C4; color: #FBC02D; border: 1px solid #FFF176; }
         .badge-bronze { background: #EFEBE9; color: #8D6E63; border: 1px solid #D7CCC8; }
-
         .timeline { max-width: 800px; margin: 0 auto; position: relative; }
         .timeline::before { content: ''; position: absolute; left: 0; top: 10px; height: 100%; width: 2px; background: #e2e8f0; }
         .timeline-item { position: relative; padding-left: 50px; margin-bottom: 60px; }
@@ -162,7 +158,7 @@
         /* --- Footer & Modal --- */
         footer { background: #062e66; color: rgba(255,255,255,0.6); padding: 100px 0; text-align: center; }
         .footer-email { font-size: 1.5rem; color: white; font-weight: 700; margin-bottom: 20px; display: block; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
         .modal-overlay.active { display: flex; opacity: 1; }
         .modal-window { width: 90%; max-width: 1000px; height: 90vh; background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-lg); }
         .modal-header { padding: 30px 50px; border-bottom: 1px solid #edf2f7; display: flex; justify-content: space-between; align-items: flex-start; }
@@ -183,16 +179,15 @@
             .nav-inner { justify-content: flex-start; padding: 0 20px; }
             .nav-menu { position: fixed; top: 70px; left: 0; width: 100%; background: var(--bg-white); flex-direction: column; padding: 30px; display: none; }
             .nav-menu.active { display: flex; }
-            
             .about-container { flex-direction: column; gap: 40px; align-items: center; text-align: center; }
             .about-image-area { width: 100%; display: flex; justify-content: center; }
             .about-img { width: 180px; margin: 0 auto; }
             .about-content-area { width: 100%; display: flex; justify-content: center; }
+            /* 모바일은 1열이므로 max-content 대신 1fr로 고정하여 꽉 채움 */
             .info-list { grid-template-columns: 1fr !important; gap: 25px !important; width: fit-content; margin: 0 auto; text-align: left; }
             .info-icon { font-size: 1.2rem; padding: 10px; width: 45px; height: 45px; }
             .info-label { font-size: 0.95rem; }
             .info-value { font-size: 1.15rem; }
-            
             .skills-wrapper, .project-grid { grid-template-columns: 1fr; }
             .mo-br { display: inline; }
             .award-item { flex-direction: column; align-items: flex-start; gap: 15px; }
@@ -384,7 +379,7 @@
         </div>
     </section>
 
-    <footer><div class="container"><a href="mailto:cms2789@gmail.com" class="footer-email">cms2789@gmail.com</a><p>Designed by Minseok Chae. © 2025</p></div></footer>
+    <footer><div class="container"><a href="mailto:cms2789@gmail.com" class="footer-email">cms2789@gmail.com</a><p>Designed & Built by Minseok Chae. © 2025</p></div></footer>
 
     <div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
         <div class="modal-window" onclick="event.stopPropagation()">
@@ -487,8 +482,6 @@
             }
         };
 
-        const modalOverlay = document.getElementById('modal-overlay');
-
         function openModal(id) {
             const data = projectDB[id];
             if(!data) return;
@@ -515,12 +508,12 @@
                 mediaSection.style.display = 'none';
                 mediaViewer.innerHTML = ''; 
             }
-            modalOverlay.classList.add('active');
+            document.getElementById('modal-overlay').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
-            modalOverlay.classList.remove('active');
+            document.getElementById('modal-overlay').classList.remove('active');
             document.body.style.overflow = '';
             document.querySelector('.media-viewer').innerHTML = '';
         }
