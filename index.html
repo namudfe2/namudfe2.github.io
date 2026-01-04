@@ -181,6 +181,7 @@
         .badge-gold { background: #FFF9C4; color: #FBC02D; border: 1px solid #FFF176; }
         .badge-bronze { background: #EFEBE9; color: #8D6E63; border: 1px solid #D7CCC8; }
         /* --- Careers --- */
+/* --- Careers --- */
         .timeline { max-width: 800px; margin: 0 auto; position: relative; }
         .timeline::before {
             content: ''; position: absolute; left: 0; top: 10px; height: 100%;
@@ -196,18 +197,32 @@
         }
         
         .timeline-content {
-            background: var(--bg-white); padding: 40px; border-radius: var(--radius-md);
-            box-shadow: var(--shadow-md); transition: 0.3s;
+            position: relative;          /* 날짜 고정을 위한 기준점 */
+            background: var(--bg-white); 
+            /* [수정] 상단 패딩을 85px로 늘려 날짜와 텍스트 사이 간격을 두 배로 확보 */
+            padding: 85px 40px 40px 20px; 
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md); 
+            transition: 0.3s;
         }
         .timeline-content:hover { box-shadow: var(--shadow-lg); transform: translateX(5px); }
+
         .timeline-period {
-            display: inline-block; font-size: 0.9rem; font-weight: 700;
-            color: var(--primary); margin-bottom: 10px;
-            background: rgba(12, 77, 162, 0.08); padding: 5px 15px; border-radius: 50px;
+            position: absolute;          /* 위치 고정 */
+            /* [수정] 위로 5px 땡김 (25px -> 20px), 왼쪽으로 10px 땡김 (40px -> 30px) */
+            top: 20px;                   
+            left: 20px;                  
+            font-size: 0.8rem;           /* 크기 기존 유지 */
+            font-weight: 1000;
+            color: var(--primary); 
+            background: rgba(12, 77, 162, 0.08); 
+            padding: 5px 15px; 
+            border-radius: 50px;
+            margin-bottom: 0;
         }
+
         .timeline-content h4 { font-size: 1.3rem; font-weight: 800; margin-bottom: 15px; }
         .timeline-content p { font-size: 1.05rem; color: var(--text-body); }
-
         /* --- Footer & Modal --- */
         footer { background: #062e66; color: rgba(255,255,255,0.6); padding: 100px 0; text-align: center; }
         .footer-email { font-size: 1.5rem; color: white; font-weight: 700; margin-bottom: 20px; display: block; }
