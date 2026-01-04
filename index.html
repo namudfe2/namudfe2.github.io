@@ -110,7 +110,21 @@
         }
         
         .info-item { display: flex; align-items: center; gap: 20px; }
-        .info-icon { color: var(--primary); font-size: 1.6rem; padding: 12px; background: rgba(12, 77, 162, 0.08); border-radius: 14px; }
+        .info-icon { 
+            color: var(--primary); 
+            font-size: 1.5rem;      /* 아이콘 자체 크기 */
+            
+            /* [수정] 아래 4개 항목을 동일하게 맞추세요 */
+            width: 50px;           /* 너비 */
+            height: 50px;          /* 높이 (너비와 같은 값 입력) */
+            display: flex;         /* 중앙 정렬을 위해 필요 */
+            align-items: center;   /* 세로 중앙 */
+            justify-content: center; /* 가로 중앙 */
+            flex-shrink: 0;        /* 텍스트가 길어져도 도형이 찌그러지지 않게 고정 */
+            
+            background: rgba(12, 77, 162, 0.08); 
+            border-radius: 50%;    /* 1:1 상태에서 50%를 주면 완전한 원이 됩니다. */
+        }
         .info-label { font-size: 1.0rem; color: var(--text-light); font-weight: 500; margin-bottom: 0px; display: block; }
         .info-value { font-size: 1.1rem; font-weight: 700; color: var(--text-heading); }
 
