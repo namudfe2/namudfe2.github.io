@@ -89,19 +89,21 @@
         .hero-desc { font-size: 1.5rem; font-weight: 300; opacity: 0; margin-bottom: 50px; max-width: 700px; animation: fadeInUp 1s ease-out forwards; animation-delay: 1.0s; }
         .btn-cta { padding: 18px 45px; background: var(--accent); color: var(--primary-dark); font-weight: 700; border-radius: 100px; display: inline-block; box-shadow: 0 10px 25px -5px rgba(56, 182, 255, 0.5); }
 
-        /* --- About Me --- */
+        /* --- About Me (수정: PC 버전 간격 최적화) --- */
         .section-wrapper { padding: var(--section-spacing) 0; }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 30px; }
         .section-header { margin-bottom: 80px; text-align: center; }
         .section-title { font-size: 2.8rem; font-weight: 800; position: relative; display: inline-block;}
-        .about-container { display: flex; gap: 60px; align-items: center; }
+        /* 사진과 텍스트 사이 간격 60px -> 40px로 축소 */
+        .about-container { display: flex; gap: 40px; align-items: center; } 
         .about-image-area { flex: 1; position: relative; }
         .about-img { width: 280px; margin: 0 auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); aspect-ratio: 3 / 4; background: #ddd; }
         .about-img img { width: 100%; height: 100%; object-fit: cover; }
         .about-content-area { flex: 1.5; }
-        .info-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 35px 25px; }
+        /* 인적사항 항목 간 상하 간격 35px -> 18px로 대폭 축소 */
+        .info-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 25px; } 
         .info-item { display: flex; align-items: center; gap: 20px; }
-        .info-icon { color: var(--primary); font-size: 1.6rem; padding: 15px; background: rgba(12, 77, 162, 0.08); border-radius: 14px; }
+        .info-icon { color: var(--primary); font-size: 1.6rem; padding: 14px; background: rgba(12, 77, 162, 0.08); border-radius: 14px; }
         .info-label { font-size: 1.1rem; color: var(--text-light); font-weight: 500; margin-bottom: 4px; display: block; }
         .info-value { font-size: 1.35rem; font-weight: 700; color: var(--text-heading); }
 
@@ -120,15 +122,30 @@
         .p-tag-sm { font-size: 0.8rem; padding: 6px 14px; background: var(--bg-light-gray); border-radius: 50px; color: var(--text-body); font-weight: 600; transition: 0.3s; }
         .project-card:hover .p-tag-sm { background: var(--primary); color: white; }
 
-        /* --- Skills, Awards, Careers --- */
+        /* --- Skills (상하 간격 넓은 상태 유지) --- */
         .skills-wrapper { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1000px; margin: 0 auto; }
         .skill-box { background: var(--bg-white); padding: 35px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); transition: 0.3s; display: flex; flex-direction: column; }
         .skill-box:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
         .sb-header { display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #edf2f7; padding-bottom: 20px; margin-bottom: 25px; }
         .sb-icon { font-size: 1.8rem; color: var(--primary); width: 50px; height: 50px; background: rgba(12, 77, 162, 0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
         .sb-title { font-size: 1.4rem; font-weight: 800; color: var(--text-heading); }
-        .tag-main { padding: 8px 18px; background: var(--primary); color: white; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 6px -1px rgba(12, 77, 162, 0.2); }
-        .tag-sub { padding: 6px 14px; background: #f1f5f9; color: var(--text-body); border-radius: 8px; font-weight: 500; font-size: 0.9rem; border: 1px solid #e2e8f0; }
+        
+        .sb-group { margin-bottom: 40px; } 
+        .sb-group:last-child { margin-bottom: 0; }
+        
+        .sb-label { font-size: 0.8rem; color: #a0aec0; font-weight: 700; margin-bottom: 15px; display: block; text-transform: uppercase; letter-spacing: 1px; }
+        .sb-tags { display: flex; flex-wrap: wrap; gap: 15px 12px; } 
+        
+        .tag-main { 
+            padding: 8px 18px; background: var(--primary); color: white; border-radius: 8px; 
+            font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 6px -1px rgba(12, 77, 162, 0.2);
+            white-space: nowrap; 
+        }
+        .tag-sub { 
+            padding: 6px 14px; background: #f1f5f9; color: var(--text-body); border-radius: 8px; 
+            font-weight: 500; font-size: 0.9rem; border: 1px solid #e2e8f0;
+            white-space: nowrap; 
+        }
 
         .award-list { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
         .award-item { background: var(--bg-white); padding: 30px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: space-between; transition: 0.3s; border-left: 5px solid var(--primary); }
@@ -145,7 +162,7 @@
         /* --- Footer & Modal --- */
         footer { background: #062e66; color: rgba(255,255,255,0.6); padding: 100px 0; text-align: center; }
         .footer-email { font-size: 1.5rem; color: white; font-weight: 700; margin-bottom: 20px; display: block; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
         .modal-overlay.active { display: flex; opacity: 1; }
         .modal-window { width: 90%; max-width: 1000px; height: 90vh; background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-lg); }
         .modal-header { padding: 30px 50px; border-bottom: 1px solid #edf2f7; display: flex; justify-content: space-between; align-items: flex-start; }
@@ -154,10 +171,10 @@
         .m-label { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; position: relative; padding-left: 15px; }
         .m-label::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 4px; height: 20px; background: var(--accent); border-radius: 10px; }
         .trouble-box { background: #fff9db; border-left: 4px solid #fab005; padding: 25px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-bottom: 20px; }
-        .solution-box { background: #f0fdf4; border-left: 4px solid #4ade80; padding: 25px; border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+        .solution-box { background: #f0fdf4; border-left: 4px solid #4ade80; padding: 30px; border-radius: 0 var(--radius-md) var(--radius-md) 0; }
         .media-viewer { width: 100%; height: 500px; background: var(--bg-light-gray); border-radius: var(--radius-md); overflow: hidden; }
 
-        /* --- Responsive (가운데 정렬 수정) --- */
+        /* --- Responsive (가운데 정렬) --- */
         @media (max-width: 768px) {
             body { padding-top: 70px; }
             .navbar { height: 70px; background: var(--bg-white); }
@@ -167,13 +184,11 @@
             .nav-menu { position: fixed; top: 70px; left: 0; width: 100%; background: var(--bg-white); flex-direction: column; padding: 30px; display: none; }
             .nav-menu.active { display: flex; }
             
-            /* [수정] 인적사항 가운데 정렬 고정 */
             .about-container { flex-direction: column; gap: 40px; align-items: center; text-align: center; }
             .about-image-area { width: 100%; display: flex; justify-content: center; }
             .about-img { width: 180px; margin: 0 auto; }
             .about-content-area { width: 100%; display: flex; justify-content: center; }
             .info-list { grid-template-columns: 1fr !important; gap: 25px !important; width: fit-content; margin: 0 auto; text-align: left; }
-            .info-item { gap: 15px; }
             .info-icon { font-size: 1.2rem; padding: 10px; width: 45px; height: 45px; }
             .info-label { font-size: 0.95rem; }
             .info-value { font-size: 1.15rem; }
@@ -308,13 +323,41 @@
             <div class="skills-wrapper">
                 <div class="skill-box">
                     <div class="sb-header"><div class="sb-icon"><i class="fas fa-code"></i></div><h4 class="sb-title">Languages</h4></div>
-                    <div class="sb-group"><span class="sb-label">Main Skills</span><div class="sb-tags"><span class="tag-main">Verilog HDL</span><span class="tag-main">SystemVerilog</span><span class="tag-main">C / C++</span><span class="tag-main">Python</span></div></div>
-                    <div class="sb-group"><span class="sb-label">Experience</span><div class="sb-tags"><span class="tag-sub">HTML</span><span class="tag-sub">Matlab</span></div></div>
+                    <div class="sb-group">
+                        <span class="sb-label">Main Skills</span>
+                        <div class="sb-tags">
+                            <span class="tag-main">Verilog HDL</span>
+                            <span class="tag-main">SystemVerilog</span>
+                            <span class="tag-main">C / C++</span>
+                            <span class="tag-main">Python</span>
+                        </div>
+                    </div>
+                    <div class="sb-group">
+                        <span class="sb-label">Experience</span>
+                        <div class="sb-tags">
+                            <span class="tag-sub">HTML</span>
+                            <span class="tag-sub">Matlab</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="skill-box">
                     <div class="sb-header"><div class="sb-icon"><i class="fas fa-microchip"></i></div><h4 class="sb-title">Tools & FPGA</h4></div>
-                    <div class="sb-group"><span class="sb-label">Main Skills</span><div class="sb-tags"><span class="tag-main">Xilinx Vivado</span><span class="tag-main">STM32 CubeIDE</span></div></div>
-                    <div class="sb-group"><span class="sb-label">Experience</span><div class="sb-tags"><span class="tag-sub">Synopsys VCS</span><span class="tag-sub">Verdi</span><span class="tag-sub">Intel Quartus</span><span class="tag-sub">ModelSim</span></div></div>
+                    <div class="sb-group">
+                        <span class="sb-label">Main Skills</span>
+                        <div class="sb-tags">
+                            <span class="tag-main">Xilinx Vivado</span>
+                            <span class="tag-main">STM32 CubeIDE</span>
+                        </div>
+                    </div>
+                    <div class="sb-group">
+                        <span class="sb-label">Experience</span>
+                        <div class="sb-tags">
+                            <span class="tag-sub">Synopsys VCS</span>
+                            <span class="tag-sub">Verdi</span>
+                            <span class="tag-sub">Intel Quartus</span>
+                            <span class="tag-sub">ModelSim</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
