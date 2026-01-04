@@ -75,8 +75,24 @@
             height: 100%;
         }
         
-        .logo { display: flex; align-items: center; }
-        .logo img { height: 30px; width: auto; }
+        /* --- 로고 아이콘 스타일 --- */
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none; /* 링크 밑줄 제거 */
+        }
+
+        .logo i {
+            font-size: 1.6rem;       /* 아이콘 크기 조절 */
+            color: var(--primary);   /* 퍼스널 컬러 (남색) 적용 */
+            transition: color 0.3s ease; /* 부드러운 색상 전환 효과 */
+        }
+
+        /* 마우스를 올렸을 때 강조 색상으로 변경 (선택 사항) */
+        .logo:hover i {
+            color: var(--accent);    /* 강조 컬러 (하늘색) 적용 */
+        }
+
         
         .nav-menu { display: flex; gap: 40px; }
         .nav-menu a {
@@ -188,7 +204,39 @@
             box-shadow: var(--shadow-md); cursor: pointer; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
         .project-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
-        .p-thumb { height: 260px; background: #edf2f7; position: relative; overflow: hidden; }
+        .p-period-header {
+            display: block;
+            /* 상단, 좌우 패딩은 넓게, 하단은 이미지와 가깝게 설정 */
+            padding: 15px 15px 10px; 
+            font-size: 0.85rem;   /* 작게 */
+            color: #a0aec0;       /* 회색 */
+            font-weight: 700;     /* 약간 두껍게 */
+            background: #ffffff;  /* 카드 배경색과 일치 */
+            text-align: left;     /* 좌측 정렬 */
+            letter-spacing: 0.5px;
+        }
+        .p-thumb {
+            height: 240px;
+            background: #edf2f7;
+            position: relative;
+            overflow: hidden;
+            /* 이미지와 기간 헤더 사이에 경계선이 필요하다면 아래 주석을 해제하세요 */
+            border-top: 1px solid #093c6e;
+        }
+        .p-period-overlay {
+            position: absolute;
+            top: 15px;  /* 상단 여백 */
+            left: 15px; /* 좌측 여백 */
+            background: rgba(255, 255, 255, 0.95); /* 반투명 흰색 배경 */
+            color: #718096;     /* 요청하신 회색 글씨 (좀 더 진한 회색으로 가독성 확보) */
+            font-size: 0.75rem; /* 작은 크기 */
+            font-weight: 700;
+            padding: 5px 10px;  /* 텍스트 주변 여백 */
+            border-radius: 6px; /* 둥근 모서리 */
+            z-index: 2;         /* 이미지 위에 표시 */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08); /* 입체감을 위한 살짝 그림자 */
+            letter-spacing: 0.5px;
+        }
         .p-thumb img { width: 100%; height: 100%; object-fit: contain; background-color: #ffffff; }
         .p-body { padding: 35px; }
         .p-category { font-size: 0.9rem; color: var(--accent); font-weight: 600; margin-bottom: 8px; display: block; }
@@ -203,7 +251,13 @@
             border-radius: 50px; color: var(--text-body); font-weight: 600; transition: 0.3s;
         }
         .project-card:hover .p-tag-sm { background: var(--primary); color: white; }
-
+        .p-period-tag {
+            font-size: 0.85rem;
+            color: #a0aec0; /* 회색 */
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
         /* --- Skills (완전히 새로 디자인됨) --- */
         .skills-wrapper { 
             display: grid; 
@@ -407,126 +461,130 @@
         }
         .media-viewer iframe { width: 100%; height: 100%; border: none; }
 
-        /* --- Responsive --- */
-        @media (max-width: 1024px) {
-            .hero { padding: 140px 30px 180px; }
-            .hero-title { font-size: 3.5rem; }
-            
-            .about-container { gap: 40px; }
-            .about-image-area { flex: 0.8; }
-            /* Skills 2열 유지 */
-            .skills-wrapper { grid-template-columns: repeat(2, 1fr); }
-        }
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+    .hero { padding: 140px 30px 180px; }
+    .hero-title { font-size: 3.5rem; }
+    
+    .about-container { gap: 40px; }
+    .about-image-area { flex: 0.8; }
+    /* Skills 2열 유지 */
+    .skills-wrapper { grid-template-columns: repeat(2, 1fr); }
+}
 
-        @media (max-width: 768px) {
-            body { padding-top: 70px; }
-            .navbar { height: 70px; background: var(--bg-white); }
-            .menu-toggle { display: block; order: -1; }
-            .logo { margin-right: auto; margin-left: 20px; }
-            .nav-menu {
-                position: fixed; top: 70px; left: 0; width: 100%;
-                background: var(--bg-white); flex-direction: column; padding: 30px; gap: 20px;
-                box-shadow: var(--shadow-md); display: none;
-            }
-            .nav-menu.active { display: flex; }
+@media (max-width: 768px) {
+    body { padding-top: 70px; }
+    .navbar { height: 70px; background: var(--bg-white); }
+    
+    /* [수정] 모바일에서 로고 숨김 */
+    .logo { display: none !important; } 
+    
+    /* [수정] 햄버거 버튼 설정 */
+    .menu-toggle { 
+        display: block; 
+        font-size: 1.8rem; 
+        padding: 10px;
+        cursor: pointer;
+    }
+    
+    /* [수정] 내비게이션 정렬: 버튼만 있으므로 왼쪽 정렬 유지 */
+    .nav-inner { 
+        justify-content: flex-start; 
+        padding: 0 20px;
+    }
 
-            .hero { 
-                text-align: center; 
-                padding: 120px 20px 150px;
-                clip-path: polygon(0 0, 100% 0, 100% 93%, 0 100%);
-            }
-            .hero-content { text-align: center; }
-            .hero-title { font-size: 2.8rem; }
-            .hero-desc { font-size: 1.2rem; margin: 0 auto 40px; }
-            
-            .section-title { font-size: 2.2rem; }
+    .nav-menu {
+        position: fixed; top: 70px; left: 0; width: 100%;
+        background: var(--bg-white); flex-direction: column; padding: 30px; gap: 20px;
+        box-shadow: var(--shadow-md); display: none;
+    }
+    .nav-menu.active { display: flex; }
 
-            /* [About Section Mobile Fix] */
-            .about-container {
-                display: flex !important;
-                flex-direction: row !important; /* 가로 고정 */
-                gap: 2px; /* [유지] 모바일에서 사진-텍스트 간격 좁게 */
-                align-items: flex-start;
-            }
+    .hero { 
+        text-align: center; 
+        padding: 120px 20px 150px;
+        clip-path: polygon(0 0, 100% 0, 100% 93%, 0 100%);
+    }
+    .hero-content { text-align: center; }
+    .hero-title { font-size: 2.8rem; }
+    .hero-desc { font-size: 1.2rem; margin: 0 auto 40px; }
+    
+    .section-title { font-size: 2.2rem; }
 
-            .about-image-area {
-                width: 110px; 
-                flex: 0 0 auto; 
-                margin: 0 !important;
-            }
-            .about-image-area::before { display: none; }
+    /* [About Section Mobile Fix] */
+    .about-container {
+        display: flex !important;
+        flex-direction: row !important; 
+        gap: 2px; 
+        align-items: flex-start;
+    }
 
-            .about-img {
-                width: 100%;
-                border-radius: 12px;
-                box-shadow: none;
-            }
+    .about-image-area {
+        width: 110px; 
+        flex: 0 0 auto; 
+        margin: 0 !important;
+    }
+    .about-image-area::before { display: none; }
 
-            .about-content-area {
-                flex: 1;
-                text-align: left;
-                padding-top: 0;
-            }
+    .about-img {
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: none;
+    }
 
-            /* 하이라이트 텍스트 스타일은 유지하되 HTML에서 내용은 비움 */
-            .about-highlight {
-                font-size: 1rem;
-                margin-bottom: 10px;
-                line-height: 1.4;
-            }
-            .about-text {
-                font-size: 0.85rem;
-                margin-bottom: 15px;
-                line-height: 1.5;
-            }
+    .about-content-area {
+        flex: 1;
+        text-align: left;
+        padding-top: 0;
+    }
 
-            /* [수정] 인적사항 리스트 2열 고정 (2x3) + 모바일 전용 줄바꿈 활성화 */
-            .info-list {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr) !important; /* 강제 2열 설정 */
-                gap: 10px 5px; /* 가로 간격 5px로 좁힘 */
-            }
-            .info-item {
-                gap: 6px;
-                align-items: center;
-            }
-            .info-icon {
-                font-size: 0.8rem;
-                padding: 5px; 
-                width: 28px; height: 28px;
-                display: flex; align-items: center; justify-content: center;
-            }
-            .info-label { font-size: 0.65rem; color: #a0aec0; margin-bottom: 0; line-height: 1.2; }
-            .info-value { 
-                font-size: 0.8rem; 
-                font-weight: 700; 
-                word-break: break-all;
-                line-height: 1.2;
-            }
+    .about-text {
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+        line-height: 1.5;
+    }
 
-            /* [추가] 모바일에서만 줄바꿈 태그 활성화 */
-            .mo-br { display: inline; }
+    .info-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr) !important; 
+        gap: 10px 5px; 
+    }
+    .info-item {
+        gap: 6px;
+        align-items: center;
+    }
+    .info-icon {
+        font-size: 0.8rem;
+        padding: 5px; 
+        width: 28px; height: 28px;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .info-label { font-size: 0.65rem; color: #a0aec0; margin-bottom: 0; line-height: 1.2; }
+    .info-value { 
+        font-size: 0.8rem; 
+        font-weight: 700; 
+        word-break: break-all;
+        line-height: 1.2;
+    }
 
-            /* [Awards Mobile Fix] */
-            .award-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            .award-badge { margin-left: 0; align-self: flex-start; }
+    .mo-br { display: inline; }
 
-            /* [Skills Mobile Fix] */
-            .skills-wrapper { grid-template-columns: 1fr; } /* 모바일은 1열로 */
+    .award-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .award-badge { margin-left: 0; align-self: flex-start; }
 
-            /* --- End Fix --- */
-            
-            .project-grid { grid-template-columns: 1fr; }
-            
-            .modal-window { width: 100%; height: 100%; border-radius: 0; }
-            .modal-header { padding: 25px; }
-            .modal-content { padding: 30px 25px; }
-            .media-viewer { height: 400px; } 
-        }
+    .skills-wrapper { grid-template-columns: 1fr; }
+
+    .project-grid { grid-template-columns: 1fr; }
+    
+    .modal-window { width: 100%; height: 100%; border-radius: 0; }
+    .modal-header { padding: 25px; }
+    .modal-content { padding: 30px 25px; }
+    .media-viewer { height: 400px; } 
+}
     </style>
 </head>
 <body oncontextmenu="return false">
@@ -537,10 +595,9 @@
                 <i class="fas fa-bars"></i>
             </div>
 
-            <a href="#" class="logo">
-                <img src="./images/icon2.png" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-weight:900; color:var(--primary); font-size:1.5rem;\'>CMS</span>'" alt="CMS Logo">
+            <a href="#home" class="logo">
+                <i class="fas fa-home"></i>
             </a>
-            
             <ul class="nav-menu">
                 <li><a href="#home" onclick="closeMenu()">Home</a></li>
                 <li><a href="#about" onclick="closeMenu()">About</a></li>
@@ -555,10 +612,10 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <span class="hero-subtitle">Portfolio</span>
-            <h1 class="hero-title">Logic<br>Designer.</h1>
+            <h1 class="hero-title">Logic<br>Designer</h1>
             <p class="hero-desc">
                 시스템반도체 설계와 검증을 공부하고 있는<br>
-                신입 엔지니어 채민석입니다.
+                엔지니어 채민석입니다.
             </p>
             <a href="#projects" class="btn-cta">View Latest Works</a>
         </div>
@@ -606,68 +663,90 @@
             </div>
         </div>
     </section>
-
     <section class="section-wrapper bg-light-gray" id="projects">
-        <div class="container">
-            <div class="section-header"><h2 class="section-title">Projects</h2></div>
-            <div class="project-grid">
-                <article class="project-card" onclick="openModal('proj7')">
-                    <div class="p-thumb"><img src="./images/linebuffer검증.png" onerror="this.style.display='none'" alt="LineBuffer"></div>
-                    <div class="p-body">
-                        <span class="p-category">UVM Verification</span>
-                        <h3 class="p-title">Linebuffer UVM Verification</h3>
-                        <p class="p-desc">Line Buffer를 Frame Size와 Data Mode에 따른 UVM 환경 검증</p>
-                        <div class="p-tags"><span class="p-tag-sm">UVM</span><span class="p-tag-sm">Systemverilog</span></div>
-                    </div>
-                </article>
-                <article class="project-card" onclick="openModal('proj6')">
-                    <div class="p-thumb"><img src="./images/vga프로젝트이미지.png" onerror="this.style.display='none'" alt="VGA Project"></div>
-                    <div class="p-body">
-                        <span class="p-category">FPGA / Display Control</span>
-                        <h3 class="p-title">VGA Display Controller</h3>
-                        <p class="p-desc">FPGA를 이용하여 이미지 데이터를 모니터로 출력하는 VGA 타이밍 컨트롤러 및 필터 시스템 구현</p>
-                        <div class="p-tags"><span class="p-tag-sm">Systemverilog</span><span class="p-tag-sm">VGA Interface</span></div>
-                    </div>
-                </article>
-                <article class="project-card" onclick="openModal('proj5')">
-                    <div class="p-thumb"><img src="./images/spi&i2c프로젝트이미지.png" onerror="this.style.display='none'" alt="SPI I2C"></div>
-                    <div class="p-body">
-                        <span class="p-category">IP Design / Verification</span>
-                        <h3 class="p-title">SPI & I2C 통신 설계 프로젝트</h3>
-                        <p class="p-desc">다양한 센서와의 통신을 위한 직렬 통신 프로토콜(SPI, I2C) 마스터/슬레이브 컨트롤러 설계 및 검증</p>
-                        <div class="p-tags"><span class="p-tag-sm">SystemVerilog</span><span class="p-tag-sm">UVM</span></div>
-                    </div>
-                </article>
-                <article class="project-card" onclick="openModal('proj4')">
-                    <div class="p-thumb"><img src="./images/AMBA_APB_Peripheral프로젝트이미지.png" onerror="this.style.display='none'" alt="AMBA APB"></div>
-                    <div class="p-body">
-                        <span class="p-category">SoC / Bus Protocol</span>
-                        <h3 class="p-title">AMBA APB Peripheral</h3>
-                        <p class="p-desc">SoC 내 저속 주변장치 제어를 위한 AMBA APB 프로토콜 기반의 IP 설계 프로젝트</p>
-                        <div class="p-tags"><span class="p-tag-sm">AMBA APB</span><span class="p-tag-sm">SoC Integration</span></div>
-                    </div>
-                </article>
-                <article class="project-card" onclick="openModal('proj3')">
-                   <div class="p-thumb"><img src="./images/rv32i_singleCPU프로젝트이미지.png" onerror="this.style.display='none'" alt="RISC-V CPU"></div>
-                    <div class="p-body">
-                        <span class="p-category">Computer Architecture</span>
-                        <h3 class="p-title">RISC-V Single Cycle CPU</h3>
-                        <p class="p-desc">RISC-V 32I 명령어 셋을 지원하는 Single Cycle 프로세서를 설계하고 구현</p>
-                        <div class="p-tags"><span class="p-tag-sm">RISC-V</span><span class="p-tag-sm">CPU Design</span></div>
-                    </div>
-                </article>
-                <article class="project-card" onclick="openModal('proj1')">
-                    <div class="p-thumb"><img src="./images/fpga_uart_watch_sensor프로젝트이미지.png" onerror="this.style.display='none'" alt="Watch Sensor"></div>
-                    <div class="p-body">
-                        <span class="p-category">FPGA System</span>
-                        <h3 class="p-title">FPGA UART Multi-Sensor</h3>
-                        <p class="p-desc">FPGA를 활용한 UART 통신 기반 clock & 2 sensor 통합 시스템 구현 </p>
-                        <div class="p-tags"><span class="p-tag-sm">FPGA</span><span class="p-tag-sm">UART / Sensors</span></div>
-                    </div>
-                </article>
-            </div>
+    <div class="container">
+        <div class="section-header"><h2 class="section-title">Projects</h2></div>
+        <div class="project-grid">
+            <article class="project-card" onclick="openModal('proj7')">
+                <span class="p-period-header">2025.12.15. - 2025.12.21.</span>
+                <div class="p-thumb">
+                    <img src="./images/linebuffer검증.png" onerror="this.style.display='none'" alt="LineBuffer">
+                </div>
+                <div class="p-body">
+                    <span class="p-category">UVM Verification</span>
+                    <h3 class="p-title">Linebuffer UVM Verification</h3>
+                    <p class="p-desc">Line Buffer를 Frame Size와 Data Mode에 따른 UVM 환경 검증</p>
+                    <div class="p-tags"><span class="p-tag-sm">UVM</span><span class="p-tag-sm">Systemverilog</span></div>
+                </div>
+            </article>
+
+            <article class="project-card" onclick="openModal('proj6')">
+                <span class="p-period-header">2025.11.24. - 2025.12.04.</span>
+                <div class="p-thumb">
+                    <img src="./images/vga프로젝트이미지.png" onerror="this.style.display='none'" alt="VGA Project">
+                </div>
+                <div class="p-body">
+                    <span class="p-category">FPGA / Display Control</span>
+                    <h3 class="p-title">VGA Display Controller</h3>
+                    <p class="p-desc">FPGA를 이용하여 이미지 데이터를 모니터로 출력하는 VGA 타이밍 컨트롤러 및 필터 시스템 구현</p>
+                    <div class="p-tags"><span class="p-tag-sm">Systemverilog</span><span class="p-tag-sm">VGA Interface</span></div>
+                </div>
+            </article>
+
+            <article class="project-card" onclick="openModal('proj5')">
+                <span class="p-period-header">2025.10.02. - 2025.10.22.</span>
+                <div class="p-thumb">
+                    <img src="./images/spi&i2c프로젝트이미지.png" onerror="this.style.display='none'" alt="SPI I2C">
+                </div>
+                <div class="p-body">
+                    <span class="p-category">IP Design / Verification</span>
+                    <h3 class="p-title">SPI & I2C 통신 설계 프로젝트</h3>
+                    <p class="p-desc">다양한 센서와의 통신을 위한 직렬 통신 프로토콜(SPI, I2C) 마스터/슬레이브 컨트롤러 설계 및 검증</p>
+                    <div class="p-tags"><span class="p-tag-sm">SystemVerilog</span><span class="p-tag-sm">UVM</span></div>
+                </div>
+            </article>
+
+            <article class="project-card" onclick="openModal('proj4')">
+                <span class="p-period-header">2025.10.17. - 2025.10.27.</span>
+                <div class="p-thumb">
+                    <img src="./images/AMBA_APB_Peripheral프로젝트이미지.png" onerror="this.style.display='none'" alt="AMBA APB">
+                </div>
+                <div class="p-body">
+                    <span class="p-category">SoC / Bus Protocol</span>
+                    <h3 class="p-title">AMBA APB Peripheral</h3>
+                    <p class="p-desc">SoC 내 저속 주변장치 제어를 위한 AMBA APB 프로토콜 기반의 IP 설계 프로젝트</p>
+                    <div class="p-tags"><span class="p-tag-sm">AMBA APB</span><span class="p-tag-sm">SoC Integration</span></div>
+                </div>
+            </article>
+
+            <article class="project-card" onclick="openModal('proj3')">
+               <span class="p-period-header">2025.10.02. - 2025.10.22.</span>
+               <div class="p-thumb">
+                   <img src="./images/rv32i_singleCPU프로젝트이미지.png" onerror="this.style.display='none'" alt="RISC-V CPU">
+               </div>
+                <div class="p-body">
+                    <span class="p-category">Computer Architecture</span>
+                    <h3 class="p-title">RISC-V Single Cycle CPU</h3>
+                    <p class="p-desc">RISC-V 32I 명령어 셋을 지원하는 Single Cycle 프로세서를 설계하고 구현</p>
+                    <div class="p-tags"><span class="p-tag-sm">RISC-V</span><span class="p-tag-sm">CPU Design</span></div>
+                </div>
+            </article>
+
+            <article class="project-card" onclick="openModal('proj1')">
+                <span class="p-period-header">2025.08.20. - 2025.08.28.</span>
+                <div class="p-thumb">
+                    <img src="./images/fpga_uart_watch_sensor프로젝트이미지.png" onerror="this.style.display='none'" alt="Watch Sensor">
+                </div>
+                <div class="p-body">
+                    <span class="p-category">FPGA System</span>
+                    <h3 class="p-title">FPGA UART Multi-Sensor</h3>
+                    <p class="p-desc">FPGA를 활용한 UART 통신 기반 clock & 2 sensor 통합 시스템 구현 </p>
+                    <div class="p-tags"><span class="p-tag-sm">FPGA</span><span class="p-tag-sm">UART / Sensors</span></div>
+                </div>
+            </article>
         </div>
-    </section>
+    </div>
+</section>
 
     <section class="section-wrapper bg-off-white" id="skills">
         <div class="container">
@@ -884,8 +963,8 @@
                 ],
                 reflect: "다중 센서 및 디스플레이 모듈 통합 제어를 통한 Top-level 시스템 설계 역량 강화 및 UART 통신 프로토콜의 하드웨어적 제어 구조 이해",
                 pdf: "1.clock & 2sensor 프로젝트.pdf",
-                trouble: "Issue 내용이 여기에 들어갑니다.",
-                solution: "Solution 내용이 여기에 들어갑니다."
+                trouble: "거리 계산 로직 내 나눗셈 (/) 및 나머지(%) 연산자 사용에 따른 조합 논리 지연 및 Negative Slack 발생",
+                solution: "입력값 범위를 분석하여 연속된 삼항 연산자 기반의 비교 로직으로 대체함으로써 연산 복잡도 최적화 및 하드웨어 타이밍 마진 확보"
             },
             "proj3": {
                 title: "RISC-V Single Cycle CPU",
@@ -908,8 +987,8 @@
                 ],
                 reflect: "RV32I 구현을 통한 하드웨어 동작 및 구조의 종합적 이해, 고급 언어의 하드웨어 실행 과정 및 메모리 접근/제어 방식 습득, 향후 Multi Cycle 방식 확장을 위한 아키텍처 설계 기초 마련",
                 pdf: "3.RISC-V_RV32I기반 SingleCycle CPU설계.pdf",
-                trouble: "Issue 내용...",
-                solution: "Solution 내용..."
+                trouble: "Byte Addressing 기반의 점프 주소와 설계 내부의 Word Index 방식 간 단위 불일치로 인한 주소 계산 및 정렬 오류 발생",
+                solution: "시프트 연산($>> 2$)을 통한 단위 변환 로직 설계 및 하위 2비트 마스킹을 통한 4-Byte Alignment 강제 적용으로 동작 안정화"
             },
             "proj4": {
                 title: "AMBA APB Peripheral",
