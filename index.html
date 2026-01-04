@@ -87,8 +87,25 @@
         .hero-subtitle { font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--accent); margin-bottom: 15px; display: block; letter-spacing: 2px; text-transform: uppercase; }
         .hero-title { font-size: 4.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 30px; color: #ffffff; opacity: 0; animation: fadeInUp 1s ease-out forwards; animation-delay: 0.2s; }
         .hero-desc { font-size: 1.5rem; font-weight: 300; opacity: 0; margin-bottom: 50px; max-width: 700px; animation: fadeInUp 1s ease-out forwards; animation-delay: 1.0s; }
-        .btn-cta { padding: 18px 45px; background: var(--accent); color: var(--primary-dark); font-weight: 700; border-radius: 100px; display: inline-block; box-shadow: 0 10px 25px -5px rgba(56, 182, 255, 0.5); }
+        .btn-cta {
+            padding: 18px 45px;
+            background: var(--accent);
+            color: var(--primary-dark);
+            font-weight: 700;
+            border-radius: 100px;
+            display: inline-block;
+            box-shadow: 0 10px 25px -5px rgba(56, 182, 255, 0.5);
+            /* 아래 transition 속성을 추가하여 변화를 부드럽게 만듭니다 */
+            transition: all 0.3s ease; 
+        }
 
+        /* 마우스를 올렸을 때(Hover) 효과 추가 */
+        .btn-cta:hover {
+            background: #ffffff;            /* 배경색을 흰색으로 변경 */
+            color: var(--primary);          /* 글씨색을 대표색(파란색)으로 변경 */
+            transform: translateY(-5px);    /* 위로 살짝 떠오르는 효과 */
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.2); /* 흰색 버튼이 잘 보이도록 그림자 조정 */
+        }
         /* --- About Me (수정: 1열-2열 간격 좁힘) --- */
         .section-wrapper { padding: var(--section-spacing) 0; }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 30px; }
