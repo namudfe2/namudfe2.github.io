@@ -205,23 +205,120 @@
         }
         .project-card:hover .p-tag-sm { background: var(--primary); color: white; }
 
-        /* --- Skills --- */
-        .skills-wrapper { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        /* --- Skills (완전히 새로 디자인됨) --- */
+        .skills-wrapper { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); /* 2열 배치 */
+            gap: 30px; 
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
         .skill-box {
-            background: var(--bg-white); padding: 50px 40px;
-            border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
-            text-align: center; transition: 0.3s;
+            background: var(--bg-white); 
+            padding: 35px;
+            border-radius: var(--radius-lg); 
+            box-shadow: var(--shadow-md);
+            text-align: left; /* 왼쪽 정렬로 변경 */
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
         }
         .skill-box:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-        .skill-icon { font-size: 3rem; color: var(--primary); margin-bottom: 25px; display: inline-block; }
-        .skill-box h4 { font-size: 1.4rem; margin-bottom: 30px; font-weight: 800; }
-        .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-        .tech-tag {
-            padding: 10px 20px; background: var(--bg-off-white); color: var(--text-body);
-            border-radius: 50px; font-weight: 600; font-size: 0.95rem;
-            border: 1px solid #edf2f7; transition: 0.3s;
+
+        .sb-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #edf2f7;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
         }
-        .tech-tag:hover { border-color: var(--primary); color: var(--primary); background: white; }
+        .sb-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            width: 50px; height: 50px;
+            background: rgba(12, 77, 162, 0.08);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .sb-title { font-size: 1.4rem; font-weight: 800; color: var(--text-heading); }
+
+        .sb-group { margin-bottom: 20px; }
+        .sb-group:last-child { margin-bottom: 0; }
+
+        .sb-label { 
+            font-size: 0.8rem; 
+            color: #a0aec0; 
+            font-weight: 700; 
+            margin-bottom: 12px; 
+            display: block; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
+
+        .sb-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+        /* 주력 기술 (Main) - 진한 색상 강조 */
+        .tag-main {
+            padding: 8px 18px; 
+            background: var(--primary); 
+            color: white;
+            border-radius: 8px; 
+            font-weight: 600; 
+            font-size: 0.95rem;
+            box-shadow: 0 4px 6px -1px rgba(12, 77, 162, 0.2);
+        }
+
+        /* 경험 기술 (Sub) - 연한 스타일 */
+        .tag-sub {
+            padding: 6px 14px; 
+            background: #f1f5f9; 
+            color: var(--text-body);
+            border-radius: 8px; 
+            font-weight: 500; 
+            font-size: 0.9rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* --- Awards --- */
+        .award-list {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .award-item {
+            background: var(--bg-white);
+            padding: 30px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: 0.3s;
+            border-left: 5px solid var(--primary); 
+        }
+        .award-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        .award-content { display: flex; flex-direction: column; gap: 5px; }
+        .award-date { font-size: 0.9rem; color: var(--text-light); font-weight: 600; }
+        .award-title { font-size: 1.15rem; font-weight: 700; color: var(--text-heading); }
+        .award-badge {
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            margin-left: 20px;
+            display: flex; align-items: center; justify-content: center;
+            min-width: 80px;
+        }
+        .badge-gold { background: #FFF9C4; color: #FBC02D; border: 1px solid #FFF176; }
+        .badge-bronze { background: #EFEBE9; color: #8D6E63; border: 1px solid #D7CCC8; }
 
         /* --- Careers --- */
         .timeline { max-width: 800px; margin: 0 auto; position: relative; }
@@ -318,6 +415,7 @@
             
             .about-container { gap: 40px; }
             .about-image-area { flex: 0.8; }
+            /* Skills 2열 유지 */
             .skills-wrapper { grid-template-columns: repeat(2, 1fr); }
         }
 
@@ -409,10 +507,20 @@
             /* [추가] 모바일에서만 줄바꿈 태그 활성화 */
             .mo-br { display: inline; }
 
-            /* --- End About Fix --- */
+            /* [Awards Mobile Fix] */
+            .award-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .award-badge { margin-left: 0; align-self: flex-start; }
+
+            /* [Skills Mobile Fix] */
+            .skills-wrapper { grid-template-columns: 1fr; } /* 모바일은 1열로 */
+
+            /* --- End Fix --- */
             
             .project-grid { grid-template-columns: 1fr; }
-            .skills-wrapper { grid-template-columns: 1fr; }
             
             .modal-window { width: 100%; height: 100%; border-radius: 0; }
             .modal-header { padding: 25px; }
@@ -438,6 +546,7 @@
                 <li><a href="#about" onclick="closeMenu()">About</a></li>
                 <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
                 <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+                <li><a href="#awards" onclick="closeMenu()">Awards</a></li>
                 <li><a href="#education" onclick="closeMenu()">Careers</a></li>
             </ul>
         </div>
@@ -564,7 +673,92 @@
         </div>
     </section>
 
-    <section class="section-wrapper bg-light-gray" id="education">
+    <section class="section-wrapper bg-off-white" id="skills">
+        <div class="container">
+            <div class="section-header"><h2 class="section-title">Skills</h2></div>
+            <div class="skills-wrapper">
+                
+                <div class="skill-box">
+                    <div class="sb-header">
+                        <div class="sb-icon"><i class="fas fa-code"></i></div>
+                        <h4 class="sb-title">Languages</h4>
+                    </div>
+                    
+                    <div class="sb-group">
+                        <span class="sb-label">Main Skills</span>
+                        <div class="sb-tags">
+                            <span class="tag-main">Verilog HDL</span>
+                            <span class="tag-main">SystemVerilog</span>
+                            <span class="tag-main">C / C++</span>
+                            <span class="tag-main">Python</span>
+                        </div>
+                    </div>
+
+                    <div class="sb-group">
+                        <span class="sb-label">Experience</span>
+                        <div class="sb-tags">
+                            <span class="tag-sub">HTML</span>
+                            <span class="tag-sub">Matlab</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <div class="sb-header">
+                        <div class="sb-icon"><i class="fas fa-microchip"></i></div>
+                        <h4 class="sb-title">Tools & FPGA</h4>
+                    </div>
+                    
+                    <div class="sb-group">
+                        <span class="sb-label">Main Skills</span>
+                        <div class="sb-tags">
+                            <span class="tag-main">Xilinx Vivado</span>
+                            <span class="tag-main">STM32 CubeIDE</span>
+                        </div>
+                    </div>
+
+                    <div class="sb-group">
+                        <span class="sb-label">Experience</span>
+                        <div class="sb-tags">
+                            <span class="tag-sub">Synopsys VCS</span>
+                            <span class="tag-sub">Verdi</span>
+                            <span class="tag-sub">Intel Quartus</span>
+                            <span class="tag-sub">ModelSim</span>
+                            <span class="tag-sub">TCAD</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wrapper bg-light-gray" id="awards">
+        <div class="container">
+            <div class="section-header"><h2 class="section-title">Awards</h2></div>
+            <div class="award-list">
+                
+                <div class="award-item">
+                    <div class="award-content">
+                        <span class="award-date">2024. 06.</span>
+                        <h3 class="award-title">제15회 대한전기학회 산업전기응용부회 대학생작품경진대회</h3>
+                    </div>
+                    <span class="award-badge badge-gold"><i class="fas fa-medal" style="margin-right:5px;"></i> 금상</span>
+                </div>
+
+                <div class="award-item">
+                    <div class="award-content">
+                        <span class="award-date">2023. 11.</span>
+                        <h3 class="award-title">제14회 대한전기학회 산업전기응용부회 대학생작품경진대회</h3>
+                    </div>
+                    <span class="award-badge badge-bronze"><i class="fas fa-medal" style="margin-right:5px;"></i> 동상</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    
+    <section class="section-wrapper bg-off-white" id="education">
         <div class="container">
             <div class="section-header"><h2 class="section-title">Careers</h2></div>
             <div class="timeline">
