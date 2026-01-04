@@ -174,14 +174,13 @@
         .tag-main { padding: 8px 18px; background: var(--primary); color: white; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 6px -1px rgba(12, 77, 162, 0.2); white-space: nowrap; }
         .tag-sub { padding: 6px 14px; background: #f1f5f9; color: var(--text-body); border-radius: 8px; font-weight: 500; font-size: 0.9rem; border: 1px solid #e2e8f0; white-space: nowrap; }
 
-        /* --- Awards, Careers --- */
-        .award-list { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+        /* --- Awards --- */
+        .award-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
         .award-item { background: var(--bg-white); padding: 30px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: space-between; transition: 0.3s; border-left: 5px solid var(--primary); }
         .award-badge { padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 0.95rem; white-space: nowrap; margin-left: 20px; display: flex; align-items: center; justify-content: center; min-width: 80px; }
         .badge-gold { background: #FFF9C4; color: #FBC02D; border: 1px solid #FFF176; }
         .badge-bronze { background: #EFEBE9; color: #8D6E63; border: 1px solid #D7CCC8; }
         /* --- Careers --- */
-/* --- Careers --- */
         .timeline { max-width: 800px; margin: 0 auto; position: relative; }
         .timeline::before {
             content: ''; position: absolute; left: 0; top: 10px; height: 100%;
@@ -430,8 +429,8 @@
         <div class="container">
             <div class="section-header"><h2 class="section-title">Awards</h2></div>
             <div class="award-list">
-                <div class="award-item"><div class="award-content"><span class="award-date">2024. 06.</span><h3 class="award-title">제15회 대한전기학회 대학생작품경진대회</h3></div><span class="award-badge badge-gold"><i class="fas fa-medal"></i> 금상</span></div>
-                <div class="award-item"><div class="award-content"><span class="award-date">2023. 11.</span><h3 class="award-title">제14회 대한전기학회 대학생작품경진대회</h3></div><span class="award-badge badge-bronze"><i class="fas fa-medal"></i> 동상</span></div>
+                <div class="award-item"><div class="award-content"><span class="award-date">2024. 06.</span><h3 class="award-title">제15회 대한전기학회 대학생작품경진대회</h3></div><span class="award-badge badge-gold"><i class="fas fa-medal"></i>&nbsp;&nbsp;금상</span></div>
+                <div class="award-item"><div class="award-content"><span class="award-date">2023. 11.</span><h3 class="award-title">제14회 대한전기학회 대학생작품경진대회</h3></div><span class="award-badge badge-bronze"><i class="fas fa-medal"></i>&nbsp;&nbsp;동상</span></div>
             </div>
         </div>
     </section>
@@ -485,12 +484,12 @@
                 role: ["FIFO 기반 UART RX/TX FSM 설계", "SR04(초음파 센서) FSM 설계 및 구현"],
                 reflect: "다중 센서 및 디스플레이 모듈 통합 제어를 통한 Top-level 시스템 설계 역량 강화",
                 pdf: "1.clock & 2sensor 프로젝트.pdf",
-                trouble: "SR04 초음파 센서에서 거리 계산 시 나머지 연산과 나눗셈 연산을 사용하니 리소스를 너무 많이 잡아먹고 타이밍 에러가 발생하는 문제가 있었습니다.",
-                solution: "나눗셈 연산자 대신 뺄셈과 시프트 연산을 활용하는 방식으로 로직을 수정하여 리소스를 최적화하고 문제를 해결했습니다."
+                trouble: "SR04 초음파 센서에서 거리 계산 시 나머지 연산(/)과 나눗셈 연산(%)을 사용으로 리소스를 너무 많이 잡아먹고 타이밍 에러 문제 발생",
+                solution: "나눗셈 연산자 대신 뺄셈과 시프트 연산을 활용하는 방식으로 로직을 수정하여 리소스를 최적화하고 문제 해결."
             },
             "proj3": {
                 title: "RISC-V Single Cycle CPU",
-                period: "2025.10.02. - 2025.10.22.",
+                period: "2025.09.17. - 2025.10.02.",
                 overview: "RISC-V RV32I ISA 기반의 Single Cycle CPU Core 설계 및 명령어 타입별 동작 시뮬레이션 검증 수행",
                 goals: ["RV32I 표준 명령어 집합 구조(ISA) 기반의 데이터패스 및 제어 유닛 설계", "명령어 타입별 기능 동작 검증 및 하드웨어 정합성 확보"],
                 summary: ["명령어 인출(IF)부터 쓰기(WB)까지 수행하는 Single Cycle 5단계 프로세스 구현", "Instruction Memory(ROM)와 Data Memory(RAM) 분리 구조 모델링"],
@@ -502,7 +501,7 @@
             },
             "proj4": {
                 title: "AMBA APB Peripheral",
-                period: "2025.10.17. - 2025.10.27.",
+                period: "2025.10.21. - 2025.10.28.",
                 overview: "RISC-V RV32I Multi-Cycle CPU 구조 내 AMBA APB 인터페이스 기반 커스텀 주변장치 통합 시스템 구현",
                 goals: ["AMBA APB 표준 규격 준수를 통한 마스터-슬레이브 간 버스 인터페이스 통일", "Bare-metal C 어플리케이션 환경에서의 주변장치 레지스터 제어 실습"],
                 summary: ["FETCH, DECODE, EXECUTE, MEMORY, WRITE BACK의 5단계 FSM 제어 로직 구현", "TX/RX FIFO 및 상태 레지스터를 포함한 UART IP 설계 및 버스 연동"],
@@ -514,7 +513,7 @@
             },
             "proj5": {
                 title: "SPI & I2C 통신 설계 프로젝트",
-                period: "2025.10.02. - 2025.10.22.",
+                period: "2025.11.11. - 2025.11.17.",
                 overview: "AXI4-Lite 인터페이스 기반 SPI 및 I2C 직렬 통신 프로토콜 마스터/슬레이브 모듈 설계 및 동작 구현",
                 goals: ["SystemVerilog 이용 SPI Master/Slave 로직 설계", "I2C 프로토콜 분석 및 AXI4-Lite 기반의 Master/Slave 블록 구조 설계"],
                 summary: ["SPI 전 모드(0~3) 지원 컨트롤러 설계", "SPI 대상 UVM 시나리오 정의 및 스코어보드 활용 트랜잭션 비교 분석"],
@@ -526,7 +525,7 @@
             },
             "proj6": {
                 title: "VGA 기반 뱀 사다리 게임 시스템 설계",
-                period: "2025.11.24. - 2025.12.04.",
+                period: "2025.11.19. - 2025.12.05.",
                 overview: "OV7670 카메라와 VGA 출력을 통합하여 실시간 영상 및 게임 로직을 구현한 FPGA 기반 게임 시스템 설계",
                 goals: ["FSM 기반의 뱀 사다리 게임 코어 로직 및 실시간 렌더링 시스템 구현", "OV7670 카메라 인터페이스와 VGA 컨트롤러의 단일 FPGA 내 통합"],
                 summary: ["FSM 기반의 뱀 사다리 게임 코어 엔진 설계 및 구현", "실시간 게임 상태 및 오브젝트 출력을 위한 VGA 렌더링 모듈 개발"],
