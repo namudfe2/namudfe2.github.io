@@ -95,18 +95,17 @@
             border-radius: 100px;
             display: inline-block;
             box-shadow: 0 10px 25px -5px rgba(56, 182, 255, 0.5);
-            /* 아래 transition 속성을 추가하여 변화를 부드럽게 만듭니다 */
             transition: all 0.3s ease; 
         }
 
-        /* 마우스를 올렸을 때(Hover) 효과 추가 */
         .btn-cta:hover {
-            background: #ffffff;            /* 배경색을 흰색으로 변경 */
-            color: var(--primary);          /* 글씨색을 대표색(파란색)으로 변경 */
-            transform: translateY(-5px);    /* 위로 살짝 떠오르는 효과 */
-            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.2); /* 흰색 버튼이 잘 보이도록 그림자 조정 */
+            background: #ffffff;
+            color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.2);
         }
-        /* --- About Me (수정: 1열-2열 간격 좁힘) --- */
+
+        /* --- About Me --- */
         .section-wrapper { padding: var(--section-spacing) 0; }
         .bg-white { background-color: var(--bg-white); }
         .bg-off-white { background-color: var(--bg-off-white); }
@@ -119,40 +118,46 @@
         .about-img { width: 240px; margin: 0 auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); aspect-ratio: 3 / 4; background: #ddd; }
         .about-img img { width: 100%; height: 100%; object-fit: cover; }
         .about-content-area { flex: 1.5; }
-        
-        /* [수정] max-content를 사용하여 각 열의 넓이를 고정값이 아닌 텍스트에 맞게 조절 */
         .info-list { 
             display: grid; 
             grid-template-columns: max-content max-content; 
-            column-gap: 160px; /* 여기서 1열과 2열 사이의 간격을 숫자로 직접 조절 가능 (예: 60px -> 40px) */
+            column-gap: 160px; 
             row-gap: 50px; 
             align-items: start; 
         }
-        
         .info-item { display: flex; align-items: center; gap: 20px; }
         .info-icon { 
             color: var(--primary); 
-            font-size: 1.5rem;      /* 아이콘 자체 크기 */
-            
-            /* [수정] 아래 4개 항목을 동일하게 맞추세요 */
-            width: 50px;           /* 너비 */
-            height: 50px;          /* 높이 (너비와 같은 값 입력) */
-            display: flex;         /* 중앙 정렬을 위해 필요 */
-            align-items: center;   /* 세로 중앙 */
-            justify-content: center; /* 가로 중앙 */
-            flex-shrink: 0;        /* 텍스트가 길어져도 도형이 찌그러지지 않게 고정 */
-            
+            font-size: 1.5rem; 
+            width: 50px; 
+            height: 50px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            flex-shrink: 0;
             background: rgba(12, 77, 162, 0.08); 
-            border-radius: 50%;    /* 1:1 상태에서 50%를 주면 완전한 원이 됩니다. */
+            border-radius: 50%;
         }
         .info-label { font-size: 1.0rem; color: var(--text-light); font-weight: 500; margin-bottom: 0px; display: block; }
         .info-value { font-size: 1.1rem; font-weight: 700; color: var(--text-heading); }
 
-        /* --- Projects (수정: 짤림 방지 contain 적용) --- */
+        /* --- Projects --- */
         .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 50px; }
         .project-card { background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); cursor: pointer; transition: 0.4s; }
         .project-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
-        .p-period-header { display: block; padding: 15px 25px 10px; font-size: 0.85rem; color: #a0aec0; font-weight: 700; background: #ffffff; text-align: left; letter-spacing: 0.5px; }
+        
+        /* [수정] Projects 날짜 디자인 (Careers와 동일하게) */
+        .p-period-header { 
+            display: inline-block; 
+            margin: 20px 0 10px 25px; 
+            font-size: 0.8rem; 
+            font-weight: 900; 
+            color: var(--primary); 
+            background: rgba(12, 77, 162, 0.08); 
+            padding: 5px 15px; 
+            border-radius: 50px; 
+        }
+
         .p-thumb { height: 260px; background: #ffffff; position: relative; overflow: hidden; border-top: 1px solid #f1f5f9; }
         .p-thumb img { width: 100%; height: 100%; object-fit: contain; } 
         .p-body { padding: 35px; }
@@ -163,7 +168,7 @@
         .p-tag-sm { font-size: 0.8rem; padding: 6px 14px; background: var(--bg-light-gray); border-radius: 50px; color: var(--text-body); font-weight: 600; transition: 0.3s; }
         .project-card:hover .p-tag-sm { background: var(--primary); color: white; }
 
-        /* --- Skills (간격 60px 유지) --- */
+        /* --- Skills --- */
         .skills-wrapper { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1000px; margin: 0 auto; }
         .skill-box { background: var(--bg-white); padding: 35px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); transition: 0.3s; display: flex; flex-direction: column; }
         .skill-box:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
@@ -179,17 +184,51 @@
 
         /* --- Awards --- */
         .award-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
-        .award-item { background: var(--bg-white); padding: 30px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: space-between; transition: 0.3s; border-left: 5px solid var(--primary); }
+        .award-item { 
+            background: var(--bg-white); 
+            padding: 30px; 
+            border-radius: var(--radius-md); 
+            box-shadow: var(--shadow-sm); 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            transition: 0.3s; 
+            border-left: 5px solid var(--primary); 
+        }
+        .award-item:hover { 
+            transform: scale(1.02); 
+            box-shadow: var(--shadow-md); 
+        }
+        
+        /* [수정] Awards 날짜 디자인 (Careers와 동일하게) */
+        .award-date { 
+            display: inline-block; 
+            font-size: 0.8rem; 
+            font-weight: 900; 
+            color: var(--primary); 
+            background: rgba(12, 77, 162, 0.08); 
+            padding: 5px 15px; 
+            border-radius: 50px; 
+            margin-bottom: 10px;
+        }
+
+        .award-subject {
+            font-size: 1.05rem; 
+            color: var(--text-body);
+            margin-top: 8px;
+        }
+
         .award-badge { padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 0.95rem; white-space: nowrap; margin-left: 20px; display: flex; align-items: center; justify-content: center; min-width: 80px; }
+        .badge-grand { background: var(--primary); color: #ffffff; box-shadow: 0 4px 8px rgba(12, 77, 162, 0.3); } 
         .badge-gold { background: #FFF9C4; color: #FBC02D; border: 1px solid #FFF176; }
         .badge-bronze { background: #EFEBE9; color: #8D6E63; border: 1px solid #D7CCC8; }
+
         /* --- Careers --- */
         .timeline { max-width: 800px; margin: 0 auto; position: relative; }
         .timeline::before {
             content: ''; position: absolute; left: 0; top: 10px; height: 100%;
             width: 2px; background: #e2e8f0;
         }
-        
         .timeline-item { position: relative; padding-left: 50px; margin-bottom: 60px; }
         .timeline-dot {
             position: absolute; left: -9px; top: 0;
@@ -197,34 +236,29 @@
             background: var(--bg-white); border: 4px solid var(--primary);
             box-shadow: 0 0 0 5px rgba(12, 77, 162, 0.1);
         }
-        
         .timeline-content {
-            position: relative;          /* 날짜 고정을 위한 기준점 */
+            position: relative;
             background: var(--bg-white); 
-            /* [수정] 상단 패딩을 85px로 늘려 날짜와 텍스트 사이 간격을 두 배로 확보 */
             padding: 85px 40px 40px 20px; 
             border-radius: var(--radius-md);
             box-shadow: var(--shadow-md); 
             transition: 0.3s;
         }
         .timeline-content:hover { box-shadow: var(--shadow-lg); transform: translateX(5px); }
-
         .timeline-period {
-            position: absolute;          /* 위치 고정 */
-            /* [수정] 위로 5px 땡김 (25px -> 20px), 왼쪽으로 10px 땡김 (40px -> 30px) */
-            top: 20px;                   
-            left: 20px;                  
-            font-size: 0.8rem;           /* 크기 기존 유지 */
+            position: absolute;
+            top: 20px; 
+            left: 20px; 
+            font-size: 0.8rem;
             font-weight: 1000;
             color: var(--primary); 
             background: rgba(12, 77, 162, 0.08); 
             padding: 5px 15px; 
             border-radius: 50px;
-            margin-bottom: 0;
         }
-
         .timeline-content h4 { font-size: 1.3rem; font-weight: 800; margin-bottom: 15px; }
         .timeline-content p { font-size: 1.05rem; color: var(--text-body); }
+
         /* --- Footer & Modal --- */
         footer { background: #062e66; color: rgba(255,255,255,0.6); padding: 100px 0; text-align: center; }
         .footer-email { font-size: 1.5rem; color: white; font-weight: 700; margin-bottom: 20px; display: block; }
@@ -240,7 +274,7 @@
         .solution-box { background: #f0fdf4; border-left: 4px solid #4ade80; padding: 30px; border-radius: 0 var(--radius-md) var(--radius-md) 0; }
         .media-viewer { width: 100%; height: 500px; background: var(--bg-light-gray); border-radius: var(--radius-md); overflow: hidden; }
 
-        /* --- Responsive (가운데 정렬) --- */
+        /* --- Responsive --- */
         @media (max-width: 768px) {
             body { padding-top: 70px; }
             .navbar { height: 70px; background: var(--bg-white); }
@@ -252,16 +286,12 @@
             .about-container { flex-direction: column; gap: 40px; align-items: center; text-align: center; }
             .about-image-area { width: 100%; display: flex; justify-content: center; }
             .about-img { width: 180px; margin: 0 auto; }
-            .about-content-area { width: 100%; display: flex; justify-content: center; }
-            /* 모바일은 1열이므로 max-content 대신 1fr로 고정하여 꽉 채움 */
+            .about-content-area { width: 100%; display: center; justify-content: center; }
             .info-list { grid-template-columns: 1fr !important; gap: 25px !important; width: fit-content; margin: 0 auto; text-align: left; }
-            .info-icon { font-size: 1.2rem; padding: 10px; width: 45px; height: 45px; }
-            .info-label { font-size: 0.95rem; }
-            .info-value { font-size: 1.15rem; }
             .skills-wrapper, .project-grid { grid-template-columns: 1fr; }
             .mo-br { display: inline; }
             .award-item { flex-direction: column; align-items: flex-start; gap: 15px; }
-            .award-badge { margin-left: 0; }
+            .award-badge { margin-left: 0; width: 100%; }
         }
     </style>
 </head>
@@ -312,12 +342,22 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>ㅇ
 
     <section class="section-wrapper bg-light-gray" id="projects">
         <div class="container">
             <div class="section-header"><h2 class="section-title">Projects</h2></div>
             <div class="project-grid">
+                <article class="project-card" onclick="openModal('proj8')">
+                    <span class="p-period-header">2025.01.05. - 2025.01.22.</span>
+                    <div class="p-thumb"><img src="./images/8.최종이미지.png" alt="FPGA / Python / Embedded"></div>
+                    <div class="p-body">
+                        <span class="p-category">FPGA / STM32</span>
+                        <h3 class="p-title">SoC기반 펜 플로터를 이용한 커스텀 각인 서비스</h3>
+                        <p class="p-desc">펜 플로터 자체를 직접 만들고 FPGA를 통한 이미지 처리, Python을 통한 최적화, STM32를 이용한 모터 구현</p>
+                        <div class="p-tags"><span class="p-tag-sm">SystemVerilog</span><span class="p-tag-sm">STM32</span></div>
+                    </div>
+                </article>
                 <article class="project-card" onclick="openModal('proj7')">
                     <span class="p-period-header">2025.12.15. - 2025.12.21.</span>
                     <div class="p-thumb"><img src="./images/linebuffer검증.png" alt="LineBuffer"></div>
@@ -432,8 +472,30 @@
         <div class="container">
             <div class="section-header"><h2 class="section-title">Awards</h2></div>
             <div class="award-list">
-                <div class="award-item"><div class="award-content"><span class="award-date">2024. 06.</span><h3 class="award-title">제15회 대한전기학회 대학생작품경진대회</h3></div><span class="award-badge badge-gold"><i class="fas fa-medal"></i>&nbsp;&nbsp;금상</span></div>
-                <div class="award-item"><div class="award-content"><span class="award-date">2023. 11.</span><h3 class="award-title">제14회 대한전기학회 대학생작품경진대회</h3></div><span class="award-badge badge-bronze"><i class="fas fa-medal"></i>&nbsp;&nbsp;동상</span></div>
+                <div class="award-item">
+                    <div class="award-content">
+                        <span class="award-date">2026. 01.</span>
+                        <h3 class="award-title">대한상공회의소 서울기술교육센터 최종프로젝트</h3>
+                        <p class="award-subject">SoC 기반 팬 플로터를 이용한 커스텀 각인 서비스</p>
+                    </div>
+                    <span class="award-badge badge-grand"><i class="fas fa-trophy"></i>&nbsp;&nbsp;최우수상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-content">
+                        <span class="award-date">2024. 06.</span>
+                        <h3 class="award-title">제15회 대한전기학회 대학생작품경진대회</h3>
+                        <p class="award-subject">작품 주제 또는 연구 내용을 입력하세요</p>
+                    </div>
+                    <span class="award-badge badge-gold"><i class="fas fa-medal"></i>&nbsp;&nbsp;금상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-content">
+                        <span class="award-date">2023. 11.</span>
+                        <h3 class="award-title">제14회 대한전기학회 대학생작품경진대회</h3>
+                        <p class="award-subject">작품 주제 또는 연구 내용을 입력하세요</p>
+                    </div>
+                    <span class="award-badge badge-bronze"><i class="fas fa-medal"></i>&nbsp;&nbsp;동상</span>
+                </div>
             </div>
         </div>
     </section>
@@ -442,7 +504,7 @@
         <div class="container">
             <div class="section-header"><h2 class="section-title">Careers</h2></div>
             <div class="timeline">
-                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-period">2025.07. - 현재</span><h4>[Harman] 세미콘아카데미 설계/검증 과정 이수 중</h4><p>VerilogHDL/UVM, ARM Cortex-M, AMBA BUS, SoC 설계 실무 교육 이수 중 (950H)</p></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-period">2025.07. - 2026.01.</span><h4>[Harman] 세미콘아카데미 설계/검증 과정 이수</h4><p>VerilogHDL/UVM, ARM Cortex-M, AMBA BUS, SoC 설계 실무 교육 이수(950H)</p></div></div>
                 <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-period">2019.03. - 2025.08.</span><h4>상명대학교 시스템반도체공학과 졸업</h4></div></div>
                 <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-period">2016.03. - 2019.02.</span><h4>단국대학교사범대학부속고등학교 졸업</h4></div></div>
             </div>
@@ -549,6 +611,18 @@
                 pdf: "7.LineBuffer UVM 검증.pdf",
                 trouble: "랜덤 테스트 시 특정 프레임 경계에서 데이터 불일치 버그 발견",
                 solution: "모니터와 스코어보드 내의 인덱스 추적 로직을 정교화하여 경계 조건 버그 수정"
+            },
+            "proj8": {
+                title: "SoC기반 펜 플로터를 이용한 커스텀 각인 서비스",
+                period: "2025.01.05. - 2025.01.22.",
+                overview: "Line Buffer를 Frame Size와 Data Mode에 따른 UVM 환경 검증",
+                goals: ["Line Buffer RTL 동작 이해 및 검증 Plan 수립", "기능 커버리지 100% 달성 목표"],
+                summary: "Line Buffer DUT 분석, UVM Environment 구축, Frame Size 및 Data Pattern 별 Sequence Item 생성",
+                role: ["이미지 filter 구현"],
+                reflect: "복잡한 메모리 버퍼 구조에 대한 검증 전략 수립 능력과 UVM 컴포넌트 재사용성에 대한 깊은 이해",
+                pdf: "8.최종프로젝트.pdf",
+                trouble: "랜덤 테스트 시 특정 프레임 경계에서 데이터 불일치 버그 발견",
+                solution: "모니터와 스코어보드 내의 인덱스 추적 로직을 정교화하여 경계 조건 버그 수정"
             }
         };
 
@@ -590,4 +664,3 @@
     </script>
 </body>
 </html>
-
