@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* [PC 기본 설정] */
         .mo-br { display: none; }
 
         :root {
@@ -30,17 +31,6 @@
             --section-spacing: 140px;
         }
 
-        body.dark {
-            --bg-white: #1a202c;
-            --bg-off-white: #11141d;
-            --bg-light-gray: #2d3748;
-            --text-heading: #f1f5f9;
-            --text-body: #cbd5e0;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.5);
-            --shadow-lg: 0 20px 40px -12px rgba(0,0,0,0.6);
-        }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
@@ -51,10 +41,9 @@
             line-height: 1.7;
             word-break: keep-all;
             -webkit-font-smoothing: antialiased;
-            transition: background-color 0.3s, color 0.3s;
         }
 
-        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', 'Noto Sans KR', sans-serif; color: var(--text-heading); transition: color 0.3s; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', 'Noto Sans KR', sans-serif; color: var(--text-heading); }
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
         ul { list-style: none; }
         img { max-width: 100%; height: auto; }
@@ -64,15 +53,14 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* --- Navigation --- */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; height: 80px;
-            background: var(--bg-white);
-            opacity: 0.95;
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             z-index: 1000;
             display: flex; align-items: center; justify-content: center;
             box-shadow: var(--shadow-sm);
-            transition: background 0.3s;
         }
         .nav-inner {
             width: 100%; max-width: 1280px; padding: 0 30px;
@@ -81,21 +69,15 @@
         }
         .logo { display: flex; align-items: center; text-decoration: none; }
         .logo i { font-size: 1.8rem; color: var(--primary); transition: color 0.3s ease; }
+        .logo:hover i { color: var(--accent); }
         .nav-menu { display: flex; gap: 40px; }
         .nav-menu a { font-size: 1rem; font-weight: 500; color: var(--text-body); position: relative; }
         .nav-menu a:hover { color: var(--primary); }
+        .nav-menu a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s; }
+        .nav-menu a:hover::after { width: 100%; }
         .menu-toggle { display: none; font-size: 1.5rem; color: var(--text-heading); cursor: pointer; }
 
-        .dark-mode-toggle {
-            position: fixed; bottom: 30px; right: 30px;
-            width: 60px; height: 60px; border-radius: 50%;
-            background: var(--primary); color: white;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; box-shadow: var(--shadow-lg); z-index: 9999;
-            transition: transform 0.3s, background 0.3s; font-size: 1.5rem;
-        }
-        .dark-mode-toggle:hover { transform: scale(1.1); }
-
+        /* --- Hero Section --- */
         .hero {
             background: linear-gradient(135deg, rgba(6, 46, 102, 0.85) 0%, rgba(12, 77, 162, 0.75) 100%), url('./images/semiconimg.png');
             background-size: cover; background-position: center; background-repeat: no-repeat;
@@ -105,8 +87,25 @@
         .hero-subtitle { font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--accent); margin-bottom: 15px; display: block; letter-spacing: 2px; text-transform: uppercase; }
         .hero-title { font-size: 4.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 30px; color: #ffffff; opacity: 0; animation: fadeInUp 1s ease-out forwards; animation-delay: 0.2s; }
         .hero-desc { font-size: 1.5rem; font-weight: 300; opacity: 0; margin-bottom: 50px; max-width: 700px; animation: fadeInUp 1s ease-out forwards; animation-delay: 1.0s; }
-        .btn-cta { padding: 18px 45px; background: var(--accent); color: var(--primary-dark); font-weight: 700; border-radius: 100px; display: inline-block; box-shadow: 0 10px 25px -5px rgba(56, 182, 255, 0.5); transition: all 0.3s ease; }
+        .btn-cta {
+            padding: 18px 45px;
+            background: var(--accent);
+            color: var(--primary-dark);
+            font-weight: 700;
+            border-radius: 100px;
+            display: inline-block;
+            box-shadow: 0 10px 25px -5px rgba(56, 182, 255, 0.5);
+            transition: all 0.3s ease; 
+        }
 
+        .btn-cta:hover {
+            background: #ffffff;
+            color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- About Me --- */
         .section-wrapper { padding: var(--section-spacing) 0; }
         .bg-white { background-color: var(--bg-white); }
         .bg-off-white { background-color: var(--bg-off-white); }
@@ -118,16 +117,46 @@
         .about-image-area { flex: 0.8; position: relative; }
         .about-img { width: 240px; margin: 0 auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); aspect-ratio: 3 / 4; background: #ddd; }
         .about-img img { width: 100%; height: 100%; object-fit: cover; }
-        .info-list { display: grid; grid-template-columns: max-content max-content; column-gap: 160px; row-gap: 50px; align-items: start; }
+        .about-content-area { flex: 1.5; }
+        .info-list { 
+            display: grid; 
+            grid-template-columns: max-content max-content; 
+            column-gap: 160px; 
+            row-gap: 50px; 
+            align-items: start; 
+        }
         .info-item { display: flex; align-items: center; gap: 20px; }
-        .info-icon { color: var(--primary); font-size: 1.5rem; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: rgba(12, 77, 162, 0.08); border-radius: 50%; }
+        .info-icon { 
+            color: var(--primary); 
+            font-size: 1.5rem; 
+            width: 50px; 
+            height: 50px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            flex-shrink: 0;
+            background: rgba(12, 77, 162, 0.08); 
+            border-radius: 50%;
+        }
         .info-label { font-size: 1.0rem; color: var(--text-light); font-weight: 500; margin-bottom: 0px; display: block; }
         .info-value { font-size: 1.1rem; font-weight: 700; color: var(--text-heading); }
 
+        /* --- Projects --- */
         .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 50px; }
         .project-card { background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); cursor: pointer; transition: 0.4s; }
         .project-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
-        .p-period-header { display: inline-block; margin: 20px 0 10px 25px; font-size: 0.8rem; font-weight: 900; color: var(--primary); background: rgba(12, 77, 162, 0.08); padding: 5px 15px; border-radius: 50px; }
+        
+        .p-period-header { 
+            display: inline-block; 
+            margin: 20px 0 10px 25px; 
+            font-size: 0.8rem; 
+            font-weight: 900; 
+            color: var(--primary); 
+            background: rgba(12, 77, 162, 0.08); 
+            padding: 5px 15px; 
+            border-radius: 50px; 
+        }
+
         .p-thumb { height: 260px; background: #ffffff; position: relative; overflow: hidden; border-top: 1px solid #f1f5f9; }
         .p-thumb img { width: 100%; height: 100%; object-fit: contain; } 
         .p-body { padding: 35px; }
@@ -136,64 +165,139 @@
         .p-desc { font-size: 1rem; color: var(--text-body); margin-bottom: 25px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .p-tags { display: flex; gap: 8px; flex-wrap: wrap; }
         .p-tag-sm { font-size: 0.8rem; padding: 6px 14px; background: var(--bg-light-gray); border-radius: 50px; color: var(--text-body); font-weight: 600; transition: 0.3s; }
+        .project-card:hover .p-tag-sm { background: var(--primary); color: white; }
 
+        /* --- Skills --- */
         .skills-wrapper { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1000px; margin: 0 auto; }
         .skill-box { background: var(--bg-white); padding: 35px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); transition: 0.3s; display: flex; flex-direction: column; }
-        .sb-header { display: flex; align-items: center; gap: 15px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 20px; margin-bottom: 25px; }
+        .skill-box:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .sb-header { display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #edf2f7; padding-bottom: 20px; margin-bottom: 25px; }
         .sb-icon { font-size: 1.8rem; color: var(--primary); width: 50px; height: 50px; background: rgba(12, 77, 162, 0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
         .sb-title { font-size: 1.4rem; font-weight: 800; color: var(--text-heading); }
         .sb-group { margin-bottom: 60px; } 
-        .tag-main { padding: 8px 18px; background: var(--primary); color: white; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 6px -1px rgba(12, 77, 162, 0.2); }
-        .tag-sub { padding: 6px 14px; background: var(--bg-light-gray); color: var(--text-body); border-radius: 8px; font-weight: 500; font-size: 0.9rem; border: 1px solid rgba(0,0,0,0.05); }
+        .sb-group:last-child { margin-bottom: 0; }
+        .sb-label { font-size: 0.8rem; color: #a0aec0; font-weight: 700; margin-bottom: 15px; display: block; text-transform: uppercase; letter-spacing: 1px; }
+        .sb-tags { display: flex; flex-wrap: wrap; gap: 15px 12px; } 
+        .tag-main { padding: 8px 18px; background: var(--primary); color: white; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 6px -1px rgba(12, 77, 162, 0.2); white-space: nowrap; }
+        .tag-sub { padding: 6px 14px; background: #f1f5f9; color: var(--text-body); border-radius: 8px; font-weight: 500; font-size: 0.9rem; border: 1px solid #e2e8f0; white-space: nowrap; }
 
+        /* --- Awards --- */
         .award-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
-        .award-item { background: var(--bg-white); padding: 30px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: space-between; border-left: 5px solid var(--primary); }
-        .award-date { display: inline-block; font-size: 0.8rem; font-weight: 900; color: var(--primary); background: rgba(12, 77, 162, 0.08); padding: 5px 15px; border-radius: 50px; margin-bottom: 10px; }
+        .award-item { 
+            background: var(--bg-white); 
+            padding: 30px; 
+            border-radius: var(--radius-md); 
+            box-shadow: var(--shadow-sm); 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            transition: 0.3s; 
+            border-left: 5px solid var(--primary); 
+        }
+        .award-item:hover { 
+            transform: scale(1.02); 
+            box-shadow: var(--shadow-md); 
+        }
+        
+        .award-date { 
+            display: inline-block; 
+            font-size: 0.8rem; 
+            font-weight: 900; 
+            color: var(--primary); 
+            background: rgba(12, 77, 162, 0.08); 
+            padding: 5px 15px; 
+            border-radius: 50px; 
+            margin-bottom: 10px;
+        }
+
+        .award-subject {
+            font-size: 1.05rem; 
+            color: var(--text-body);
+            margin-top: 8px;
+        }
+
         .award-badge { padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 0.95rem; white-space: nowrap; margin-left: 20px; display: flex; align-items: center; justify-content: center; min-width: 80px; }
-        .badge-grand { background: var(--primary); color: #ffffff; } 
+        .badge-grand { background: var(--primary); color: #ffffff; box-shadow: 0 4px 8px rgba(12, 77, 162, 0.3); } 
+        .badge-gold { background: #FFF9C4; color: #FBC02D; border: 1px solid #FFF176; }
+        .badge-bronze { background: #EFEBE9; color: #8D6E63; border: 1px solid #D7CCC8; }
 
+        /* --- Careers --- */
         .timeline { max-width: 800px; margin: 0 auto; position: relative; }
-        .timeline::before { content: ''; position: absolute; left: 0; top: 10px; height: 100%; width: 2px; background: #e2e8f0; }
+        .timeline::before {
+            content: ''; position: absolute; left: 0; top: 10px; height: 100%;
+            width: 2px; background: #e2e8f0;
+        }
         .timeline-item { position: relative; padding-left: 50px; margin-bottom: 60px; }
-        .timeline-dot { position: absolute; left: -9px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--bg-white); border: 4px solid var(--primary); box-shadow: 0 0 0 5px rgba(12, 77, 162, 0.1); }
-        .timeline-content { position: relative; background: var(--bg-white); padding: 85px 40px 40px 20px; border-radius: var(--radius-md); box-shadow: var(--shadow-md); transition: 0.3s; }
-        .timeline-period { position: absolute; top: 20px; left: 20px; font-size: 0.8rem; font-weight: 1000; color: var(--primary); background: rgba(12, 77, 162, 0.08); padding: 5px 15px; border-radius: 50px; }
+        .timeline-dot {
+            position: absolute; left: -9px; top: 0;
+            width: 20px; height: 20px; border-radius: 50%;
+            background: var(--bg-white); border: 4px solid var(--primary);
+            box-shadow: 0 0 0 5px rgba(12, 77, 162, 0.1);
+        }
+        .timeline-content {
+            position: relative;
+            background: var(--bg-white); 
+            padding: 85px 40px 40px 20px; 
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md); 
+            transition: 0.3s;
+        }
+        .timeline-content:hover { box-shadow: var(--shadow-lg); transform: translateX(5px); }
+        .timeline-period {
+            position: absolute;
+            top: 20px; 
+            left: 20px; 
+            font-size: 0.8rem;
+            font-weight: 1000;
+            color: var(--primary); 
+            background: rgba(12, 77, 162, 0.08); 
+            padding: 5px 15px; 
+            border-radius: 50px;
+        }
+        .timeline-content h4 { font-size: 1.3rem; font-weight: 800; margin-bottom: 15px; }
+        .timeline-content p { font-size: 1.05rem; color: var(--text-body); }
 
+        /* --- Footer & Modal --- */
         footer { background: #062e66; color: rgba(255,255,255,0.6); padding: 100px 0; text-align: center; }
         .footer-email { font-size: 1.5rem; color: white; font-weight: 700; margin-bottom: 20px; display: block; }
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
         .modal-overlay.active { display: flex; opacity: 1; }
-        .modal-window { width: 90%; max-width: 1000px; height: 90vh; background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-lg); transition: background 0.3s; }
-        .modal-header { padding: 30px 50px; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: flex-start; }
+        .modal-window { width: 90%; max-width: 1000px; height: 90vh; background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-lg); }
+        .modal-header { padding: 30px 50px; border-bottom: 1px solid #edf2f7; display: flex; justify-content: space-between; align-items: flex-start; }
         .btn-close { font-size: 2.5rem; color: var(--text-light); cursor: pointer; }
         .modal-content { flex: 1; overflow-y: auto; padding: 50px; }
-        .m-section { margin-bottom: 40px; }
+        .m-section { margin-bottom: 40px; } /* 카테고리 간격 추가 */
         .m-label { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; position: relative; padding-left: 15px; }
         .m-label::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 4px; height: 20px; background: var(--accent); border-radius: 10px; }
-        .trouble-box { background: #fff9db; border-left: 4px solid #fab005; padding: 25px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-bottom: 20px; margin-top: 15px; color: #1a202c; }
-        body.dark .trouble-box { background: #2d2d1a; color: #fff9db; }
-        .solution-box { background: #f0fdf4; border-left: 4px solid #4ade80; padding: 30px; border-radius: 0 var(--radius-md) var(--radius-md) 0; color: #1a202c; }
-        body.dark .solution-box { background: #1a2e21; color: #f0fdf4; }
+        .m-text { margin-top: 15px; } /* 레이블과 내용 사이 간격 */
+        .m-list { margin-top: 15px; } /* 리스트 상단 간격 */
+        .m-list li { margin-bottom: 12px; } /* 리스트 항목 간격 */
+        .trouble-box { background: #fff9db; border-left: 4px solid #fab005; padding: 25px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-bottom: 20px; margin-top: 15px; }
+        .solution-box { background: #f0fdf4; border-left: 4px solid #4ade80; padding: 30px; border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+        .media-viewer { width: 100%; height: 500px; background: var(--bg-light-gray); border-radius: var(--radius-md); overflow: hidden; margin-top: 20px; }
 
+        /* --- Responsive --- */
         @media (max-width: 768px) {
             body { padding-top: 70px; }
+            .navbar { height: 70px; background: var(--bg-white); }
             .logo { display: none !important; } 
-            .menu-toggle { display: block; order: -1; padding: 10px; }
+            .menu-toggle { display: block; order: -1; padding: 10px; cursor: pointer; }
             .nav-inner { justify-content: flex-start; padding: 0 20px; }
             .nav-menu { position: fixed; top: 70px; left: 0; width: 100%; background: var(--bg-white); flex-direction: column; padding: 30px; display: none; }
             .nav-menu.active { display: flex; }
-            .about-container { flex-direction: column; text-align: center; }
-            .info-list { grid-template-columns: 1fr !important; gap: 25px !important; margin: 0 auto; text-align: left; }
+            .about-container { flex-direction: column; gap: 40px; align-items: center; text-align: center; }
+            .about-image-area { width: 100%; display: flex; justify-content: center; }
+            .about-img { width: 180px; margin: 0 auto; }
+            .about-content-area { width: 100%; display: center; justify-content: center; }
+            .info-list { grid-template-columns: 1fr !important; gap: 25px !important; width: fit-content; margin: 0 auto; text-align: left; }
             .skills-wrapper, .project-grid { grid-template-columns: 1fr; }
-            .dark-mode-toggle { bottom: 20px; right: 20px; width: 50px; height: 50px; }
+            .mo-br { display: inline; }
+            .award-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .award-badge { margin-left: 0; width: 100%; }
         }
     </style>
 </head>
 <body oncontextmenu="return false">
-
-    <div class="dark-mode-toggle" onclick="toggleDarkMode()" title="다크모드 전환">
-        <i class="fas fa-moon" id="theme-icon"></i>
-    </div>
 
     <nav class="navbar">
         <div class="nav-inner">
@@ -302,7 +406,7 @@
                     <div class="p-body">
                         <span class="p-category">Computer Architecture</span>
                         <h3 class="p-title">RISC-V Single Cycle CPU</h3>
-                        <p class="p-desc">RISC-V RV32I ISA 기반의 단일 사이클 프로세서 설계 및 동작 확인</p>
+                        <p class="p-desc">RISC-V RV32I ISA 기반의 단일 사이클 프로세서 설계 및 정합성 검증</p>
                         <div class="p-tags"><span class="p-tag-sm">RISC-V</span><span class="p-tag-sm">CPU Design</span></div>
                     </div>
                 </article>
@@ -326,20 +430,42 @@
             <div class="skills-wrapper">
                 <div class="skill-box">
                     <div class="sb-header"><div class="sb-icon"><i class="fas fa-code"></i></div><h4 class="sb-title">Languages</h4></div>
-                    <div class="sb-tags">
-                        <span class="tag-main">Verilog HDL</span>
-                        <span class="tag-main">SystemVerilog</span>
-                        <span class="tag-main">C / C++</span>
-                        <span class="tag-main">Python</span>
+                    <div class="sb-group">
+                        <span class="sb-label">Main Skills</span>
+                        <div class="sb-tags">
+                            <span class="tag-main">Verilog HDL</span>
+                            <span class="tag-main">SystemVerilog</span>
+                            <span class="tag-main">C / C++</span>
+                            <span class="tag-main">Python</span>
+                        </div>
+                    </div>
+                    <div class="sb-group">
+                        <span class="sb-label">Experience</span>
+                        <div class="sb-tags">
+                            <span class="tag-sub">HTML</span>
+                            <span class="tag-sub">Matlab</span>
+                        </div>
                     </div>
                 </div>
                 <div class="skill-box">
-                    <div class="sb-header"><div class="sb-icon"><i class="fas fa-microchip"></i></div><h4 class="sb-title">Platforms</h4></div>
-                    <div class="sb-tags">
-                        <span class="tag-main">Xilinx Vivado</span>
-                        <span class="tag-main">Vitis</span>
-                        <span class="tag-main">Linux</span>
-                        <span class="tag-main">STM32 CubeIDE</span>
+                    <div class="sb-header"><div class="sb-icon"><i class="fas fa-microchip"></i></div><h4 class="sb-title">Platforms & Development</h4></div>
+                    <div class="sb-group">
+                        <span class="sb-label">Main Skills</span>
+                        <div class="sb-tags">
+                            <span class="tag-main">Xilinx Vivado</span>
+                            <span class="tag-main"> Vitis</span>
+                            <span class="tag-main"> Linux</span>
+                            <span class="tag-main">STM32 CubeIDE</span>
+                        </div>
+                    </div>
+                    <div class="sb-group">
+                        <span class="sb-label">Experience</span>
+                        <div class="sb-tags">
+                            <span class="tag-sub">Synopsys VCS</span>
+                            <span class="tag-sub">Verdi</span>
+                            <span class="tag-sub">Intel Quartus</span>
+                            <span class="tag-sub">ModelSim</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -353,26 +479,43 @@
                 <div class="award-item">
                     <div class="award-content">
                         <span class="award-date">2026. 01.</span>
-                        <h3 class="award-title">서울기술교육센터 프로젝트 경진대회 최우수상</h3>
-                        <p class="award-subject">SoC 기반 팬 플로터 커스텀 각인 서비스</p>
+                        <h3 class="award-title">대한상공회의소 서울기술교육센터 프로젝트 경진대회</h3>
+                        <p class="award-subject">SoC 기반 팬 플로터를 이용한 커스텀 각인 서비스</p>
                     </div>
-                    <span class="award-badge badge-grand"><i class="fas fa-trophy"></i></span>
+                    <span class="award-badge badge-grand"><i class="fas fa-trophy"></i>&nbsp;&nbsp;최우수상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-content">
+                        <span class="award-date">2024. 06.</span>
+                        <h3 class="award-title">제15회 대한전기학회 대학생작품경진대회</h3>
+                        <p class="award-subject">시각장애인들을 위한 점자 인식 및 음성 출력 프로그램</p>
+                    </div>
+                    <span class="award-badge badge-gold"><i class="fas fa-medal"></i>&nbsp;&nbsp;금상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-content">
+                        <span class="award-date">2023. 11.</span>
+                        <h3 class="award-title">제14회 대한전기학회 대학생작품경진대회</h3>
+                        <p class="award-subject">mLP를 이용한 FinFET22nm I-V Curve 측정</p>
+                    </div>
+                    <span class="award-badge badge-bronze"><i class="fas fa-medal"></i>&nbsp;&nbsp;동상</span>
                 </div>
             </div>
         </div>
     </section>
-
+    
     <section class="section-wrapper bg-off-white" id="education">
         <div class="container">
             <div class="section-header"><h2 class="section-title">Careers</h2></div>
             <div class="timeline">
-                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-period">2025.07. - 2026.01.</span><h4>[Harman] 세미콘아카데미 시스템반도체 설계/검증 과정 이수</h4><p>VerilogHDL/UVM, ARM Cortex-M, AMBA BUS, SoC 설계 실무 교육 이수(950H)</p></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-period">2025.07. - 2026.01.</span><h4>[Harman] 세미콘아카데미 설계/검증 과정 이수</h4><p>VerilogHDL/UVM, ARM Cortex-M, AMBA BUS, SoC 설계 실무 교육 이수(950H)</p></div></div>
                 <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-period">2019.03. - 2025.08.</span><h4>상명대학교 시스템반도체공학과 졸업</h4></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-period">2016.03. - 2019.02.</span><h4>단국대학교사범대학부속고등학교 졸업</h4></div></div>
             </div>
         </div>
     </section>
 
-    <footer><div class="container"><a href="mailto:cms2789@gmail.com" class="footer-email">cms2789@gmail.com</a><p>© 2026 Minseok Chae.</p></div></footer>
+    <footer><div class="container"><a href="mailto:cms2789@gmail.com" class="footer-email">cms2789@gmail.com</a><p>Designed & Built by Minseok Chae. © 2025</p></div></footer>
 
     <div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
         <div class="modal-window" onclick="event.stopPropagation()">
@@ -381,17 +524,47 @@
                 <div class="btn-close" onclick="closeModal()">&times;</div>
             </div>
             <div class="modal-content">
-                <div class="m-section"><div class="m-label">프로젝트 개요</div><p id="m-overview" class="m-text"></p></div>
-                <div class="m-section"><div class="m-label">프로젝트 목표</div><ul id="m-goals" class="m-list"></ul></div>
-                <div class="m-section"><div class="m-label">프로젝트 요약</div><p id="m-summary" class="m-text" style="font-weight: 600; color: var(--primary); background: #f0f7ff; padding: 15px; border-radius: 8px;"></p></div>
-                <div class="m-section"><div class="m-label">역할</div><ul id="m-role" class="m-list"></ul></div>
+                <div class="m-section">
+                    <div class="m-label">프로젝트 개요</div>
+                    <p id="m-overview" class="m-text"></p>
+                </div>
+                
+                <div class="m-section">
+                    <div class="m-label">프로젝트 목표</div>
+                    <ul id="m-goals" class="m-list"></ul>
+                </div>
+                
+                <div class="m-section">
+                    <div class="m-label">프로젝트 요약</div>
+                    <p id="m-summary" class="m-text" style="font-weight: 600; color: var(--primary); background: #f0f7ff; padding: 15px; border-radius: 8px;"></p>
+                </div>
+                
+                <div class="m-section">
+                    <div class="m-label">역할</div>
+                    <ul id="m-role" class="m-list"></ul>
+                </div>
+                
                 <div class="m-section">
                     <div class="m-label">트러블슈팅</div>
-                    <div class="trouble-box"><span style="color:#e67700; font-weight:800; display:block; margin-bottom:5px;">Issue</span><p id="m-trouble" class="m-text"></p></div>
-                    <div class="solution-box"><span style="color:#166534; font-weight:800; display:block; margin-bottom:5px;">Solution</span><p id="m-solution" class="m-text"></p></div>
+                    <div class="trouble-box">
+                        <span style="color:#e67700; font-weight:800; display:block; margin-bottom:5px;">Issue</span>
+                        <p id="m-trouble" class="m-text"></p>
+                    </div>
+                    <div class="solution-box">
+                        <span style="color:#166534; font-weight:800; display:block; margin-bottom:5px;">Solution</span>
+                        <p id="m-solution" class="m-text"></p>
+                    </div>
                 </div>
-                <div class="m-section"><div class="m-label">고찰</div><p id="m-reflect" class="m-text"></p></div>
-                <div id="m-media-section" style="display:none;"><div class="m-label">상세 자료 (PDF)</div><div class="media-viewer"></div></div>
+                
+                <div class="m-section">
+                    <div class="m-label">고찰</div>
+                    <p id="m-reflect" class="m-text"></p>
+                </div>
+                
+                <div id="m-media-section" style="display:none;">
+                    <div class="m-label">상세 자료 (PDF)</div>
+                    <div class="media-viewer"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -399,28 +572,6 @@
     <script>
         function toggleMenu() { document.querySelector('.nav-menu').classList.toggle('active'); }
         function closeMenu() { document.querySelector('.nav-menu').classList.remove('active'); }
-
-        function toggleDarkMode() {
-            const body = document.body;
-            const icon = document.getElementById('theme-icon');
-            body.classList.toggle('dark');
-            
-            if (body.classList.contains('dark')) {
-                icon.classList.replace('fa-moon', 'fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                icon.classList.replace('fa-sun', 'fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
-        }
-
-        window.addEventListener('load', () => {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark');
-                document.getElementById('theme-icon').classList.replace('fa-moon', 'fa-sun');
-            }
-        });
 
         const projectDB = {
                 "proj1": {
@@ -565,17 +716,36 @@
                 reflect: "실제 산업용 IP 사양을 분석하여 이를 UVM 검증 컴포넌트 단위로 구체화하는 실무 역량을 길렀으며, 가변적인 입력 환경에서도 신뢰할 수 있는 자동화 검증 프로세스 구축 경험을 확보함.",
                 pdf: "7.LineBuffer UVM 검증.pdf"
             },
+
             "proj8": {
                 title: "SoC기반 펜 플로터를 이용한 커스텀 각인 서비스",
+
                 period: "2025.01.05. - 2025.01.22.",
-                overview: "FPGA 이미지 처리와 STM32 모터 제어를 통합한 실시간 각인 시스템.",
-                goals: ["이미지 이진화 하드웨어 가속기 설계", "SoC 구조 기반 시스템 통합"],
-                summary: ["Sobel Filter 기반 이미지 처리", "G-code 해석 및 모터 제어"],
-                role: ["■ FPGA 이미지 필터링 RTL 설계", "■ 하드웨어 가속기 인터페이스 설계"],
-                trouble: "고해상도 처리 시 데이터 병목 현상 발생.",
-                solution: "파이프라인 설계 및 라인 버퍼 구조 최적화로 처리 성능 확보.",
-                reflect: "이 기종 디바이스 간 시스템 통합 역량 확보.",
-                pdf: "8.펜플로터프로젝트.pdf"
+
+                overview: "FPGA 이미지 필터링과 STM32 모터 제어를 통합한 실시간 각인 시스템 구축.",
+
+                goals: [
+                    "이미지 이진화 및 경계 검출 알고리즘의 하드웨어 가속기 설계",
+                    "SoC 구조 기반의 데이터 통신 및 모터 드라이버 제어 시스템 통합"
+                ],
+
+                summary: [
+                    "Sobel Filter 기반의 실시간 이미지 처리 FPGA 모듈 구현",
+                    "G-code 해석 및 2축 스테핑 모터 정밀 제어 시스템 구축"
+                ],
+
+                role: [
+                    "■ FPGA 기반 이미지 필터링 알고리즘 RTL 설계 및 최적화",
+                    "■ 하드웨어 가속기 인터페이스 정의 및 데이터 패스 설계"
+                ],
+
+                reflect: "이 기종 디바이스(FPGA-STM32) 간 시스템 통합 역량 및 이미지 처리 가속 설계 능력 확보.",
+
+                pdf: "8.펜플로터프로젝트.pdf",
+
+                trouble: "고해상도 이미지 처리 시 데이터 병목 현상으로 인한 필터링 지연 발생.",
+
+                solution: "파이프라인 설계 방식 적용 및 라인 버퍼 구조 최적화를 통해 실시간 처리 성능 확보."
             }
         };
 
@@ -618,6 +788,7 @@
         function closeModal() {
             document.getElementById('modal-overlay').classList.remove('active');
             document.body.style.overflow = '';
+            document.querySelector('.media-viewer').innerHTML = '';
         }
     </script>
 </body>
