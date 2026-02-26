@@ -266,12 +266,12 @@
         .modal-header { padding: 30px 50px; border-bottom: 1px solid #edf2f7; display: flex; justify-content: space-between; align-items: flex-start; }
         .btn-close { font-size: 2.5rem; color: var(--text-light); cursor: pointer; }
         .modal-content { flex: 1; overflow-y: auto; padding: 50px; }
-        .m-section { margin-bottom: 40px; } /* 카테고리 간격 추가 */
+        .m-section { margin-bottom: 40px; } 
         .m-label { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; position: relative; padding-left: 15px; }
         .m-label::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 4px; height: 20px; background: var(--accent); border-radius: 10px; }
-        .m-text { margin-top: 15px; } /* 레이블과 내용 사이 간격 */
-        .m-list { margin-top: 15px; } /* 리스트 상단 간격 */
-        .m-list li { margin-bottom: 12px; } /* 리스트 항목 간격 */
+        .m-text { margin-top: 15px; } 
+        .m-list { margin-top: 15px; } 
+        .m-list li { margin-bottom: 12px; } 
         .trouble-box { background: #fff9db; border-left: 4px solid #fab005; padding: 25px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-bottom: 20px; margin-top: 15px; }
         .solution-box { background: #f0fdf4; border-left: 4px solid #4ade80; padding: 30px; border-radius: 0 var(--radius-md) var(--radius-md) 0; }
         .media-viewer { width: 100%; height: 500px; background: var(--bg-light-gray); border-radius: var(--radius-md); overflow: hidden; margin-top: 20px; }
@@ -357,7 +357,11 @@
                         <span class="p-category">FPGA / STM32</span>
                         <h3 class="p-title">SoC기반 펜 플로터를 이용한 커스텀 각인 서비스</h3>
                         <p class="p-desc">펜 플로터 하드웨어 설계 및 FPGA 이미지 처리, Python 최적화, STM32 모터 제어 구현</p>
-                        <div class="p-tags"><span class="p-tag-sm">SystemVerilog</span><span class="p-tag-sm">STM32</span></div>
+                        <div class="p-tags">
+                            <span class="p-tag-sm">SystemVerilog</span>
+                            <span class="p-tag-sm">STM32</span>
+                            <span class="p-tag-sm">Python</span>
+                        </div>
                     </div>
                 </article>
                 <article class="project-card" onclick="openModal('proj7')">
@@ -367,7 +371,10 @@
                         <span class="p-category">UVM Verification</span>
                         <h3 class="p-title">Linebuffer UVM Verification</h3>
                         <p class="p-desc">Line Buffer 유닛에 대한 Frame Size 및 Data Mode별 UVM 검증 환경 구축</p>
-                        <div class="p-tags"><span class="p-tag-sm">UVM</span><span class="p-tag-sm">Systemverilog</span></div>
+                        <div class="p-tags">
+                            <span class="p-tag-sm">SystemVerilog</span>
+                            <span class="p-tag-sm">UVM</span>
+                        </div>
                     </div>
                 </article>
                 <article class="project-card" onclick="openModal('proj6')">
@@ -377,7 +384,10 @@
                         <span class="p-category">FPGA / Display Control</span>
                         <h3 class="p-title">VGA 기반 뱀 사다리 게임 시스템 설계</h3>
                         <p class="p-desc">FPGA 기반 VGA 타이밍 컨트롤러 및 게임 상태 엔진 구현</p>
-                        <div class="p-tags"><span class="p-tag-sm">Systemverilog</span><span class="p-tag-sm">VGA Interface</span></div>
+                        <div class="p-tags">
+                            <span class="p-tag-sm">SystemVerilog</span>
+                            <span class="p-tag-sm">OV7670</span>
+                        </div>
                     </div>
                 </article>
                 <article class="project-card" onclick="openModal('proj5')">
@@ -387,7 +397,12 @@
                         <span class="p-category">IP Design / Verification</span>
                         <h3 class="p-title">SPI & I2C 통신 설계 프로젝트</h3>
                         <p class="p-desc">센서 인터페이스를 위한 고속 직렬 통신 프로토콜 설계 및 검증</p>
-                        <div class="p-tags"><span class="p-tag-sm">SystemVerilog</span><span class="p-tag-sm">UVM</span></div>
+                        <div class="p-tags">
+                            <span class="p-tag-sm">SystemVerilog</span>
+                            <span class="p-tag-sm">AXI4-Lite</span>
+                            <span class="p-tag-sm">SPI / I2C</span>
+                            <span class="p-tag-sm">VCS / Verdi</span>
+                        </div>
                     </div>
                 </article>
                 <article class="project-card" onclick="openModal('proj4')">
@@ -397,7 +412,11 @@
                         <span class="p-category">SoC / Bus Protocol</span>
                         <h3 class="p-title">AMBA APB Peripheral</h3>
                         <p class="p-desc">SoC 저속 주변장치 제어를 위한 AMBA APB 프로토콜 기반 IP 통합 설계</p>
-                        <div class="p-tags"><span class="p-tag-sm">AMBA APB</span><span class="p-tag-sm">SoC Integration</span></div>
+                        <div class="p-tags">
+                            <span class="p-tag-sm">SystemVerilog</span>
+                            <span class="p-tag-sm">RISC-V(RV32I)</span>
+                            <span class="p-tag-sm">AMBA APB</span>
+                        </div>
                     </div>
                 </article>
                 <article class="project-card" onclick="openModal('proj3')">
@@ -407,7 +426,11 @@
                         <span class="p-category">Computer Architecture</span>
                         <h3 class="p-title">RISC-V Single Cycle CPU</h3>
                         <p class="p-desc">RISC-V RV32I ISA 기반의 단일 사이클 프로세서 설계 및 정합성 검증</p>
-                        <div class="p-tags"><span class="p-tag-sm">RISC-V</span><span class="p-tag-sm">CPU Design</span></div>
+                        <div class="p-tags">
+                            <span class="p-tag-sm">Verilog HDL</span>
+                            <span class="p-tag-sm">SystemVerilog</span>
+                            <span class="p-tag-sm">RISC-V(RV32I)</span>
+                        </div>
                     </div>
                 </article>
                 <article class="project-card" onclick="openModal('proj1')">
@@ -417,7 +440,11 @@
                         <span class="p-category">FPGA System</span>
                         <h3 class="p-title">FPGA UART Multi-Sensor</h3>
                         <p class="p-desc">FPGA 기반 UART 명령 제어 및 다중 센서 데이터 통합 시스템 구축</p>
-                        <div class="p-tags"><span class="p-tag-sm">FPGA</span><span class="p-tag-sm">UART / Sensors</span></div>
+                        <div class="p-tags">
+                            <span class="p-tag-sm">Verilog HDL</span>
+                            <span class="p-tag-sm">SR04 / DHT11</span>
+                            <span class="p-tag-sm">UART</span>
+                        </div>
                     </div>
                 </article>
             </div>
@@ -520,7 +547,13 @@
     <div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
         <div class="modal-window" onclick="event.stopPropagation()">
             <div class="modal-header">
-                <div class="modal-title-area"><h2 id="m-title">Project Title</h2><span id="m-period" class="modal-period" style="font-size: 1rem; color: #a0aec0;"></span></div>
+                <div class="modal-title-area" style="width: 100%;">
+                    <h2 id="m-title">Project Title</h2>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                        <span id="m-period" class="modal-period" style="font-size: 1rem; color: #a0aec0;"></span>
+                        <span id="m-team" style="font-size: 0.9rem; color: var(--primary); font-weight: 700; background: rgba(12, 77, 162, 0.05); padding: 4px 12px; border-radius: 50px;"></span>
+                    </div>
+                </div>
                 <div class="btn-close" onclick="closeModal()">&times;</div>
             </div>
             <div class="modal-content">
@@ -536,7 +569,7 @@
                 
                 <div class="m-section">
                     <div class="m-label">프로젝트 요약</div>
-                    <p id="m-summary" class="m-text" style="font-weight: 600; color: var(--primary); background: #f0f7ff; padding: 15px; border-radius: 8px;"></p>
+                    <p id="m-summary" class="m-text" style="font-weight: 600; color: var(--primary); background: #f0f7ff; padding: 15px; border-radius: 8px; white-space: pre-wrap; line-height: 1.6;"></p>
                 </div>
                 
                 <div class="m-section">
@@ -577,6 +610,7 @@
                 "proj1": {
                 title: "FPGA 기반 UART 제어 Multi-Sensor Digital Clock 시스템",
                 period: "2025.08.20. - 2025.08.28.",
+                team: "4인 프로젝트",
                 overview: "Basys3 FPGA 보드를 활용하여 시계, 스톱워치, 타이머 기능과 초음파(SR04) 및 온습도(DHT11) 센서 데이터를 통합한 시스템 설계. UART 통신을 통해 PC에서 실시간 모니터링 및 원격 제어가 가능한 통합 임베디드 시스템을 구축함.",
                 goals: [
                 "1. Verilog HDL 기반의 계층적 구조(Hierarchical Design) 디지털 시스템 설계 역량 확보",
@@ -602,7 +636,8 @@
                 "proj3": {
                     title: "RISC-V RV32I 기반 Single Cycle CPU Core 설계",
                     period: "2025.09.17. - 2025.10.02.",
-                    overview: "RISC-V RV32I ISA 표준 규격을 기반으로 하드웨어 데이터패스와 제어 유닛을 직접 설계하고, 명령어 타입별 동작을 기계어 수준에서 검증한 1인 설계 프로젝트임.",
+                    team: "1인 프로젝트",
+                    overview: "RISC-V RV32I ISA 표준 규격을 기반으로 하드웨어 데이터패스와 제어 유닛을 직접 설계, 명령어 타입별 동작 시뮬레이션 검증.",
                     goals: [
                         "1. 오픈소스 ISA인 RISC-V RV32I 표준 명세를 분석하여 이를 실제 하드웨어 로직으로 구현하는 설계 역량 확보",
                         "2. 명령어 타입별(R, I, S, B, U, J) 데이터 흐름을 이해하고 시뮬레이션을 통해 각 기능의 동작 정합성 완벽 검증"
@@ -625,7 +660,8 @@
             "proj4": {
                 title: "RISC-V Multi-Cycle CPU 및 AMBA APB Peripheral 설계",
                 period: "2025.10.17. - 2025.10.27.",
-                overview: "RISC-V Multi-Cycle CPU 환경 내에서 AMBA APB 인터페이스를 기반으로 UART 주변장치를 통합하여 시스템 확장성을 확보하고, C언어 테스트 코드로 실보드 동작을 검증한 프로젝트임.",
+                team: "1인 프로젝트",
+                overview: "RISC-V Multi-Cycle CPU 환경 내에서 AMBA APB 인터페이스를 기반으로 UART 주변장치를 통합하여 시스템 확장성을 확보하고, C언어 테스트 코드로 실보드 동작을 검증한 프로젝트.",
                 goals: [
                     "1. RISC-V RV32I ISA를 기반으로 Fetch부터 Writeback까지 5단계 파이프라인 구조를 갖춘 Multi-Cycle CPU Core 구현",
                     "2. AMBA APB BUS 표준 규격을 활용하여 UART Peripheral을 연동하고 FPGA와 PC 간의 안정적인 양방향 통신 시스템 구축"
@@ -648,6 +684,7 @@
             "proj5": {
                 title: "AXI 기반 SPI / I2C 통신 모듈 설계",
                 period: "2025.11.07. - 2025.11.18.",
+                team: "1인 프로젝트",
                 overview: "AMBA AXI4-Lite 인터페이스를 기반으로 SPI 및 I2C 직렬 통신 프로토콜의 마스터/슬레이브 모듈을 설계하고, UVM 기반의 고도화된 검증 환경을 구축하여 하드웨어 동작 검증",
                 goals: [
                     "1. SPI 및 I2C 통신 프로토콜의 하드웨어 메커니즘을 심도 있게 이해하고 AXI4-Lite 인터페이스와 연동 가능한 통신 IP 구현",
@@ -671,7 +708,8 @@
             "proj6": {
                 title: "VGA기반 뱀사다리 게임",
                 period: "2025.11.24. - 2025.12.05.",
-                overview: "OV7670 카메라 영상 처리와 게임 로직을 단일 FPGA에 통합한 시스템 설계 프로젝트임. 카메라 캡처 기능을 통한 플레이어 등록과 VGA 기반의 실시간 게임 인터페이스 출력을 결합한 통합 임베디드 하드웨어를 구현함.",
+                team: "4인 프로젝트",
+                overview: "OV7670 카메라 영상 처리와 게임 로직을 단일 FPGA에 통합한 시스템 설계 프로젝트. 카메라 캡처 기능을 통한 플레이어 등록과 VGA 기반의 실시간 게임 인터페이스 출력을 결합한 통합 임베디드 하드웨어를 구현함.",
                 goals: [
                     "1. OV7670 카메라, VGA 컨트롤러, 게임 로직을 단일 FPGA(Basys3)에 통합하여 개구리 말을 사용하는 뱀사다리 게임 시스템 구축",
                     "2. 디지털 회로 설계, 실시간 영상 처리, 임베디드 시스템 통합을 통한 하드웨어 설계 역량 및 시스템 최적화 능력 향상"
@@ -695,7 +733,8 @@
             "proj7": {
                 title: "UVM기반 Linebuffer 검증",
                 period: "2025.12.15. - 2025.12.22.",
-                overview: "기업에서 제시한 산업용 IP 사양에 따라 영상 처리용 Line Buffer의 동작을 검증하기 위해 UVM 환경을 구축하고, 가변 해상도 및 다양한 데이터 패턴 환경에서의 무결성을 확인한 3인 팀 프로젝트임.",
+                team: "4인 프로젝트",
+                overview: "기업에서 제시한 산업용 IP 사양에 따라 영상 처리용 Line Buffer의 동작을 검증하기 위해 UVM 환경을 구축하고, 가변 해상도 및 다양한 데이터 패턴 환경에서의 무결성 확인.",
                 goals: [
                     "1. 설계자의 검증 요구사항을 정밀 분석하여 사양에 부합하는 시나리오 기반 UVM 검증 환경 구축 역량 확보",
                     "2. 기능 커버리지(Functional Coverage) 100% 달성을 통해 설계 로직의 신뢰성 및 예외 상황에 대한 기능적 완전성 확인"
@@ -719,32 +758,24 @@
 
             "proj8": {
                 title: "SoC기반 펜 플로터를 이용한 커스텀 각인 서비스",
-
                 period: "2025.01.05. - 2025.01.22.",
-
+                team: "7인 프로젝트",
                 overview: "FPGA 이미지 필터링과 STM32 모터 제어를 통합한 실시간 각인 시스템 구축.",
-
                 goals: [
                     "이미지 이진화 및 경계 검출 알고리즘의 하드웨어 가속기 설계",
                     "SoC 구조 기반의 데이터 통신 및 모터 드라이버 제어 시스템 통합"
                 ],
-
                 summary: [
                     "Sobel Filter 기반의 실시간 이미지 처리 FPGA 모듈 구현",
                     "G-code 해석 및 2축 스테핑 모터 정밀 제어 시스템 구축"
                 ],
-
                 role: [
                     "■ FPGA 기반 이미지 필터링 알고리즘 RTL 설계 및 최적화",
                     "■ 하드웨어 가속기 인터페이스 정의 및 데이터 패스 설계"
                 ],
-
                 reflect: "이 기종 디바이스(FPGA-STM32) 간 시스템 통합 역량 및 이미지 처리 가속 설계 능력 확보.",
-
                 pdf: "8.펜플로터프로젝트.pdf",
-
                 trouble: "고해상도 이미지 처리 시 데이터 병목 현상으로 인한 필터링 지연 발생.",
-
                 solution: "파이프라인 설계 방식 적용 및 라인 버퍼 구조 최적화를 통해 실시간 처리 성능 확보."
             }
         };
@@ -755,16 +786,15 @@
 
             document.getElementById('m-title').innerText = data.title;
             document.getElementById('m-period').innerText = data.period;
+            document.getElementById('m-team').innerText = data.team; // 인원 정보 삽입
             document.getElementById('m-overview').innerText = data.overview;
             document.getElementById('m-trouble').innerText = data.trouble;
             document.getElementById('m-solution').innerText = data.solution;
             document.getElementById('m-reflect').innerText = data.reflect;
 
-            // 요약 부분 수정: join(', ')을 join('\n')으로 변경
             const summaryText = document.getElementById('m-summary');
             summaryText.innerText = Array.isArray(data.summary) ? data.summary.join('\n') : data.summary;
 
-            // goals, role 처리는 기존 코드 유지
             const goalsList = document.getElementById('m-goals');
             goalsList.innerHTML = '';
             if(data.goals) data.goals.forEach(goal => { const li = document.createElement('li'); li.innerText = goal; goalsList.appendChild(li); });
