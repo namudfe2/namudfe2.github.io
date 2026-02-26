@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* [PC 기본 설정] */
         .mo-br { display: none; }
 
         :root {
@@ -31,6 +30,17 @@
             --section-spacing: 140px;
         }
 
+        body.dark {
+            --bg-white: #1a202c;
+            --bg-off-white: #11141d;
+            --bg-light-gray: #2d3748;
+            --text-heading: #f1f5f9;
+            --text-body: #cbd5e0;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.5);
+            --shadow-lg: 0 20px 40px -12px rgba(0,0,0,0.6);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
@@ -41,9 +51,10 @@
             line-height: 1.7;
             word-break: keep-all;
             -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', 'Noto Sans KR', sans-serif; color: var(--text-heading); }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', 'Noto Sans KR', sans-serif; color: var(--text-heading); transition: color 0.3s; }
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
         ul { list-style: none; }
         img { max-width: 100%; height: auto; }
@@ -53,14 +64,15 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- Navigation --- */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; height: 80px;
-            background: rgba(255, 255, 255, 0.9);
+            background: var(--bg-white);
+            opacity: 0.95;
             backdrop-filter: blur(10px);
             z-index: 1000;
             display: flex; align-items: center; justify-content: center;
             box-shadow: var(--shadow-sm);
+            transition: background 0.3s;
         }
         .nav-inner {
             width: 100%; max-width: 1280px; padding: 0 30px;
@@ -69,15 +81,21 @@
         }
         .logo { display: flex; align-items: center; text-decoration: none; }
         .logo i { font-size: 1.8rem; color: var(--primary); transition: color 0.3s ease; }
-        .logo:hover i { color: var(--accent); }
         .nav-menu { display: flex; gap: 40px; }
         .nav-menu a { font-size: 1rem; font-weight: 500; color: var(--text-body); position: relative; }
         .nav-menu a:hover { color: var(--primary); }
-        .nav-menu a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s; }
-        .nav-menu a:hover::after { width: 100%; }
         .menu-toggle { display: none; font-size: 1.5rem; color: var(--text-heading); cursor: pointer; }
 
-        /* --- Hero Section --- */
+        .dark-mode-toggle {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 60px; height: 60px; border-radius: 50%;
+            background: var(--primary); color: white;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: var(--shadow-lg); z-index: 9999;
+            transition: transform 0.3s, background 0.3s; font-size: 1.5rem;
+        }
+        .dark-mode-toggle:hover { transform: scale(1.1); }
+
         .hero {
             background: linear-gradient(135deg, rgba(6, 46, 102, 0.85) 0%, rgba(12, 77, 162, 0.75) 100%), url('./images/semiconimg.png');
             background-size: cover; background-position: center; background-repeat: no-repeat;
@@ -87,25 +105,8 @@
         .hero-subtitle { font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--accent); margin-bottom: 15px; display: block; letter-spacing: 2px; text-transform: uppercase; }
         .hero-title { font-size: 4.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 30px; color: #ffffff; opacity: 0; animation: fadeInUp 1s ease-out forwards; animation-delay: 0.2s; }
         .hero-desc { font-size: 1.5rem; font-weight: 300; opacity: 0; margin-bottom: 50px; max-width: 700px; animation: fadeInUp 1s ease-out forwards; animation-delay: 1.0s; }
-        .btn-cta {
-            padding: 18px 45px;
-            background: var(--accent);
-            color: var(--primary-dark);
-            font-weight: 700;
-            border-radius: 100px;
-            display: inline-block;
-            box-shadow: 0 10px 25px -5px rgba(56, 182, 255, 0.5);
-            transition: all 0.3s ease; 
-        }
+        .btn-cta { padding: 18px 45px; background: var(--accent); color: var(--primary-dark); font-weight: 700; border-radius: 100px; display: inline-block; box-shadow: 0 10px 25px -5px rgba(56, 182, 255, 0.5); transition: all 0.3s ease; }
 
-        .btn-cta:hover {
-            background: #ffffff;
-            color: var(--primary);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.2);
-        }
-
-        /* --- About Me --- */
         .section-wrapper { padding: var(--section-spacing) 0; }
         .bg-white { background-color: var(--bg-white); }
         .bg-off-white { background-color: var(--bg-off-white); }
@@ -117,46 +118,16 @@
         .about-image-area { flex: 0.8; position: relative; }
         .about-img { width: 240px; margin: 0 auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); aspect-ratio: 3 / 4; background: #ddd; }
         .about-img img { width: 100%; height: 100%; object-fit: cover; }
-        .about-content-area { flex: 1.5; }
-        .info-list { 
-            display: grid; 
-            grid-template-columns: max-content max-content; 
-            column-gap: 160px; 
-            row-gap: 50px; 
-            align-items: start; 
-        }
+        .info-list { display: grid; grid-template-columns: max-content max-content; column-gap: 160px; row-gap: 50px; align-items: start; }
         .info-item { display: flex; align-items: center; gap: 20px; }
-        .info-icon { 
-            color: var(--primary); 
-            font-size: 1.5rem; 
-            width: 50px; 
-            height: 50px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            flex-shrink: 0;
-            background: rgba(12, 77, 162, 0.08); 
-            border-radius: 50%;
-        }
+        .info-icon { color: var(--primary); font-size: 1.5rem; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: rgba(12, 77, 162, 0.08); border-radius: 50%; }
         .info-label { font-size: 1.0rem; color: var(--text-light); font-weight: 500; margin-bottom: 0px; display: block; }
         .info-value { font-size: 1.1rem; font-weight: 700; color: var(--text-heading); }
 
-        /* --- Projects --- */
         .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 50px; }
         .project-card { background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); cursor: pointer; transition: 0.4s; }
         .project-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
-        
-        .p-period-header { 
-            display: inline-block; 
-            margin: 20px 0 10px 25px; 
-            font-size: 0.8rem; 
-            font-weight: 900; 
-            color: var(--primary); 
-            background: rgba(12, 77, 162, 0.08); 
-            padding: 5px 15px; 
-            border-radius: 50px; 
-        }
-
+        .p-period-header { display: inline-block; margin: 20px 0 10px 25px; font-size: 0.8rem; font-weight: 900; color: var(--primary); background: rgba(12, 77, 162, 0.08); padding: 5px 15px; border-radius: 50px; }
         .p-thumb { height: 260px; background: #ffffff; position: relative; overflow: hidden; border-top: 1px solid #f1f5f9; }
         .p-thumb img { width: 100%; height: 100%; object-fit: contain; } 
         .p-body { padding: 35px; }
@@ -165,139 +136,64 @@
         .p-desc { font-size: 1rem; color: var(--text-body); margin-bottom: 25px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .p-tags { display: flex; gap: 8px; flex-wrap: wrap; }
         .p-tag-sm { font-size: 0.8rem; padding: 6px 14px; background: var(--bg-light-gray); border-radius: 50px; color: var(--text-body); font-weight: 600; transition: 0.3s; }
-        .project-card:hover .p-tag-sm { background: var(--primary); color: white; }
 
-        /* --- Skills --- */
         .skills-wrapper { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1000px; margin: 0 auto; }
         .skill-box { background: var(--bg-white); padding: 35px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); transition: 0.3s; display: flex; flex-direction: column; }
-        .skill-box:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-        .sb-header { display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #edf2f7; padding-bottom: 20px; margin-bottom: 25px; }
+        .sb-header { display: flex; align-items: center; gap: 15px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 20px; margin-bottom: 25px; }
         .sb-icon { font-size: 1.8rem; color: var(--primary); width: 50px; height: 50px; background: rgba(12, 77, 162, 0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
         .sb-title { font-size: 1.4rem; font-weight: 800; color: var(--text-heading); }
         .sb-group { margin-bottom: 60px; } 
-        .sb-group:last-child { margin-bottom: 0; }
-        .sb-label { font-size: 0.8rem; color: #a0aec0; font-weight: 700; margin-bottom: 15px; display: block; text-transform: uppercase; letter-spacing: 1px; }
-        .sb-tags { display: flex; flex-wrap: wrap; gap: 15px 12px; } 
-        .tag-main { padding: 8px 18px; background: var(--primary); color: white; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 6px -1px rgba(12, 77, 162, 0.2); white-space: nowrap; }
-        .tag-sub { padding: 6px 14px; background: #f1f5f9; color: var(--text-body); border-radius: 8px; font-weight: 500; font-size: 0.9rem; border: 1px solid #e2e8f0; white-space: nowrap; }
+        .tag-main { padding: 8px 18px; background: var(--primary); color: white; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 6px -1px rgba(12, 77, 162, 0.2); }
+        .tag-sub { padding: 6px 14px; background: var(--bg-light-gray); color: var(--text-body); border-radius: 8px; font-weight: 500; font-size: 0.9rem; border: 1px solid rgba(0,0,0,0.05); }
 
-        /* --- Awards --- */
         .award-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
-        .award-item { 
-            background: var(--bg-white); 
-            padding: 30px; 
-            border-radius: var(--radius-md); 
-            box-shadow: var(--shadow-sm); 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            transition: 0.3s; 
-            border-left: 5px solid var(--primary); 
-        }
-        .award-item:hover { 
-            transform: scale(1.02); 
-            box-shadow: var(--shadow-md); 
-        }
-        
-        .award-date { 
-            display: inline-block; 
-            font-size: 0.8rem; 
-            font-weight: 900; 
-            color: var(--primary); 
-            background: rgba(12, 77, 162, 0.08); 
-            padding: 5px 15px; 
-            border-radius: 50px; 
-            margin-bottom: 10px;
-        }
-
-        .award-subject {
-            font-size: 1.05rem; 
-            color: var(--text-body);
-            margin-top: 8px;
-        }
-
+        .award-item { background: var(--bg-white); padding: 30px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: space-between; border-left: 5px solid var(--primary); }
+        .award-date { display: inline-block; font-size: 0.8rem; font-weight: 900; color: var(--primary); background: rgba(12, 77, 162, 0.08); padding: 5px 15px; border-radius: 50px; margin-bottom: 10px; }
         .award-badge { padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 0.95rem; white-space: nowrap; margin-left: 20px; display: flex; align-items: center; justify-content: center; min-width: 80px; }
-        .badge-grand { background: var(--primary); color: #ffffff; box-shadow: 0 4px 8px rgba(12, 77, 162, 0.3); } 
-        .badge-gold { background: #FFF9C4; color: #FBC02D; border: 1px solid #FFF176; }
-        .badge-bronze { background: #EFEBE9; color: #8D6E63; border: 1px solid #D7CCC8; }
+        .badge-grand { background: var(--primary); color: #ffffff; } 
 
-        /* --- Careers --- */
         .timeline { max-width: 800px; margin: 0 auto; position: relative; }
-        .timeline::before {
-            content: ''; position: absolute; left: 0; top: 10px; height: 100%;
-            width: 2px; background: #e2e8f0;
-        }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 10px; height: 100%; width: 2px; background: #e2e8f0; }
         .timeline-item { position: relative; padding-left: 50px; margin-bottom: 60px; }
-        .timeline-dot {
-            position: absolute; left: -9px; top: 0;
-            width: 20px; height: 20px; border-radius: 50%;
-            background: var(--bg-white); border: 4px solid var(--primary);
-            box-shadow: 0 0 0 5px rgba(12, 77, 162, 0.1);
-        }
-        .timeline-content {
-            position: relative;
-            background: var(--bg-white); 
-            padding: 85px 40px 40px 20px; 
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-md); 
-            transition: 0.3s;
-        }
-        .timeline-content:hover { box-shadow: var(--shadow-lg); transform: translateX(5px); }
-        .timeline-period {
-            position: absolute;
-            top: 20px; 
-            left: 20px; 
-            font-size: 0.8rem;
-            font-weight: 1000;
-            color: var(--primary); 
-            background: rgba(12, 77, 162, 0.08); 
-            padding: 5px 15px; 
-            border-radius: 50px;
-        }
-        .timeline-content h4 { font-size: 1.3rem; font-weight: 800; margin-bottom: 15px; }
-        .timeline-content p { font-size: 1.05rem; color: var(--text-body); }
+        .timeline-dot { position: absolute; left: -9px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--bg-white); border: 4px solid var(--primary); box-shadow: 0 0 0 5px rgba(12, 77, 162, 0.1); }
+        .timeline-content { position: relative; background: var(--bg-white); padding: 85px 40px 40px 20px; border-radius: var(--radius-md); box-shadow: var(--shadow-md); transition: 0.3s; }
+        .timeline-period { position: absolute; top: 20px; left: 20px; font-size: 0.8rem; font-weight: 1000; color: var(--primary); background: rgba(12, 77, 162, 0.08); padding: 5px 15px; border-radius: 50px; }
 
-        /* --- Footer & Modal --- */
         footer { background: #062e66; color: rgba(255,255,255,0.6); padding: 100px 0; text-align: center; }
         .footer-email { font-size: 1.5rem; color: white; font-weight: 700; margin-bottom: 20px; display: block; }
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
         .modal-overlay.active { display: flex; opacity: 1; }
-        .modal-window { width: 90%; max-width: 1000px; height: 90vh; background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-lg); }
-        .modal-header { padding: 30px 50px; border-bottom: 1px solid #edf2f7; display: flex; justify-content: space-between; align-items: flex-start; }
+        .modal-window { width: 90%; max-width: 1000px; height: 90vh; background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-lg); transition: background 0.3s; }
+        .modal-header { padding: 30px 50px; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: flex-start; }
         .btn-close { font-size: 2.5rem; color: var(--text-light); cursor: pointer; }
         .modal-content { flex: 1; overflow-y: auto; padding: 50px; }
-        .m-section { margin-bottom: 40px; } /* 카테고리 간격 추가 */
+        .m-section { margin-bottom: 40px; }
         .m-label { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; position: relative; padding-left: 15px; }
         .m-label::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 4px; height: 20px; background: var(--accent); border-radius: 10px; }
-        .m-text { margin-top: 15px; } /* 레이블과 내용 사이 간격 */
-        .m-list { margin-top: 15px; } /* 리스트 상단 간격 */
-        .m-list li { margin-bottom: 12px; } /* 리스트 항목 간격 */
-        .trouble-box { background: #fff9db; border-left: 4px solid #fab005; padding: 25px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-bottom: 20px; margin-top: 15px; }
-        .solution-box { background: #f0fdf4; border-left: 4px solid #4ade80; padding: 30px; border-radius: 0 var(--radius-md) var(--radius-md) 0; }
-        .media-viewer { width: 100%; height: 500px; background: var(--bg-light-gray); border-radius: var(--radius-md); overflow: hidden; margin-top: 20px; }
+        .trouble-box { background: #fff9db; border-left: 4px solid #fab005; padding: 25px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-bottom: 20px; margin-top: 15px; color: #1a202c; }
+        body.dark .trouble-box { background: #2d2d1a; color: #fff9db; }
+        .solution-box { background: #f0fdf4; border-left: 4px solid #4ade80; padding: 30px; border-radius: 0 var(--radius-md) var(--radius-md) 0; color: #1a202c; }
+        body.dark .solution-box { background: #1a2e21; color: #f0fdf4; }
 
-        /* --- Responsive --- */
         @media (max-width: 768px) {
             body { padding-top: 70px; }
-            .navbar { height: 70px; background: var(--bg-white); }
             .logo { display: none !important; } 
-            .menu-toggle { display: block; order: -1; padding: 10px; cursor: pointer; }
+            .menu-toggle { display: block; order: -1; padding: 10px; }
             .nav-inner { justify-content: flex-start; padding: 0 20px; }
             .nav-menu { position: fixed; top: 70px; left: 0; width: 100%; background: var(--bg-white); flex-direction: column; padding: 30px; display: none; }
             .nav-menu.active { display: flex; }
-            .about-container { flex-direction: column; gap: 40px; align-items: center; text-align: center; }
-            .about-image-area { width: 100%; display: flex; justify-content: center; }
-            .about-img { width: 180px; margin: 0 auto; }
-            .about-content-area { width: 100%; display: center; justify-content: center; }
-            .info-list { grid-template-columns: 1fr !important; gap: 25px !important; width: fit-content; margin: 0 auto; text-align: left; }
+            .about-container { flex-direction: column; text-align: center; }
+            .info-list { grid-template-columns: 1fr !important; gap: 25px !important; margin: 0 auto; text-align: left; }
             .skills-wrapper, .project-grid { grid-template-columns: 1fr; }
-            .mo-br { display: inline; }
-            .award-item { flex-direction: column; align-items: flex-start; gap: 15px; }
-            .award-badge { margin-left: 0; width: 100%; }
+            .dark-mode-toggle { bottom: 20px; right: 20px; width: 50px; height: 50px; }
         }
     </style>
 </head>
 <body oncontextmenu="return false">
+
+    <div class="dark-mode-toggle" onclick="toggleDarkMode()" title="다크모드 전환">
+        <i class="fas fa-moon" id="theme-icon"></i>
+    </div>
 
     <nav class="navbar">
         <div class="nav-inner">
@@ -406,7 +302,7 @@
                     <div class="p-body">
                         <span class="p-category">Computer Architecture</span>
                         <h3 class="p-title">RISC-V Single Cycle CPU</h3>
-                        <p class="p-desc">RISC-V RV32I ISA 기반의 단일 사이클 프로세서 설계 및 정합성 검증</p>
+                        <p class="p-desc">RISC-V RV32I ISA 기반의 단일 사이클 프로세서 설계 및 동작 확인</p>
                         <div class="p-tags"><span class="p-tag-sm">RISC-V</span><span class="p-tag-sm">CPU Design</span></div>
                     </div>
                 </article>
@@ -430,42 +326,20 @@
             <div class="skills-wrapper">
                 <div class="skill-box">
                     <div class="sb-header"><div class="sb-icon"><i class="fas fa-code"></i></div><h4 class="sb-title">Languages</h4></div>
-                    <div class="sb-group">
-                        <span class="sb-label">Main Skills</span>
-                        <div class="sb-tags">
-                            <span class="tag-main">Verilog HDL</span>
-                            <span class="tag-main">SystemVerilog</span>
-                            <span class="tag-main">C / C++</span>
-                            <span class="tag-main">Python</span>
-                        </div>
-                    </div>
-                    <div class="sb-group">
-                        <span class="sb-label">Experience</span>
-                        <div class="sb-tags">
-                            <span class="tag-sub">HTML</span>
-                            <span class="tag-sub">Matlab</span>
-                        </div>
+                    <div class="sb-tags">
+                        <span class="tag-main">Verilog HDL</span>
+                        <span class="tag-main">SystemVerilog</span>
+                        <span class="tag-main">C / C++</span>
+                        <span class="tag-main">Python</span>
                     </div>
                 </div>
                 <div class="skill-box">
-                    <div class="sb-header"><div class="sb-icon"><i class="fas fa-microchip"></i></div><h4 class="sb-title">Platforms & Development</h4></div>
-                    <div class="sb-group">
-                        <span class="sb-label">Main Skills</span>
-                        <div class="sb-tags">
-                            <span class="tag-main">Xilinx Vivado</span>
-                            <span class="tag-main"> Vitis</span>
-                            <span class="tag-main"> Linux</span>
-                            <span class="tag-main">STM32 CubeIDE</span>
-                        </div>
-                    </div>
-                    <div class="sb-group">
-                        <span class="sb-label">Experience</span>
-                        <div class="sb-tags">
-                            <span class="tag-sub">Synopsys VCS</span>
-                            <span class="tag-sub">Verdi</span>
-                            <span class="tag-sub">Intel Quartus</span>
-                            <span class="tag-sub">ModelSim</span>
-                        </div>
+                    <div class="sb-header"><div class="sb-icon"><i class="fas fa-microchip"></i></div><h4 class="sb-title">Platforms</h4></div>
+                    <div class="sb-tags">
+                        <span class="tag-main">Xilinx Vivado</span>
+                        <span class="tag-main">Vitis</span>
+                        <span class="tag-main">Linux</span>
+                        <span class="tag-main">STM32 CubeIDE</span>
                     </div>
                 </div>
             </div>
@@ -479,43 +353,26 @@
                 <div class="award-item">
                     <div class="award-content">
                         <span class="award-date">2026. 01.</span>
-                        <h3 class="award-title">대한상공회의소 서울기술교육센터 프로젝트 경진대회</h3>
-                        <p class="award-subject">SoC 기반 팬 플로터를 이용한 커스텀 각인 서비스</p>
+                        <h3 class="award-title">서울기술교육센터 프로젝트 경진대회 최우수상</h3>
+                        <p class="award-subject">SoC 기반 팬 플로터 커스텀 각인 서비스</p>
                     </div>
-                    <span class="award-badge badge-grand"><i class="fas fa-trophy"></i>&nbsp;&nbsp;최우수상</span>
+                    <span class="award-badge badge-grand"><i class="fas fa-trophy"></i></span>
                 </div>
-                <div class="award-item">
-                    <div class="award-content">
-                        <span class="award-date">2024. 06.</span>
-                        <h3 class="award-title">제15회 대한전기학회 대학생작품경진대회</h3>
-                        <p class="award-subject">시각장애인들을 위한 점자 인식 및 음성 출력 프로그램</p>
-                    </div>
-                    <span class="award-badge badge-gold"><i class="fas fa-medal"></i>&nbsp;&nbsp;금상</span>
-                </div>
-                <div class="award-item">
-                    <div class="award-content">
-                        <span class="award-date">2023. 11.</span>
-                        <h3 class="award-title">제14회 대한전기학회 대학생작품경진대회</h3>
-                        <p class="award-subject">mLP를 이용한 FinFET22nm I-V Curve 측정</p>
-                    </div>
-                    <span class="award-badge badge-bronze"><i class="fas fa-medal"></i>&nbsp;&nbsp;동상</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="section-wrapper bg-off-white" id="education">
-        <div class="container">
-            <div class="section-header"><h2 class="section-title">Careers</h2></div>
-            <div class="timeline">
-                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-period">2025.07. - 2026.01.</span><h4>[Harman] 세미콘아카데미 설계/검증 과정 이수</h4><p>VerilogHDL/UVM, ARM Cortex-M, AMBA BUS, SoC 설계 실무 교육 이수(950H)</p></div></div>
-                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-period">2019.03. - 2025.08.</span><h4>상명대학교 시스템반도체공학과 졸업</h4></div></div>
-                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-period">2016.03. - 2019.02.</span><h4>단국대학교사범대학부속고등학교 졸업</h4></div></div>
             </div>
         </div>
     </section>
 
-    <footer><div class="container"><a href="mailto:cms2789@gmail.com" class="footer-email">cms2789@gmail.com</a><p>Designed & Built by Minseok Chae. © 2025</p></div></footer>
+    <section class="section-wrapper bg-off-white" id="education">
+        <div class="container">
+            <div class="section-header"><h2 class="section-title">Careers</h2></div>
+            <div class="timeline">
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-period">2025.07. - 2026.01.</span><h4>[Harman] 세미콘아카데미 시스템반도체 설계/검증 과정 이수</h4><p>VerilogHDL/UVM, ARM Cortex-M, AMBA BUS, SoC 설계 실무 교육 이수(950H)</p></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-period">2019.03. - 2025.08.</span><h4>상명대학교 시스템반도체공학과 졸업</h4></div></div>
+            </div>
+        </div>
+    </section>
+
+    <footer><div class="container"><a href="mailto:cms2789@gmail.com" class="footer-email">cms2789@gmail.com</a><p>© 2026 Minseok Chae.</p></div></footer>
 
     <div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
         <div class="modal-window" onclick="event.stopPropagation()">
@@ -524,47 +381,17 @@
                 <div class="btn-close" onclick="closeModal()">&times;</div>
             </div>
             <div class="modal-content">
-                <div class="m-section">
-                    <div class="m-label">프로젝트 개요</div>
-                    <p id="m-overview" class="m-text"></p>
-                </div>
-                
-                <div class="m-section">
-                    <div class="m-label">프로젝트 목표</div>
-                    <ul id="m-goals" class="m-list"></ul>
-                </div>
-                
-                <div class="m-section">
-                    <div class="m-label">프로젝트 요약</div>
-                    <p id="m-summary" class="m-text" style="font-weight: 600; color: var(--primary); background: #f0f7ff; padding: 15px; border-radius: 8px;"></p>
-                </div>
-                
-                <div class="m-section">
-                    <div class="m-label">역할</div>
-                    <ul id="m-role" class="m-list"></ul>
-                </div>
-                
+                <div class="m-section"><div class="m-label">프로젝트 개요</div><p id="m-overview" class="m-text"></p></div>
+                <div class="m-section"><div class="m-label">프로젝트 목표</div><ul id="m-goals" class="m-list"></ul></div>
+                <div class="m-section"><div class="m-label">프로젝트 요약</div><p id="m-summary" class="m-text" style="font-weight: 600; color: var(--primary); background: #f0f7ff; padding: 15px; border-radius: 8px;"></p></div>
+                <div class="m-section"><div class="m-label">역할</div><ul id="m-role" class="m-list"></ul></div>
                 <div class="m-section">
                     <div class="m-label">트러블슈팅</div>
-                    <div class="trouble-box">
-                        <span style="color:#e67700; font-weight:800; display:block; margin-bottom:5px;">Issue</span>
-                        <p id="m-trouble" class="m-text"></p>
-                    </div>
-                    <div class="solution-box">
-                        <span style="color:#166534; font-weight:800; display:block; margin-bottom:5px;">Solution</span>
-                        <p id="m-solution" class="m-text"></p>
-                    </div>
+                    <div class="trouble-box"><span style="color:#e67700; font-weight:800; display:block; margin-bottom:5px;">Issue</span><p id="m-trouble" class="m-text"></p></div>
+                    <div class="solution-box"><span style="color:#166534; font-weight:800; display:block; margin-bottom:5px;">Solution</span><p id="m-solution" class="m-text"></p></div>
                 </div>
-                
-                <div class="m-section">
-                    <div class="m-label">고찰</div>
-                    <p id="m-reflect" class="m-text"></p>
-                </div>
-                
-                <div id="m-media-section" style="display:none;">
-                    <div class="m-label">상세 자료 (PDF)</div>
-                    <div class="media-viewer"></div>
-                </div>
+                <div class="m-section"><div class="m-label">고찰</div><p id="m-reflect" class="m-text"></p></div>
+                <div id="m-media-section" style="display:none;"><div class="m-label">상세 자료 (PDF)</div><div class="media-viewer"></div></div>
             </div>
         </div>
     </div>
@@ -573,251 +400,217 @@
         function toggleMenu() { document.querySelector('.nav-menu').classList.toggle('active'); }
         function closeMenu() { document.querySelector('.nav-menu').classList.remove('active'); }
 
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.getElementById('theme-icon');
+            body.classList.toggle('dark');
+            
+            if (body.classList.contains('dark')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        window.addEventListener('load', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark');
+                document.getElementById('theme-icon').classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+
         const projectDB = {
-            "proj1": {
+                "proj1": {
                 title: "FPGA 기반 UART 제어 Multi-Sensor Digital Clock 시스템",
-
                 period: "2025.08.20. - 2025.08.28.",
-
-                overview: "Basys3 FPGA 보드를 활용하여 실시간 시각 및 센서 데이터를 관리하는 통합 시스템 설계. UART 통신을 통한 PC 명령 하달 및 센서 값 모니터링 기능 구현. Stopwatch, Watch, Timer 모드와 초음파(SR04), 온습도(DHT11) 센서 데이터를 7-Segment에 실시간 출력.",
-
+                overview: "Basys3 FPGA 보드를 활용하여 시계, 스톱워치, 타이머 기능과 초음파(SR04) 및 온습도(DHT11) 센서 데이터를 통합한 시스템 설계. UART 통신을 통해 PC에서 실시간 모니터링 및 원격 제어가 가능한 통합 임베디드 시스템을 구축함.",
                 goals: [
-                    "Verilog HDL 기반의 계층적 구조(Hierarchical Design) 디지털 시스템 설계",
-                    "UART 프로토콜을 이용한 FPGA-PC 간 데이터 송수신 및 명령어 해석 로직 구축",
-                    "FSM(Finite State Machine) 기반의 정밀 초음파 센서 제어 및 거리 측정 알고리즘 개발",
-                    "외부 인터럽트(Button)와 직렬 통신(UART) 입력을 통합한 멀티 제어 시스템 확보"
+                "1. Verilog HDL 기반의 계층적 구조(Hierarchical Design) 디지털 시스템 설계 역량 확보",
+                "2. UART 프로토콜을 이용한 FPGA-PC 간 양방향 데이터 송수신 및 명령어 해석 로직 구축",
+                "3. FSM 기반의 정밀 초음파 센서 제어 및 거리 측정 알고리즘 개발 및 인터럽트 통합 제어"
                 ],
-
                 summary: [
-                    "UART Command 해석을 통한 시스템 동작 모드 원격 전환 기능",
-                    "100MHz 클락 분주 및 Multiplexing 기법을 적용한 7-Segment 스캐닝 제어",
-                    "FSM 기반 SR04 인터페이스 구동 및 DHT11 온습도 데이터 프로토콜 파싱"
+                "1. UART_TOP 및 FIFO를 활용한 비동기 직렬 데이터 수신/송신 처리 및 데이터 손실 방지",
+                "2. UART_Control 모듈을 통한 PC 명령어('r', 's', 'm' 등) 분석 및 시스템 동작 모드 1-tick 제어 신호 변환",
+                "3. MODE CONTROL FSM을 설계하여 시계 및 스톱워치 등 장치의 상태를 관리하는 가상 스위치 역할 구현",
+                "4. FND_CNTL 모듈을 사용하여 현재 시간, 스톱워치, 센서 측정값을 7-Segment에 실시간 디스플레이"
                 ],
-
                 role: [
-                    "■ SR04(초음파 센서) 제어 모듈 설계 및 거리 계산 FSM 구현",
-                    "■ 10us Trigger 신호 생성 및 Echo 펄스 폭 측정을 통한 데이터 정합성 확보",
-                    "■ FIFO 기반 UART RX/TX 인터페이스 및 Baud Rate Generator 설계",
-                    "■ ASCII 명령어 해석을 위한 UART Command Parser 및 시스템 제어 신호 생성 로직 구현",
-                    "■ Top-level 모듈 통합 및 다중 센서 데이터 MUX 제어 설계"
+                "1. SR04(초음파 센서) 제어 모듈 설계 및 FSM 기반 거리 측정 알고리즘 구현",
+                "2. StopWatch 및 Watch 기능 로직 설계와 시간 계산, 카운팅, 수정 동작 처리",
+                "3. FIFO 기반 UART RX/TX 인터페이스 및 명령어 해석용 핵심 유닛 설계"
                 ],
-
-                trouble: "SR04 초음파 센서 거리 변환 과정에서 나눗셈(/) 및 나머지(%) 연산자 사용으로 인한 FPGA 내부 리소스 과다 점유 및 타이밍 위반(Timing Violation) 발생.",
-
-                solution: "나눗셈 연산자 대신 시프트(Shift) 및 상수를 활용한 연산 로직으로 대체하여 최적화 수행. 연산 자원 점유율을 60% 이상 절감하고 안정적인 클락 타이밍 마진 확보 성공.",
-
-                reflect: "하드웨어 리소스 최적화의 중요성 체득 및 FSM 기반 프로토콜 통합 설계 역량 강화. 모듈 간 신호 동기화와 계층적 RTL 설계 프로세스 숙달.",
-
+                trouble: "SR04 거리 계산 시 단순 나눗셈 연산자 사용으로 인해 FPGA 내부 리소스 과다 점유 및 타이밍 위반(Negative Slack) 발생.",
+                solution: "나눗셈 연산자를 시프트(Shift) 및 상수를 활용한 비트 연산 로직으로 대체하여 하드웨어 자원을 최적화하고 타이밍 정확성을 확보함.",
+                reflect: "외부 디바이스 데이터시트 분석의 중요성을 체감하였으며, 하드웨어 설계 시 FSM 기반의 상태 제어 로직을 통해 시스템을 체계적으로 구현하는 역량을 강화함.",
                 pdf: "1.clock & 2sensor 프로젝트.pdf"
-            },
-            "proj3": {
-                title: "RISC-V Single Cycle CPU",
-            
-                period: "2025.09.17. - 2025.10.02.",
-            
-                overview: "RISC-V RV32I ISA 표준 기반의 Single Cycle CPU Core 설계 및 명령어 타입별 동작 검증 수행.",
-            
-                goals: [
-                    "RV32I 표준 명령어 집합 구조 기반 데이터패스 및 제어 유닛 설계",
-                    "명령어 타입별 기능 동작 검증 및 하드웨어 정합성 확보"
-                ],
-            
-                summary: [
-                    "명령어 인출(IF)부터 쓰기(WB)까지 수행하는 단일 사이클 5단계 프로세스 구현",
-                    "Instruction Memory(ROM)와 Data Memory(RAM) 분리 구조 모델링"
-                ],
-            
-                role: [
-                    "■ RV32I 전 타입 명령어 처리를 위한 데이터패스 회로 및 제어 유닛 RTL 설계",
-                    "■ Vivado Simulator를 활용한 파동 분석 및 명령어 실행 사이클 디버깅 수행"
-                ],
-            
-                trouble: "테스트용 기계어 코드 실행 완료 후, PC(Program Counter)가 계속 증가하여 유효하지 않은 메모리 영역(Undefined Area)의 명령어를 페칭(Fetching)하고 시스템이 예기치 않게 동작하는 현상 발생.",
-            
-                solution: "코드의 마지막 부분에 자기 자신에게 분기하는 `beq x0, x0, 0` 명령어를 추가하여, 프로그램 종료 후 PC를 특정 주소에 고정시키는 무한 루프(Infinite Loop) 트랩 로직 구현 및 시스템 안정성 확보.",
-            
-                reflect: "하드웨어 수준에서의 프로그램 종료 처리 메커니즘을 이해하고, ISA 명세에 따른 예외 상황 제어 로직 설계 역량 강화.",
-            
-                pdf: "3.RISC-V_RV32I기반 SingleCycle CPU설계.pdf"
-            },
+                },
+                "proj3": {
+                    title: "RISC-V RV32I 기반 Single Cycle CPU Core 설계",
+                    period: "2025.09.17. - 2025.10.02.",
+                    overview: "RISC-V RV32I ISA 표준 규격을 기반으로 하드웨어 데이터패스와 제어 유닛을 직접 설계하고, 명령어 타입별 동작을 기계어 수준에서 검증한 1인 설계 프로젝트임.",
+                    goals: [
+                        "1. 오픈소스 ISA인 RISC-V RV32I 표준 명세를 분석하여 이를 실제 하드웨어 로직으로 구현하는 설계 역량 확보",
+                        "2. 명령어 타입별(R, I, S, B, U, J) 데이터 흐름을 이해하고 시뮬레이션을 통해 각 기능의 동작 정합성 완벽 검증"
+                    ],
+                    summary: [
+                        "1. Control Unit 설계: Opcode와 funct3/7 필드를 분석하여 ALU 제어, 레지스터 쓰기 활성화 등 시스템 전체 제어 신호 생성 로직 구현",
+                        "2. Datapath 구현: Program Counter(PC), Register File, ALU, Mux 등으로 구성된 단일 사이클 데이터 흐름 설계 및 하버드 구조(ROM/RAM) 적용",
+                        "3. 명령어 그룹별 동작 확인: 산술/논리 연산(R), 로드 및 즉치 연산(I), 메모리 저장(S), 분기(B), 점프 및 상수 생성(U/J) 등 전 타입 동작 수행",
+                        "4. 검증 환경 구축: 직접 작성한 기계어 코드를 Instruction ROM에 적재하여 실제 CPU 동작 사이클에 따른 레지스터 및 메모리 값 변화 분석"
+                    ],
+                    role: [
+                        "1. RV32I 표준 명령어 처리를 위한 전체 데이터패스 및 제어 유닛 RTL 설계 및 모듈 최적화 수행",
+                        "2. Vivado Simulator를 활용하여 명령어별 실행 사이클의 웨이브폼을 분석하고 데이터 충돌 및 제어 신호 타이밍 디버깅"
+                    ],
+                    trouble: "테스트용 기계어 코드 실행 완료 후, PC(Program Counter)가 계속 증가하여 유효하지 않은 메모리 영역(Undefined Area)의 명령어를 페칭(Fetching)하고 시스템이 예기치 않게 동작하는 현상 발생.",
+                    solution: "코드의 마지막 부분에 자기 자신에게 분기하는 beq x0, x0, 0 명령어를 추가하여, 프로그램 종료 후 PC를 특정 주소에 고정시키는 무한 루프(Infinite Loop) 트랩 로직 구현 및 시스템 안정성 확보.",
+                    reflect: "컴퓨터 구조의 이론적 지식을 실제 하드웨어 로직으로 구체화하며 하드웨어 수준에서의 예외 상황 제어 및 ISA 명세 준수의 중요성을 깊이 있게 이해함.",
+                    pdf: "3.RISC-V_RV32I기반 SingleCycle CPU설계.pdf"
+                },
             "proj4": {
-                title: "AMBA APB Peripheral",
-
-                period: "2025.10.21. - 2025.10.28.",
-
-                overview: "RISC-V Multi-Cycle CPU 환경 내 AMBA APB 인터페이스 기반 커스텀 주변장치 통합 시스템 구현.",
-
+                title: "RISC-V Multi-Cycle CPU 및 AMBA APB Peripheral 설계",
+                period: "2025.10.17. - 2025.10.27.",
+                overview: "RISC-V Multi-Cycle CPU 환경 내에서 AMBA APB 인터페이스를 기반으로 UART 주변장치를 통합하여 시스템 확장성을 확보하고, C언어 테스트 코드로 실보드 동작을 검증한 프로젝트임.",
                 goals: [
-                    "AMBA APB 표준 규격 준수를 통한 마스터-슬레이브 간 인터페이스 통일",
-                    "Bare-metal C 어플리케이션 환경에서의 주변장치 레지스터 제어 실습"
+                    "1. RISC-V RV32I ISA를 기반으로 Fetch부터 Writeback까지 5단계 파이프라인 구조를 갖춘 Multi-Cycle CPU Core 구현",
+                    "2. AMBA APB BUS 표준 규격을 활용하여 UART Peripheral을 연동하고 FPGA와 PC 간의 안정적인 양방향 통신 시스템 구축"
                 ],
-
                 summary: [
-                    "FETCH, DECODE, EXECUTE 등 5단계 FSM 제어 로직 설계",
-                    "TX/RX FIFO 및 상태 레지스터를 포함한 UART IP 설계 및 버스 통합"
+                    "1. 하드웨어 구조 개선: 기존 Single-Cycle 구조를 5단계(IF, ID, EX, MEM, WB)로 분리하고 파이프라인 레지스터를 추가하여 클럭 효율이 높은 Multi-Cycle 구조로 모델링",
+                    "2. 버스 인터페이스 통합: UART를 APB Slave로 설계 및 연결하여 표준화된 버스 기반의 시스템 확장성 및 IP 재사용성 확보",
+                    "3. SystemVerilog 기반 검증: Class 기반 UART 검증 환경(Generator, Driver, Monitor, Scoreboard)을 구축하여 프로토콜 유효성 및 데이터 무결성 체크 자동화 수행",
+                    "4. C 기반 시스템 검증: C언어로 작성된 UART 송수신 및 LED 제어 프로그램을 CPU에서 직접 실행하여 FPGA 보드 상의 하드웨어 동작 최종 확인"
                 ],
-
                 role: [
-                    "■ Multi-Cycle CPU Core 및 APB Master 컨트롤러 RTL 설계",
-                    "■ SystemVerilog 기반 Generator-Driver-Monitor 구조의 검증 환경 구축"
+                    "1. Multi-Cycle CPU Core 및 AMBA APB Master/Slave 인터페이스 전 과정 RTL 설계 총괄",
+                    "2. 명령어 타입별(R, I, S, B, U, J) 데이터패스 설계 및 C 코드 실행을 위한 메모리 맵 구성 및 소프트웨어 스택 통합"
                 ],
-
-                reflect: "AMBA 버스 프로토콜 적용 능력 배양 및 SoC 시스템 버스 인터페이스 구조 이해.",
-
-                pdf: "4.AMBA_APB Peripheral 설계 검증..pdf",
-
-                trouble: "연속 트랜잭션 수행 시 APB 제어 신호와 내부 로직 간 레이스 컨디션에 따른 데이터 중복 기록 발생.",
-
-                solution: "FSM 상태 전이 시점 최적화 및 명확한 Hold Time 확보를 위한 순차 논리 보완으로 데이터 신뢰성 강화."
+                trouble: "Verification 수행 시 TX Data의 타이밍 불일치로 인해 데이터가 비정상적으로 샘플링되는 현상 발생.",
+                solution: "샘플링 로직에 wait 조건을 추가하여 특정 이벤트(Event) 발생 시점에 맞춰 데이터를 수집하도록 로직을 수정함으로써 동기화 오류 해결.",
+                reflect: "표준화된 AMBA 버스 인터페이스 설계 능력을 배양하였으며, 시스템 확장성 측면에서 표준 BUS 인터페이스가 IP 재사용성과 시스템 통합에 기여하는 중요성을 체감함.",
+                pdf: "4.AMBA_APB Peripheral 설계 검증..pdf"
             },
             "proj5": {
-                title: "SPI & I2C 통신 설계 프로젝트",
-
-                period: "2025.11.11. - 2025.11.17.",
-
-                overview: "AXI4-Lite 인터페이스 기반 SPI 및 I2C 직렬 통신 프로토콜 마스터/슬레이브 모듈 설계 및 동작 구현.",
-
+                title: "AXI 기반 SPI / I2C 통신 모듈 설계",
+                period: "2025.11.07. - 2025.11.18.",
+                overview: "AMBA AXI4-Lite 인터페이스를 기반으로 SPI 및 I2C 직렬 통신 프로토콜의 마스터/슬레이브 모듈을 설계하고, UVM 기반의 고도화된 검증 환경을 구축하여 하드웨어 동작 검증",
                 goals: [
-                    "SystemVerilog 이용 SPI Master/Slave 로직 설계",
-                    "I2C 프로토콜 분석 및 AXI4-Lite 기반 Master/Slave 블록 구조 설계"
+                    "1. SPI 및 I2C 통신 프로토콜의 하드웨어 메커니즘을 심도 있게 이해하고 AXI4-Lite 인터페이스와 연동 가능한 통신 IP 구현",
+                    "2. Synopsys의 VCS 및 Verdi 도구를 활용하여 설계한 모듈에 대한 UVM 기반 검증 환경을 구축하고 기능적 무결성 확보"
                 ],
-
                 summary: [
-                    "SPI 전 모드(0~3) 지원 컨트롤러 및 유연한 데이터 프레임 제어 구현",
-                    "UVM 방법론 기반 SPI 데이터 전송 시나리오 정의 및 스코어보드 검증"
+                    "1. SPI 모듈 구현: SCLK, MOSI, MISO, SS 4선을 이용한 Full-Duplex 통신 및 CPOL/CPHA 설정에 따른 4가지 전송 모드 완벽 지원",
+                    "2. I2C 모듈 구현: Open-Drain 구조와 7비트 주소 체계를 적용한 Half-Duplex 통신 및 START/STOP, ACK/NACK 체크 프로토콜 설계",
+                    "3. 시스템 통합: MicroBlaze 프로세서와 AXI4-Lite 인터페이스를 연동하여 C언어 어플리케이션으로 제어 레지스터를 핸들링하는 시스템 구축",
+                    "4. 하드웨어 검증: 로직 분석기를 활용해 실제 통신 파형을 캡처하고 규격 준수 여부를 확인하여 Basys 3 FPGA 보드 상의 실보드 동작 검증 완료"
                 ],
-
                 role: [
-                    "■ SPI 및 I2C 상태 머신 및 데이터패스 RTL 설계",
-                    "■ SPI 동작 검증을 위한 UVM Sequence 및 Scoreboard 로직 구현"
+                    "1. SPI 및 I2C 마스터/슬레이브의 안정적인 트랜잭션을 위한 상태 머신(ASM/FSM) 설계 및 전 과정 RTL 구현",
+                    "2. SystemVerilog 기반 UVM 환경 내에서 Scoreboard를 구축하여 송수신 데이터의 실시간 일치 여부 및 데이터 무결성 검증 프로세스 자동화"
                 ],
-
-                reflect: "표준 통신 규격의 하드웨어 구현 능력 및 UVM 기반 검증 자동화 환경 구축 경험 확보.",
-
-                pdf: "5. SPI&I2C 통신 모듈 설계.pdf",
-
-                trouble: "I2C 주소 전송 완료 후 ACK 수신 시점에서 SDA 신호 고착으로 인한 통신 오류 발생.",
-
-                solution: "Master측 SDA 입출력 선택 신호 제어 및 Slave 구동 타이밍 최적화를 통해 정상 응답 유도 성공."
+                trouble: "Master에서 주소 전송 이후 Slave로부터 ACK를 받지 못하고 NACK 상태가 지속되는 현상 발생. 분석 결과 ACK 구간에서 SDA가 여전히 High를 유지하고 있음을 확인.",
+                solution: "Master가 ACK 수신 시점에 SDA 드라이브를 High로 유지(해제)하도록 하고, Slave가 SCL이 High인 구간에서만 SDA를 Low로 당기도록 로직 및 타이밍을 수정하여 해결함.",
+                reflect: "하드웨어 설계 전 프로토콜 사양과 UVM 검증 구조를 명확히 정의하는 것이 오류를 줄이는 핵심임을 체감함. 현재 I2C Read 버그 수정을 위해 시퀀스를 재정리하며 검증 신뢰도를 높이는 중임.",
+                pdf: "5. SPI&I2C 통신 모듈 설계.pdf"
             },
             "proj6": {
-                title: "VGA 기반 뱀 사다리 게임 시스템 설계",
-
-                period: "2025.11.19. - 2025.12.05.",
-
-                overview: "OV7670 카메라 인터페이스와 VGA 출력을 통합한 FPGA 기반 실시간 영상 처리 및 게임 시스템 설계.",
-
+                title: "VGA기반 뱀사다리 게임",
+                period: "2025.11.24. - 2025.12.05.",
+                overview: "OV7670 카메라 영상 처리와 게임 로직을 단일 FPGA에 통합한 시스템 설계 프로젝트임. 카메라 캡처 기능을 통한 플레이어 등록과 VGA 기반의 실시간 게임 인터페이스 출력을 결합한 통합 임베디드 하드웨어를 구현함.",
                 goals: [
-                    "FSM 기반 게임 코어 로직 및 실시간 오브젝트 렌더링 시스템 구현",
-                    "카메라 영상 입력 및 VGA 디스플레이 제어 로직의 단일 FPGA 통합"
+                    "1. OV7670 카메라, VGA 컨트롤러, 게임 로직을 단일 FPGA(Basys3)에 통합하여 개구리 말을 사용하는 뱀사다리 게임 시스템 구축",
+                    "2. 디지털 회로 설계, 실시간 영상 처리, 임베디드 시스템 통합을 통한 하드웨어 설계 역량 및 시스템 최적화 능력 향상"
                 ],
-
                 summary: [
-                    "FSM 기반 게임 상태 관리 엔진 및 실시간 렌더링 모듈 개발",
-                    "OV7670 I2C 설정 제어 및 Raw 데이터 수신 모듈 설계"
+                    "1. Game Control & Snake Core 설계: 버튼 입력 기반 턴 제어 로직 및 LFSR(Linear Feedback Shift Register)을 활용한 주사위 난수 생성기 구현",
+                    "2. 게임 규칙 알고리즘: 뱀(후퇴), 사다리(전진), 잡기(상대방 초기화 및 추가 턴) 등 핵심 이동 규칙을 FSM(Finite State Machine)으로 정밀하게 설계",
+                    "3. Board Image & 시각 효과: 49칸 보드 배경 이미지 및 도트(DOT) 기반 플레이어 말·표정 모듈 설계, 뱀 도달 시 화면 흔들림(Shake) 및 잡기 발생 시 Red 필터 효과 구현",
+                    "4. 시스템 통합 및 출력: 카메라 영상, 게임 오브젝트, UI를 실시간으로 합성하여 VGA 신호로 출력하고 개별 모듈 간 타이밍 조율 및 인터페이스 통합 수행"
                 ],
-
                 role: [
-                    "■ FSM 구조 기반 게임 코어 로직 및 VGA 디스플레이 렌더링 모듈 RTL 설계",
-                    "■ 모듈 간 입출력 인터페이스 정의 및 TOP 레벨 시스템 통합 수행"
+                    "1. 보드게임 Core Logic 및 핵심 게임 규칙 알고리즘 RTL 설계 및 검증",
+                    "2. 게임 내 특수 효과(Shake, Red 필터) 모듈 및 Board/플레이어 말 오브젝트 모듈 구성",
+                    "3. 각 기능 모듈 간의 입출력 타이밍 조율 및 최종 TOP 레벨 시스템 모듈 결합 구현"
                 ],
-
-                reflect: "대규모 로직 통합 시 인터페이스 조율의 중요성 파악 및 실시간 영상 제어 타이밍 설계 능력 배양.",
-
-                pdf: "6.vga프로젝트.pdf",
-
-                trouble: "게임 코어 로직과 VGA Sync 신호 불일치로 인한 화면 흔들림 및 출력 오류 발생.",
-
-                solution: "렌더링 전용 버퍼링 모듈 분리 및 타이밍 동기화 로직 재구성으로 시스템 안정성 확보."
+                trouble: "게임 코어 내에 효과 로직과 상태 변화를 동시에 처리하면서 발생하는 타이밍 충돌로 인해 VGA 출력 화면이 불안정해지는 현상 발생.",
+                solution: "효과 처리 전용 모듈을 물리적으로 분리 설계하고, 모듈 간 입출력 인터페이스와 데이터 유효 타이밍을 재정의하여 동기화 오류를 해결하고 시스템 동작 안정성을 확보함.",
+                reflect: "단순 기능 구현을 넘어 모듈 간 Sync 조율과 기능 분할 설계가 시스템 전체 안정성에 미치는 중요성을 체감함. 특히 서로 다른 로직을 하나의 TOP 모듈로 통합하는 하드웨어 인터페이스 설계 역량을 강화함.",
+                pdf: "6.vga프로젝트.pdf"
             },
             "proj7": {
-                title: "Linebuffer UVM Verification",
-
-                period: "2025.12.15. - 2025.12.21.",
-
-                overview: "이미지 처리용 Line Buffer 유닛에 대한 Frame Size 및 Data Mode별 UVM 기반 검증 수행.",
-
+                title: "UVM기반 Linebuffer 검증",
+                period: "2025.12.15. - 2025.12.22.",
+                overview: "기업에서 제시한 산업용 IP 사양에 따라 영상 처리용 Line Buffer의 동작을 검증하기 위해 UVM 환경을 구축하고, 가변 해상도 및 다양한 데이터 패턴 환경에서의 무결성을 확인한 3인 팀 프로젝트임.",
                 goals: [
-                    "Line Buffer RTL 동작 분석 및 세부 검증 계획 수립",
-                    "기능 커버리지 100% 달성을 통한 설계 신뢰성 확보"
+                    "1. 설계자의 검증 요구사항을 정밀 분석하여 사양에 부합하는 시나리오 기반 UVM 검증 환경 구축 역량 확보",
+                    "2. 기능 커버리지(Functional Coverage) 100% 달성을 통해 설계 로직의 신뢰성 및 예외 상황에 대한 기능적 완전성 확인"
                 ],
-
                 summary: [
-                    "UVM Environment 구축 및 프레임 경계 조건 테스트 시나리오 설계",
-                    "다양한 데이터 패턴 생성을 위한 시퀀스 아이템 정의"
+                    "1. Sequence Item 및 Sequence 설계: 기업 요구 규격인 8-bit 픽셀 데이터 트랜잭션 패킷을 정의하고, 3x3 윈도우 생성 로직 검증을 위한 랜덤 트래픽 인가 로직 구현",
+                    "2. Scoreboard 자동 비교 로직: 윈도우 슬라이딩 메커니즘을 참조 모델(Reference Model)로 구현하여 입력 데이터에 따른 이론적 기대값을 산출하고 DUT 출력과 실시간 대조",
+                    "3. 에러 리포팅 및 분석: 데이터 불일치 발생 시 즉각적인 에러 로그를 발생시켜 분석 효율을 높이고, 불일치 구간에 대한 파형 분석 및 정밀 디버깅 수행",
+                    "4. 검증 환경 통합: Driver, Monitor, Agent 등 UVM 컴포넌트를 통합하여 설계자의 요구 사양 및 타이밍 규격에 부합하는 통합 테스트벤치 완성"
                 ],
-
                 role: [
-                    "■ UVM Scoreboard 설계 및 예상 결과(Reference Model) 비교 로직 구현",
-                    "■ Agent 및 주요 컴포넌트 유닛 설계 및 연동"
+                    "1. Scoreboard 설계 및 참조 모델 기반의 실시간 데이터 정합성 비교 알고리즘 RTL 구현 및 검증",
+                    "2. Agent 및 Sequence 설계 담당: 시나리오에 따른 데이터 입력 흐름 제어 및 검증용 랜덤 테스트 트래픽 생성",
+                    "3. 초기화 레이턴시 타이밍 이슈 분석 및 유효 신호(Valid) 기준의 데이터 비교 동기화 로직 설계"
                 ],
-
-                reflect: "복잡한 메모리 버퍼 구조 검증 전략 수립 능력 및 UVM 컴포넌트 재사용성 최적화 경험 확보.",
-
-                pdf: "7.LineBuffer UVM 검증.pdf",
-
-                trouble: "랜덤 테스트 시 특정 프레임 경계 조건에서 데이터 인덱스 불일치 버그 발견.",
-
-                solution: "모니터와 스코어보드 내 주소 추적 로직 정교화 및 경계 조건 예외 처리 추가로 해결."
+                trouble: "사양서에 명시된 초기화 레이턴시와 실제 설계 동작 간의 미세한 시간 차로 인해 데이터 샘플링 시점이 어긋나며 데이터 불일치 에러가 빈번하게 발생함.",
+                solution: "데이터 유효 신호(Valid)의 활성화 시점을 기준으로 Scoreboard의 비교 동작이 시작되도록 동기화 로직을 수정하여 검증의 정확성과 신뢰성을 확보함.",
+                reflect: "실제 산업용 IP 사양을 분석하여 이를 UVM 검증 컴포넌트 단위로 구체화하는 실무 역량을 길렀으며, 가변적인 입력 환경에서도 신뢰할 수 있는 자동화 검증 프로세스 구축 경험을 확보함.",
+                pdf: "7.LineBuffer UVM 검증.pdf"
             },
             "proj8": {
                 title: "SoC기반 펜 플로터를 이용한 커스텀 각인 서비스",
-
                 period: "2025.01.05. - 2025.01.22.",
-
-                overview: "FPGA 이미지 필터링과 STM32 모터 제어를 통합한 실시간 각인 시스템 구축.",
-
-                goals: [
-                    "이미지 이진화 및 경계 검출 알고리즘의 하드웨어 가속기 설계",
-                    "SoC 구조 기반의 데이터 통신 및 모터 드라이버 제어 시스템 통합"
-                ],
-
-                summary: [
-                    "Sobel Filter 기반의 실시간 이미지 처리 FPGA 모듈 구현",
-                    "G-code 해석 및 2축 스테핑 모터 정밀 제어 시스템 구축"
-                ],
-
-                role: [
-                    "■ FPGA 기반 이미지 필터링 알고리즘 RTL 설계 및 최적화",
-                    "■ 하드웨어 가속기 인터페이스 정의 및 데이터 패스 설계"
-                ],
-
-                reflect: "이 기종 디바이스(FPGA-STM32) 간 시스템 통합 역량 및 이미지 처리 가속 설계 능력 확보.",
-
-                pdf: "8.펜플로터프로젝트.pdf",
-
-                trouble: "고해상도 이미지 처리 시 데이터 병목 현상으로 인한 필터링 지연 발생.",
-
-                solution: "파이프라인 설계 방식 적용 및 라인 버퍼 구조 최적화를 통해 실시간 처리 성능 확보."
+                overview: "FPGA 이미지 처리와 STM32 모터 제어를 통합한 실시간 각인 시스템.",
+                goals: ["이미지 이진화 하드웨어 가속기 설계", "SoC 구조 기반 시스템 통합"],
+                summary: ["Sobel Filter 기반 이미지 처리", "G-code 해석 및 모터 제어"],
+                role: ["■ FPGA 이미지 필터링 RTL 설계", "■ 하드웨어 가속기 인터페이스 설계"],
+                trouble: "고해상도 처리 시 데이터 병목 현상 발생.",
+                solution: "파이프라인 설계 및 라인 버퍼 구조 최적화로 처리 성능 확보.",
+                reflect: "이 기종 디바이스 간 시스템 통합 역량 확보.",
+                pdf: "8.펜플로터프로젝트.pdf"
             }
         };
 
         function openModal(id) {
             const data = projectDB[id];
             if(!data) return;
+
             document.getElementById('m-title').innerText = data.title;
             document.getElementById('m-period').innerText = data.period;
             document.getElementById('m-overview').innerText = data.overview;
             document.getElementById('m-trouble').innerText = data.trouble;
             document.getElementById('m-solution').innerText = data.solution;
             document.getElementById('m-reflect').innerText = data.reflect;
+
+            // 요약 부분 수정: join(', ')을 join('\n')으로 변경
             const summaryText = document.getElementById('m-summary');
-            summaryText.innerText = Array.isArray(data.summary) ? data.summary.join(', ') : data.summary;
+            summaryText.innerText = Array.isArray(data.summary) ? data.summary.join('\n') : data.summary;
+
+            // goals, role 처리는 기존 코드 유지
             const goalsList = document.getElementById('m-goals');
             goalsList.innerHTML = '';
             if(data.goals) data.goals.forEach(goal => { const li = document.createElement('li'); li.innerText = goal; goalsList.appendChild(li); });
+
             const roleList = document.getElementById('m-role');
             roleList.innerHTML = '';
             if(data.role) data.role.forEach(r => { const li = document.createElement('li'); li.innerText = r; roleList.appendChild(li); });
+
             const mediaSection = document.getElementById('m-media-section');
-            const mediaViewer = document.querySelector('.media-viewer');
             if (data.pdf) {
                 mediaSection.style.display = 'block';
-                mediaViewer.innerHTML = `<iframe src="./file/${data.pdf}#toolbar=0&navpanes=0&view=FitH" width="100%" height="100%" style="border:none;"></iframe>`;
+                document.querySelector('.media-viewer').innerHTML = `<iframe src="./file/${data.pdf}#toolbar=0&navpanes=0&view=FitH" width="100%" height="100%" style="border:none;"></iframe>`;
             } else {
                 mediaSection.style.display = 'none';
-                mediaViewer.innerHTML = ''; 
             }
+
             document.getElementById('modal-overlay').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -825,7 +618,6 @@
         function closeModal() {
             document.getElementById('modal-overlay').classList.remove('active');
             document.body.style.overflow = '';
-            document.querySelector('.media-viewer').innerHTML = '';
         }
     </script>
 </body>
