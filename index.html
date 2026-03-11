@@ -275,7 +275,7 @@
         .trouble-box { background: #fff9db; border-left: 4px solid #fab005; padding: 25px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-bottom: 20px; margin-top: 15px; }
         .solution-box { background: #f0fdf4; border-left: 4px solid #4ade80; padding: 30px; border-radius: 0 var(--radius-md) var(--radius-md) 0; }
         .media-viewer { width: 100%; height: 500px; background: var(--bg-light-gray); border-radius: var(--radius-md); overflow: hidden; margin-top: 20px; }
-
+        #m-video-section { margin-bottom: 40px; }
         /* --- Responsive --- */
         @media (max-width: 768px) {
             body { padding-top: 70px; }
@@ -557,6 +557,36 @@
                 <div class="btn-close" onclick="closeModal()">&times;</div>
             </div>
             <div class="modal-content">
+
+                <div id="m-video-section" style="display:none;">
+                    <div class="m-label">데모 영상</div>
+                    <div class="media-viewer">
+                        <video id="m-video" width="100%" height="100%" controls playsinline style="display:none; background:#000;">
+                            <source id="m-video-source" src="" type="">
+                            브라우저가 video 태그를 지원하지 않습니다.
+                        </video>
+                        <iframe
+                            id="m-youtube"
+                            width="100%"
+                            height="100%"
+                            src=""
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen
+                            style="display:none;">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!--
+                나머지 프로젝트는 현재 영상이 없으므로 projectDB에 video 속성을 넣지 않음.
+                로컬 mp4는 video: "video/파일명.mp4"
+                유튜브는 youtube: "https://youtu.be/영상ID"
+                형식으로 추가하면 됨.
+                -->
+
                 <div class="m-section">
                     <div class="m-label">프로젝트 개요</div>
                     <p id="m-overview" class="m-text"></p>
@@ -596,7 +626,7 @@
                 
                 <div id="m-media-section" style="display:none;">
                     <div class="m-label">상세 자료 (PDF)</div>
-                    <div class="media-viewer"></div>
+                    <div class="media-viewer" id="m-pdf-viewer"></div>
                 </div>
             </div>
         </div>
@@ -632,6 +662,9 @@
                 solution: "나눗셈 연산자를 시프트(Shift) 및 상수를 활용한 비트 연산 로직으로 대체하여 하드웨어 자원을 최적화하고 타이밍 정확성을 확보함.",
                 reflect: "외부 디바이스 데이터시트 분석의 중요성을 체감하였으며, 하드웨어 설계 시 FSM 기반의 상태 제어 로직을 통해 시스템을 체계적으로 구현하는 역량을 강화함.",
                 pdf: "1.clock & 2sensor 프로젝트.pdf"
+                /*
+                video: "video/example.mp4"
+                */
                 },
                 "proj3": {
                     title: "RISC-V RV32I 기반 Single Cycle CPU Core 설계",
@@ -656,6 +689,9 @@
                     solution: "코드의 마지막 부분에 자기 자신에게 분기하는 beq x0, x0, 0 명령어를 추가하여, 프로그램 종료 후 PC를 특정 주소에 고정시키는 무한 루프(Infinite Loop) 트랩 로직 구현 및 시스템 안정성 확보.",
                     reflect: "컴퓨터 구조의 이론적 지식을 실제 하드웨어 로직으로 구체화하며 하드웨어 수준에서의 예외 상황 제어 및 ISA 명세 준수의 중요성을 깊이 있게 이해함.",
                     pdf: "3.RISC-V_RV32I기반 SingleCycle CPU설계.pdf"
+                    /*
+                    video: "video/example.mp4"
+                    */
                 },
             "proj4": {
                 title: "RISC-V Multi-Cycle CPU 및 AMBA APB Peripheral 설계",
@@ -679,7 +715,9 @@
                 trouble: "Verification 수행 시 TX Data의 타이밍 불일치로 인해 데이터가 비정상적으로 샘플링되는 현상 발생.",
                 solution: "샘플링 로직에 wait 조건을 추가하여 특정 이벤트(Event) 발생 시점에 맞춰 데이터를 수집하도록 로직을 수정함으로써 동기화 오류 해결.",
                 reflect: "표준화된 AMBA 버스 인터페이스 설계 능력을 배양하였으며, 시스템 확장성 측면에서 표준 BUS 인터페이스가 IP 재사용성과 시스템 통합에 기여하는 중요성을 체감함.",
-                pdf: "4.AMBA_APB Peripheral 설계 검증..pdf"
+                pdf: "4.AMBA_APB Peripheral 설계 검증..pdf",
+                youtube: "https://youtu.be/ETVAAKxeeys"
+
             },
             "proj5": {
                 title: "AXI 기반 SPI / I2C 통신 모듈 설계",
@@ -703,7 +741,8 @@
                 trouble: "Master에서 주소 전송 이후 Slave로부터 ACK를 받지 못하고 NACK 상태가 지속되는 현상 발생. 분석 결과 ACK 구간에서 SDA가 여전히 High를 유지하고 있음을 확인.",
                 solution: "Master가 ACK 수신 시점에 SDA 드라이브를 High로 유지(해제)하도록 하고, Slave가 SCL이 High인 구간에서만 SDA를 Low로 당기도록 로직 및 타이밍을 수정하여 해결함.",
                 reflect: "하드웨어 설계 전 프로토콜 사양과 UVM 검증 구조를 명확히 정의하는 것이 오류를 줄이는 핵심임을 체감함. 현재 I2C Read 버그 수정을 위해 시퀀스를 재정리하며 검증 신뢰도를 높이는 중임.",
-                pdf: "5. SPI&I2C 통신 모듈 설계.pdf"
+                pdf: "5. SPI&I2C 통신 모듈 설계.pdf",
+                youtube: "https://youtu.be/iYFb_4y3mss"
             },
             "proj6": {
                 title: "VGA기반 뱀사다리 게임",
@@ -729,6 +768,9 @@
                 solution: "효과 처리 전용 모듈을 물리적으로 분리 설계하고, 모듈 간 입출력 인터페이스와 데이터 유효 타이밍을 재정의하여 동기화 오류를 해결하고 시스템 동작 안정성을 확보함.",
                 reflect: "단순 기능 구현을 넘어 모듈 간 Sync 조율과 기능 분할 설계가 시스템 전체 안정성에 미치는 중요성을 체감함. 특히 서로 다른 로직을 하나의 TOP 모듈로 통합하는 하드웨어 인터페이스 설계 역량을 강화함.",
                 pdf: "6.vga프로젝트.pdf"
+                /*
+                video: "video/example.mp4"
+                */
             },
             "proj7": {
                 title: "UVM기반 Linebuffer 검증",
@@ -754,6 +796,9 @@
                 solution: "데이터 유효 신호(Valid)의 활성화 시점을 기준으로 Scoreboard의 비교 동작이 시작되도록 동기화 로직을 수정하여 검증의 정확성과 신뢰성을 확보함.",
                 reflect: "실제 산업용 IP 사양을 분석하여 이를 UVM 검증 컴포넌트 단위로 구체화하는 실무 역량을 길렀으며, 가변적인 입력 환경에서도 신뢰할 수 있는 자동화 검증 프로세스 구축 경험을 확보함.",
                 pdf: "7.LineBuffer UVM 검증.pdf"
+                /*
+                video: "video/example.mp4"
+                */
             },
 
             "proj8": {
@@ -776,9 +821,15 @@
                 reflect: "이 기종 디바이스(FPGA-STM32) 간 시스템 통합 역량 및 이미지 처리 가속 설계 능력 확보.",
                 pdf: "8.펜플로터프로젝트.pdf",
                 trouble: "고해상도 이미지 처리 시 데이터 병목 현상으로 인한 필터링 지연 발생.",
-                solution: "파이프라인 설계 방식 적용 및 라인 버퍼 구조 최적화를 통해 실시간 처리 성능 확보."
+                solution: "파이프라인 설계 방식 적용 및 라인 버퍼 구조 최적화를 통해 실시간 처리 성능 확보.",
+                video: "video/final_demo.mp4"
             }
         };
+
+        function getYoutubeEmbedUrl(url) {
+            const match = url.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=|youtube\.com\/embed\/)([^?&/]+)/);
+            return match ? `https://www.youtube.com/embed/${match[1]}` : '';
+        }
 
         function openModal(id) {
             const data = projectDB[id];
@@ -786,7 +837,7 @@
 
             document.getElementById('m-title').innerText = data.title;
             document.getElementById('m-period').innerText = data.period;
-            document.getElementById('m-team').innerText = data.team; // 인원 정보 삽입
+            document.getElementById('m-team').innerText = data.team;
             document.getElementById('m-overview').innerText = data.overview;
             document.getElementById('m-trouble').innerText = data.trouble;
             document.getElementById('m-solution').innerText = data.solution;
@@ -803,12 +854,61 @@
             roleList.innerHTML = '';
             if(data.role) data.role.forEach(r => { const li = document.createElement('li'); li.innerText = r; roleList.appendChild(li); });
 
+            const videoSection = document.getElementById('m-video-section');
+            const video = document.getElementById('m-video');
+            const videoSource = document.getElementById('m-video-source');
+            const youtube = document.getElementById('m-youtube');
+
+            if (data.video || data.youtube) {
+                videoSection.style.display = 'block';
+
+                if (data.video) {
+                    video.style.display = 'block';
+                    youtube.style.display = 'none';
+                    youtube.src = '';
+
+                    videoSource.src = `./${data.video}`;
+
+                    if (data.video.endsWith('.mp4')) {
+                        videoSource.type = 'video/mp4';
+                    } else if (data.video.endsWith('.mkv')) {
+                        videoSource.type = 'video/x-matroska';
+                    } else {
+                        videoSource.type = 'video/mp4';
+                    }
+
+                    video.load();
+                } else if (data.youtube) {
+                    video.style.display = 'none';
+                    video.pause();
+                    videoSource.src = '';
+                    videoSource.type = '';
+                    video.load();
+
+                    youtube.style.display = 'block';
+                    youtube.src = getYoutubeEmbedUrl(data.youtube);
+                }
+            } else {
+                videoSection.style.display = 'none';
+
+                video.style.display = 'none';
+                video.pause();
+                videoSource.src = '';
+                videoSource.type = '';
+                video.load();
+
+                youtube.style.display = 'none';
+                youtube.src = '';
+            }
+
             const mediaSection = document.getElementById('m-media-section');
+            const pdfViewer = document.getElementById('m-pdf-viewer');
             if (data.pdf) {
                 mediaSection.style.display = 'block';
-                document.querySelector('.media-viewer').innerHTML = `<iframe src="./file/${data.pdf}#toolbar=0&navpanes=0&view=FitH" width="100%" height="100%" style="border:none;"></iframe>`;
+                pdfViewer.innerHTML = `<iframe src="./file/${data.pdf}#toolbar=0&navpanes=0&view=FitH" width="100%" height="100%" style="border:none;"></iframe>`;
             } else {
                 mediaSection.style.display = 'none';
+                pdfViewer.innerHTML = '';
             }
 
             document.getElementById('modal-overlay').classList.add('active');
@@ -818,7 +918,25 @@
         function closeModal() {
             document.getElementById('modal-overlay').classList.remove('active');
             document.body.style.overflow = '';
-            document.querySelector('.media-viewer').innerHTML = '';
+
+            const video = document.getElementById('m-video');
+            const videoSource = document.getElementById('m-video-source');
+            const youtube = document.getElementById('m-youtube');
+
+            if (video && videoSource) {
+                video.pause();
+                videoSource.src = '';
+                videoSource.type = '';
+                video.load();
+                video.style.display = 'none';
+            }
+
+            if (youtube) {
+                youtube.src = '';
+                youtube.style.display = 'none';
+            }
+
+            document.getElementById('m-pdf-viewer').innerHTML = '';
         }
     </script>
 </body>
