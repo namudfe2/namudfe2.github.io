@@ -420,7 +420,7 @@
                     <div class="p-thumb"><img src="./images/6.linuffer검증.png" alt="LineBuffer"></div>
                     <div class="p-body">
                         <span class="p-category">UVM Verification</span>
-                        <h3 class="p-title">Linebuffer UVM Verification</h3>
+                        <h3 class="p-title">UVM기반 Linebuffer 검증</h3>
                         <p class="p-desc">Line Buffer 유닛에 대한 Frame Size 및 Data Mode별 UVM 검증 환경 구축</p>
                         <div class="p-tags">
                             <span class="p-tag-sm">SystemVerilog</span>
@@ -433,7 +433,7 @@
                     <div class="p-thumb"><img src="./images/5.vga프로젝트.png" alt="VGA Project"></div>
                     <div class="p-body">
                         <span class="p-category">FPGA / Display Control</span>
-                        <h3 class="p-title">VGA 기반 뱀 사다리 게임 시스템 설계</h3>
+                        <h3 class="p-title">VGA 기반 뱀 사다리 게임</h3>
                         <p class="p-desc">FPGA 기반 VGA 타이밍 컨트롤러 및 게임 상태 엔진 구현</p>
                         <div class="p-tags">
                             <span class="p-tag-sm">SystemVerilog</span>
@@ -446,7 +446,7 @@
                     <div class="p-thumb"><img src="./images/4.SPI&I2C통신.png" alt="SPI I2C"></div>
                     <div class="p-body">
                         <span class="p-category">IP Design / Verification</span>
-                        <h3 class="p-title">SPI & I2C 통신 설계 프로젝트</h3>
+                        <h3 class="p-title">AXI 기반 SPI / I2C 통신 설계</h3>
                         <p class="p-desc">센서 인터페이스를 위한 고속 직렬 통신 프로토콜 설계 및 검증</p>
                         <div class="p-tags">
                             <span class="p-tag-sm">SystemVerilog</span>
@@ -461,7 +461,7 @@
                     <div class="p-thumb"><img src="./images/3.AXI_MULTICYCLE.png" alt="AMBA APB"></div>
                     <div class="p-body">
                         <span class="p-category">SoC / Bus Protocol</span>
-                        <h3 class="p-title">AMBA APB Peripheral</h3>
+                        <h3 class="p-title">RV32I 기반 Multi-Cycle CPU 및 AMBA APB Peripheral 설계 검증</h3>
                         <p class="p-desc">SoC 저속 주변장치 제어를 위한 AMBA APB 프로토콜 기반 IP 통합 설계</p>
                         <div class="p-tags">
                             <span class="p-tag-sm">SystemVerilog</span>
@@ -672,7 +672,7 @@
                 
                 <div class="m-section">
                     <div class="m-label">프로젝트 요약</div>
-                    <p id="m-summary" class="m-text" style="font-weight: 600; color: var(--primary); background: #f0f7ff; padding: 15px; border-radius: 8px; white-space: pre-wrap; line-height: 1.6;"></p>
+                    <p id="m-summary" class="m-text" style="font-weight: 600; color: var(--primary); background: #f0f7ff; padding: 15px; border-radius: 8px; line-height: 1.8;"></p>
                 </div>
                 
                 <div class="m-section">
@@ -761,7 +761,7 @@
                     pdf: "3.RISC-V_RV32I기반 SingleCycle CPU설계.pdf"
                 },
             "proj4": {
-                title: "RISC-V Multi-Cycle CPU 및 AMBA APB Peripheral 설계",
+                title: "RV32I 기반 Multi-Cycle CPU 및 AMBA APB Peripheral 설계 검증",
                 period: "2025.10.17. - 2025.10.27.",
                 team: "1인 프로젝트",
                 overview: "RISC-V Multi-Cycle CPU 환경 내에서 AMBA APB 인터페이스를 기반으로 UART 주변장치를 통합하여 시스템 확장성을 확보하고, C언어 테스트 코드로 실보드 동작을 검증한 프로젝트.",
@@ -787,7 +787,7 @@
 
             },
             "proj5": {
-                title: "AXI 기반 SPI / I2C 통신 모듈 설계",
+                title: "AXI 기반 SPI / I2C 통신 설계 프로젝트",
                 period: "2025.11.07. - 2025.11.18.",
                 team: "1인 프로젝트",
                 overview: "AMBA AXI4-Lite 인터페이스를 기반으로 SPI 및 I2C 직렬 통신 프로토콜의 마스터/슬레이브 모듈을 설계하고, UVM 기반의 고도화된 검증 환경을 구축하여 하드웨어 동작 검증",
@@ -847,8 +847,11 @@
                 ],
                 summary: [
                     "1. Sequence Item 및 Sequence 설계: 기업 요구 규격인 8-bit 픽셀 데이터 트랜잭션 패킷을 정의하고, 3x3 윈도우 생성 로직 검증을 위한 랜덤 트래픽 인가 로직 구현",
+                    
                     "2. Scoreboard 자동 비교 로직: 윈도우 슬라이딩 메커니즘을 참조 모델(Reference Model)로 구현하여 입력 데이터에 따른 이론적 기대값을 산출하고 DUT 출력과 실시간 대조",
+                    
                     "3. 에러 리포팅 및 분석: 데이터 불일치 발생 시 즉각적인 에러 로그를 발생시켜 분석 효율을 높이고, 불일치 구간에 대한 파형 분석 및 정밀 디버깅 수행",
+                    
                     "4. 검증 환경 통합: Driver, Monitor, Agent 등 UVM 컴포넌트를 통합하여 설계자의 요구 사양 및 타이밍 규격에 부합하는 통합 테스트벤치 완성"
                 ],
                 role: [
@@ -874,8 +877,11 @@
                 ],
                 summary: [
                     "1. 이미지 전처리 가속: Canny Edge 알고리즘(Gaussian, Sobel, Hysteresis 등)을 RTL로 설계하여 실시간 경계 검출 하드웨어 가속기 구현",
+
                     "2. 데이터 패스 최적화: 카메라 입력(Board -> Filter -> Python) 및 PC 입력(PC -> FPGA -> Filter -> PC) 경로를 이원화 설계하고 [0xAA] 시작 트리거 프로토콜 기반 데이터 동기화 제어",
+                    
                     "3. 모듈 최적화: 3x3 윈도우 연산을 위한 라인 버퍼(Line Buffer) 구조 및 파이프라이닝 기법을 적용하여 하드웨어 연산 병목 해결 및 처리 성능 극대화",
+                    
                     "4. 시스템 통합 제어: Python 기반 OpenCV 윤곽선 추출 및 G-code 경로 최적화 알고리즘 탑재, STM32 RTOS 기반 브레젠험 알고리즘을 활용한 2축 스테핑 모터 정밀 구동 시스템 완성"
                 ],
                 role: [
@@ -908,9 +914,12 @@
             document.getElementById('m-solution').innerText = data.solution;
             document.getElementById('m-reflect').innerText = data.reflect;
 
-            const summaryText = document.getElementById('m-summary');
-            summaryText.innerText = Array.isArray(data.summary) ? data.summary.join('\n') : data.summary;
-
+            const summaryEl = document.getElementById('m-summary');
+            if (Array.isArray(data.summary)) {
+                summaryEl.innerHTML = data.summary.map(s => `<p style="margin-bottom: 14px;">${s}</p>`).join('');
+            } else {
+                summaryEl.innerText = data.summary;
+            }
             const goalsList = document.getElementById('m-goals');
             goalsList.innerHTML = '';
             if(data.goals) data.goals.forEach(goal => { const li = document.createElement('li'); li.innerText = goal; goalsList.appendChild(li); });
